@@ -79,7 +79,7 @@ public class Robot extends IterativeRobot {
 	    ledTable = NetworkTable.getTable("led");
 		led = new PiLED(ledTable);
 		
-//		camera.setResolution(640, 320);
+		camera.setResolution(640, 360);
 		camera.setFPS(10);
 		
 		chooser = new SendableChooser<Command>();
