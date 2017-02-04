@@ -1,4 +1,4 @@
-package org.usfirst.frc.team340.robot.commands.gears;
+package org.usfirst.frc.team340.robot.commands.gears.manual;
 
 import org.usfirst.frc.team340.robot.Robot;
 
@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ManualClawDown extends Command {
+public class ManualPusherExtend extends Command {
 
-    public ManualClawDown() {
+    public ManualPusherExtend() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.claw);
@@ -17,8 +17,8 @@ public class ManualClawDown extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	System.out.println("initialize ManualClawDown");
-    	Robot.claw.goDown();
+    	System.out.println("initialize ManualPusherExtend");
+    	Robot.claw.goExtend();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -32,7 +32,7 @@ public class ManualClawDown extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println("end ManualClawDown");
+    	System.out.println("end ManualPusherExtend");
     }
 
     // Called when another command which requires one or more of the same

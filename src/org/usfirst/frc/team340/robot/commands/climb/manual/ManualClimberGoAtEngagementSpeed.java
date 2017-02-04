@@ -1,4 +1,4 @@
-package org.usfirst.frc.team340.robot.commands.climb;
+package org.usfirst.frc.team340.robot.commands.climb.manual;
 
 import org.usfirst.frc.team340.robot.Robot;
 
@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ManualClimberGoStopped extends Command {
+public class ManualClimberGoAtEngagementSpeed extends Command {
 
-    public ManualClimberGoStopped() {
+    public ManualClimberGoAtEngagementSpeed() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.climber);
@@ -17,8 +17,8 @@ public class ManualClimberGoStopped extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	System.out.println("initialize ManualClimberGoStopped");
-    	Robot.climber.goStopped();
+    	System.out.println("initialize ManualClimberGoAtEngagmentSpeed");
+    	Robot.climber.goAtEngagementSpeed();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -32,7 +32,7 @@ public class ManualClimberGoStopped extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println("end ManualClimberGoStopped");
+    	System.out.println("end ManualClimberGoAtEngagmentSpeed");
     }
 
     // Called when another command which requires one or more of the same
