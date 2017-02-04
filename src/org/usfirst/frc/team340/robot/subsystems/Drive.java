@@ -3,6 +3,7 @@ package org.usfirst.frc.team340.robot.subsystems;
 import org.usfirst.frc.team340.robot.RobotMap;
 import org.usfirst.frc.team340.robot.commands.DriveXbox;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -20,6 +21,9 @@ public class Drive extends Subsystem {
     private Talon leftDrive;
     private Talon rightDrive;
     
+    private AnalogInput frontUltrasonic;
+    private AnalogInput backUltrasonic;
+    
     /**
      * Sets the variables for each of the
      * drive base's objects to the necessary
@@ -32,6 +36,9 @@ public class Drive extends Subsystem {
 		drop = new Solenoid(RobotMap.DROP_SOLENOID_CHANNEL);
 		leftDrive = new Talon(RobotMap.LEFT_DRIVE_PORT);
 		rightDrive = new Talon(RobotMap.RIGHT_DRIVE_PORT);
+		
+		frontUltrasonic = new AnalogInput(RobotMap.FRONT_ULTRASONIC_PORT);
+		backUltrasonic = new AnalogInput(RobotMap.BACK_ULTRASONIC_PORT);
     }
     
     /**
@@ -41,6 +48,14 @@ public class Drive extends Subsystem {
     @Override
     public void initDefaultCommand() {
         setDefaultCommand(new DriveXbox());
+    }
+    
+    public int getFrontUltrasonic() {
+    	return frontUltrasonic.getValue();
+    }
+    
+    public int getBackUltrasonic() {
+    	return backUltrasonic.getValue();
     }
     
     /**

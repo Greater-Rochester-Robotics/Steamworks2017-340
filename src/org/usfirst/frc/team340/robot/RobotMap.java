@@ -25,4 +25,10 @@ public class RobotMap {
     public static final int GEAR_SENSOR_RIGHT_CHANNEL = 14;
     
 	public static final double CLIMB_MOTORS_ENGAGEMENT_SPIN_UP_TIME = 0.5;
+	
+	/*
+	 * Analog ports
+	 */
+	public static final int FRONT_ULTRASONIC_PORT = 0;
+	public static final int BACK_ULTRASONIC_PORT = 1;
 }

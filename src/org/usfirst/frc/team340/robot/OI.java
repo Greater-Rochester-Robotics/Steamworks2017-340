@@ -14,6 +14,7 @@ import org.usfirst.frc.team340.robot.commands.gears.ManualRollersSpinIn;
 import org.usfirst.frc.team340.robot.commands.gears.ManualRollersSpinOut;
 import org.usfirst.frc.team340.robot.commands.gears.ManualSpinStop;
 
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -123,5 +124,14 @@ public class OI {
 	 */
 	public double getCoDriverAxis(Axis axis) {
 	    return (coDriver.getRawAxis(axis.getAxis()) < -.05 || coDriver.getRawAxis(axis.getAxis()) > .05) ? coDriver.getRawAxis(axis.getAxis()) : 0;
+	}
+	
+	/**
+	 * Rumble the driver's controller at the specified intensity
+	 * @param intensity the intensity
+	 */
+	public void rumbleDriver(float intensity) {
+		driver.setRumble(RumbleType.kLeftRumble, intensity);
+		driver.setRumble(RumbleType.kRightRumble, intensity);
 	}
 }

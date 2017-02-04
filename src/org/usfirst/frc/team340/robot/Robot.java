@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -23,7 +24,11 @@ public class Robot extends IterativeRobot {
     public static OI oi;
 
     Command autonomousCommand;
-//    SendableChooser<Command> chooser = new SendableChooser<>();
+    
+    public static NetworkTable visionTable;
+	public static NetworkTable ledTable;
+	
+	public static PiLED led;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -35,8 +40,31 @@ public class Robot extends IterativeRobot {
 	    claw = new Claw();
 	    climber = new Climber();
 	    oi = new OI();
+	    
+	    visionTable = NetworkTable.getTable("vision");
+		ledTable = NetworkTable.getTable("led");
+		led = new PiLED(ledTable);
 	    // chooser.addObject("My Auto", new MyAutoCommand());
 //	    SmartDashboard.putData("Auto mode", chooser);
+	}
+	
+	public static double avgValue() {
+//		return 0;
+		
+		return visionTable.getNumber("avg", 0);
+	}
+	
+	public static double distValue() {
+//		return 0;
+		return visionTable.getNumber("dist", 1);
+	}
+	
+	public static boolean linedValue() {
+		return visionTable.getBoolean("lined", true);
+	}
+	
+	public static void setMode(int mode) {
+		visionTable.putNumber("mode", mode);
 	}
 
 	/**
