@@ -13,6 +13,7 @@ import org.usfirst.frc.team340.robot.commands.gears.manual.ManualRollersSpinIn;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualRollersSpinOut;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualSpinStop;
 
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
