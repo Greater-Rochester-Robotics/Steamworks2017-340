@@ -12,13 +12,15 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * more specifically the controlled rotation of the
  * drum
  */
+@SuppressWarnings("unused")
 public class Climber extends Subsystem {
-	private static final double ENGAGEMENT_SPEED = 0.5;
-	private static final double CLIMB_SPEED = 0.75;
+	private static final int TOUCHPAD_CURRENT = 120; //TODO: perfect this
+	private static final int LIFTOFF_CURRENT = 100; //TODO: perfect this
+	
+	private static final double ENGAGEMENT_SPEED = 0.5; //TODO: perfect this
+	private static final double CLIMB_SPEED = 0.75; //TODO: perfect this
 	
 	private Spark drumOne;
-	
-	@SuppressWarnings("unused")
 	private Spark drumTwo; //TODO: see if we need to worry about both (check for sync)
 	
 	public Climber() {
@@ -92,6 +94,10 @@ public class Climber extends Subsystem {
 	 */
 	public boolean isStopped(){
 		return drumOne.get() ==0;
+	}
+	
+	public boolean ifLiftingOff() {
+		 return false; //TODO: this
 	}
 
 	/**
