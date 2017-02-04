@@ -1,0 +1,50 @@
+@startuml
+
+''''' states
+
+state CenterFaceAuto {
+
+	startMovingForward : left=1
+	startMovingForward : right=1
+	
+	scoreGear: already an existing command group
+	
+	reverseInArc : left=-1
+	reverseInArc : right=-0.5
+	
+	straightMovingBack : left=-1
+	straightMovingBack : right=-1
+
+}
+
+state LoadingStationAuto {
+
+	movingForward : left=1
+	movingForward : right=1
+	
+	turnTowardsPeg : left=-0.5
+	turnTowardsPeg : right=0.5
+	
+	scoreTheGear: already an existing command group
+	
+	reverseBackInArc : left=-1
+	reverseBackInArc : right=-0.5
+}
+
+''''' transitions
+
+CenterFaceAuto -right-> LoadingStationAuto
+
+startMovingForward --> scoreGear: timeDelay
+
+scoreGear --> reverseInArc: gearScored
+
+reverseInArc --> straightMovingBack: done
+
+movingForward --> turnTowardsPeg: timeDelay
+
+turnTowardsPeg --> scoreTheGear: timeDelay
+
+scoreTheGear --> reverseBackInArc: gearScored
+
+@enduml

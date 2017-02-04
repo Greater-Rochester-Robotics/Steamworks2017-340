@@ -1,29 +1,27 @@
 package org.usfirst.frc.team340.robot;
 
-import org.usfirst.frc.team340.robot.commands.ConditionalCommandTest;
-import org.usfirst.frc.team340.robot.commands.climb.ManualClimberGoAtEngagementSpeed;
-import org.usfirst.frc.team340.robot.commands.climb.ManualClimberGoStopped;
-import org.usfirst.frc.team340.robot.commands.climb.ManualGoAtClimbSpeed;
-import org.usfirst.frc.team340.robot.commands.gears.ManualArmClose;
-import org.usfirst.frc.team340.robot.commands.gears.ManualArmOpen;
-import org.usfirst.frc.team340.robot.commands.gears.ManualClawDown;
-import org.usfirst.frc.team340.robot.commands.gears.ManualClawUp;
-import org.usfirst.frc.team340.robot.commands.gears.ManualPusherExtend;
-import org.usfirst.frc.team340.robot.commands.gears.ManualPusherRetract;
-import org.usfirst.frc.team340.robot.commands.gears.ManualRollersSpinIn;
-import org.usfirst.frc.team340.robot.commands.gears.ManualRollersSpinOut;
-import org.usfirst.frc.team340.robot.commands.gears.ManualSpinStop;
+import org.usfirst.frc.team340.robot.commands.climb.manual.ManualClimberGoAtEngagementSpeed;
+import org.usfirst.frc.team340.robot.commands.climb.manual.ManualClimberGoStopped;
+import org.usfirst.frc.team340.robot.commands.climb.manual.ManualGoAtClimbSpeed;
+import org.usfirst.frc.team340.robot.commands.gears.manual.ManualArmClose;
+import org.usfirst.frc.team340.robot.commands.gears.manual.ManualArmOpen;
+import org.usfirst.frc.team340.robot.commands.gears.manual.ManualClawDown;
+import org.usfirst.frc.team340.robot.commands.gears.manual.ManualClawUp;
+import org.usfirst.frc.team340.robot.commands.gears.manual.ManualPusherExtend;
+import org.usfirst.frc.team340.robot.commands.gears.manual.ManualPusherRetract;
+import org.usfirst.frc.team340.robot.commands.gears.manual.ManualRollersSpinIn;
+import org.usfirst.frc.team340.robot.commands.gears.manual.ManualRollersSpinOut;
+import org.usfirst.frc.team340.robot.commands.gears.manual.ManualSpinStop;
 
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
-@SuppressWarnings({"deprecation", "unused"})
 public class OI {
 	
 	//DRIVER
@@ -123,5 +121,14 @@ public class OI {
 	 */
 	public double getCoDriverAxis(Axis axis) {
 	    return (coDriver.getRawAxis(axis.getAxis()) < -.05 || coDriver.getRawAxis(axis.getAxis()) > .05) ? coDriver.getRawAxis(axis.getAxis()) : 0;
+	}
+
+	/**
+	 * Rumble the driver's controller at the specified intensity
+	 * @param intensity the intensity
+	 */
+	public void rumbleDriver(float intensity) {
+		driver.setRumble(RumbleType.kLeftRumble, intensity);
+		driver.setRumble(RumbleType.kRightRumble, intensity);
 	}
 }
