@@ -10,13 +10,13 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  * <h1><em>Claw</em></h1>
- * <br>
+ * <br>c
  * This class handles the mechanisms of the claw:
  * the pusher piston, arm, and claw itself.
  */
 public class Claw extends Subsystem {
-	private static final double ROLLER_IN_SPEED = .75; //TODO: perfect this
-	private static final double ROLLER_OUT_SPEED = -.75; //TODO: perfect this too
+	private static final double ROLLER_IN_SPEED = 1.0; //TODO: perfect this
+	private static final double ROLLER_OUT_SPEED = -1.0; //TODO: perfect this too
 	
 	private static final Value ARM_UP = Value.kReverse;
 	private static final Value ARM_DOWN = Value.kForward;

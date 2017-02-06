@@ -86,7 +86,7 @@ public class Drive extends Subsystem {
     		speed = 1;
     	}
 	
-    	leftDrive.set(speed);
+    	leftDrive.set(-speed);
     }
     
     /**
@@ -102,7 +102,7 @@ public class Drive extends Subsystem {
     		speed = 1;
     	}
 	
-    	rightDrive.set(-speed);
+    	rightDrive.set(speed);
     }
     
     /**
