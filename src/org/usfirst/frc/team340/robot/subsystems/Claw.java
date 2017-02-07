@@ -5,12 +5,13 @@ import org.usfirst.frc.team340.robot.RobotMap;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  * <h1><em>Claw</em></h1>
- * <br>c
+ * <br>
  * This class handles the mechanisms of the claw:
  * the pusher piston, arm, and claw itself.
  */
@@ -22,14 +23,14 @@ public class Claw extends Subsystem {
 	private static final Value ARM_DOWN = Value.kForward;
 	private static final Value CLAW_OPEN = Value.kForward; //TODO: see if forward is open or closed
 	private static final Value CLAW_CLOSED = Value.kReverse; //TODO: see if reverse is open or closed
-	private static final Value PUSHER_OUT = Value.kForward;
-	private static final Value PUSHER_IN = Value.kReverse;
+	private static final boolean PUSHER_OUT = true;
+	private static final boolean PUSHER_IN = false;
 	
 	private DigitalInput gearSensorLeft;
 	private DigitalInput gearSensorRight;
 	private DoubleSolenoid claw;
 	private DoubleSolenoid hinge;
-	private DoubleSolenoid pusher;
+	private Solenoid pusher;
 	private TalonSRX rollers;
 	
 	/**
@@ -43,11 +44,11 @@ public class Claw extends Subsystem {
 		gearSensorRight = new DigitalInput(RobotMap.GEAR_SENSOR_RIGHT_CHANNEL);
 		claw = new DoubleSolenoid(RobotMap.CLAW_SOLENOID_FORWARD_CHANNEL, RobotMap.CLAW_SOLENOID_REVERSE_CHANNEL);
 		hinge = new DoubleSolenoid(RobotMap.ARM_SOLENOID_FORWARD_CHANNEL, RobotMap.ARM_SOLENOID_REVERSE_CHANNEL);
-		pusher = new DoubleSolenoid(RobotMap.PUSHER_SOLENOID_FORWARD_CHANNEL, RobotMap.PUSHER_SOLENOID_REVERSE_CHANNEL);
+		pusher = new Solenoid(RobotMap.PUSHER_SOLENOID_CHANNEL);
 		rollers = new TalonSRX(RobotMap.CLAW_ROLLERS_PORT);
 	}
     
-	/**
+	/*
 	 * Raise the "arm" (the entire claw)
 	 */
 	public void goUp() {
@@ -117,7 +118,7 @@ public class Claw extends Subsystem {
 	 * retracted
 	 */
 	public boolean isRetracted() {
-		return pusher.get().equals(PUSHER_IN);
+		return !pusher.get();
 	}
 	
 	/**
@@ -132,7 +133,7 @@ public class Claw extends Subsystem {
 	 * extended
 	 */
 	public boolean isExtended() {
-		return pusher.get().equals(PUSHER_OUT);
+		return pusher.get();
 	}
 	
 	/**
@@ -181,6 +182,15 @@ public class Claw extends Subsystem {
 	 */
 	public boolean whenGearIsNotAcquired() {
 		return !whenGearIsAcquired();
+	}
+	
+	/** Gets the left sensor */
+	public boolean getLeftSensor() {
+		return gearSensorLeft.get();
+	}
+	/** Gets the right sensor */
+	public boolean getRightSensor() {
+		return gearSensorRight.get();
 	}
 	
 	/**

@@ -13,13 +13,12 @@ public class RobotMap {
     public static final int RIGHT_DRIVE_PORT = 1;
     public static final int CLAW_ROLLERS_PORT = 2;
     
-    public static final int DROP_SOLENOID_CHANNEL = 3;
-    public static final int ARM_SOLENOID_FORWARD_CHANNEL = 4;
-    public static final int ARM_SOLENOID_REVERSE_CHANNEL = 5;
-    public static final int CLAW_SOLENOID_FORWARD_CHANNEL = 7;
-    public static final int CLAW_SOLENOID_REVERSE_CHANNEL = 2;
-    public static final int PUSHER_SOLENOID_FORWARD_CHANNEL = 0;
-    public static final int PUSHER_SOLENOID_REVERSE_CHANNEL = 1;
+    public static final int DROP_SOLENOID_CHANNEL = 4;
+    public static final int ARM_SOLENOID_FORWARD_CHANNEL = 2;
+    public static final int ARM_SOLENOID_REVERSE_CHANNEL = 3;
+    public static final int CLAW_SOLENOID_FORWARD_CHANNEL = 0;
+    public static final int CLAW_SOLENOID_REVERSE_CHANNEL = 1;
+    public static final int PUSHER_SOLENOID_CHANNEL = 5;
     
     public static final int CLIMBER_DRUM_PORT_ONE = 11;
     public static final int CLIMBER_DRUM_PORT_TWO = 12;
