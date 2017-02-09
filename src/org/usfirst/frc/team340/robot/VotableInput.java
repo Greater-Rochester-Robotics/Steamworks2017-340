@@ -24,6 +24,28 @@ public class VotableInput extends DigitalInput {
 	}
 	
 	/**
+	 * Allow the sensors to take a vote
+	 * @param sensors the {@link VotableInput}s
+	 * taking a vote
+	 * @return the ultimate decision
+	 */
+	public static boolean vote(VotableInput... sensors) {
+		int totalVotes = 0; //Total number of allowed votes
+		int trueVotes = 0; //Number of votes for true
+		
+		//Gives totalVotes and trueVotes their values
+		for(VotableInput sensor : sensors) {
+			totalVotes += sensor.getVotes();
+			
+			if(sensor.get()) {
+				trueVotes += sensor.getVotes();
+			}
+		}
+		
+		return ((double) trueVotes)/totalVotes >= .5;
+	}
+	
+	/**
 	 * Get the number of votes this sensor has during the poll process
 	 * @return number of votes
 	 */
