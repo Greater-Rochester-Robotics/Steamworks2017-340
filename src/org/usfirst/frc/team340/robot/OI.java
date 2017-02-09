@@ -1,8 +1,5 @@
 package org.usfirst.frc.team340.robot;
 
-import org.usfirst.frc.team340.robot.commands.climb.manual.ManualClimberGoAtEngagementSpeed;
-import org.usfirst.frc.team340.robot.commands.climb.manual.ManualClimberGoStopped;
-import org.usfirst.frc.team340.robot.commands.climb.manual.ManualGoAtClimbSpeed;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualArmClose;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualArmOpen;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualClawDown;
@@ -57,24 +54,24 @@ public class OI {
 	public OI() {
 		
 		//Manual testing for climber
-		coDriverA.whenPressed(new ManualClimberGoAtEngagementSpeed());
-		coDriverA.whenReleased(new ManualClimberGoStopped());
-		coDriverB.whenPressed(new ManualGoAtClimbSpeed());
-		coDriverB.whenReleased(new ManualClimberGoStopped());
+//		coDriver/*A.whenPressed(new ManualClimberGoAtEngagementSpeed());
+//		coDriverA.whenReleased(new ManualClimberGoStopped());
+//		coDriverB.whenPressed(new ManualGoAtClimbSpeed());
+//		coDriver*/B.whenReleased(new ManualClimberGoStopped());
 		
 		//Manual testing for claw
-		coDriverX.whenPressed(new ManualArmClose());
-		coDriverY.whenPressed(new ManualArmOpen());
-		coDriverLS.whenPressed(new ManualClawDown());
-		coDriverLB.whenPressed(new ManualClawUp());
-		coDriverStart.whenPressed(new ManualPusherExtend());
-		coDriverBack.whenPressed(new ManualPusherRetract());
+		driverX.whenPressed(new ManualArmClose());
+		driverY.whenPressed(new ManualArmOpen());
+		driverA.whenPressed(new ManualClawDown());
+		driverB.whenPressed(new ManualClawUp());
+		driverStart.whenPressed(new ManualPusherExtend());
+		driverBack.whenPressed(new ManualPusherRetract());
 		
 		//Manual testing for rollers
-		coDriverRB.whenPressed(new ManualRollersSpinIn());
-		coDriverRB.whenReleased(new ManualSpinStop());
-		coDriverRS.whenPressed(new ManualRollersSpinOut());
-		coDriverRS.whenReleased(new ManualSpinStop());
+		driverLB.whenPressed(new ManualRollersSpinIn());
+		driverLB.whenReleased(new ManualSpinStop());
+		driverRB.whenPressed(new ManualRollersSpinOut());
+		driverRB.whenReleased(new ManualSpinStop());
 	}
 	
 	/**
@@ -123,7 +120,7 @@ public class OI {
 	public double getCoDriverAxis(Axis axis) {
 	    return (coDriver.getRawAxis(axis.getAxis()) < -.05 || coDriver.getRawAxis(axis.getAxis()) > .05) ? coDriver.getRawAxis(axis.getAxis()) : 0;
 	}
-
+	
 	/**
 	 * Rumble the driver's controller at the specified intensity
 	 * @param intensity the intensity
@@ -133,3 +130,4 @@ public class OI {
 		driver.setRumble(RumbleType.kRightRumble, intensity);
 	}
 }
+//>>>>>>> code changes after testing
