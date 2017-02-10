@@ -1,5 +1,7 @@
 package org.usfirst.frc.team340.robot;
 
+import org.usfirst.frc.team340.robot.commands.DriveDropWheels;
+import org.usfirst.frc.team340.robot.commands.DriveRaiseWheels;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualArmClose;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualArmOpen;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualClawDown;
@@ -32,8 +34,8 @@ public class OI {
 	private Button driverRB = new JoystickButton(driver, 6);
 	private Button driverBack = new JoystickButton(driver, 7);
 	private Button driverStart = new JoystickButton(driver, 8);
-	private Button driverLS = new JoystickButton(driver, 9);
-	private Button driverRS = new JoystickButton(driver, 10);
+	private Button driverL3 = new JoystickButton(driver, 9);
+	private Button driverR3 = new JoystickButton(driver, 10);
 	
 	//CO-DRIVER
 	private Joystick coDriver = new Joystick(1);
@@ -45,8 +47,8 @@ public class OI {
 	private Button coDriverRB = new JoystickButton(coDriver, 6);
 	private Button coDriverBack = new JoystickButton(coDriver, 7);
 	private Button coDriverStart = new JoystickButton(coDriver, 8);
-	private Button coDriverLS = new JoystickButton(coDriver, 9);
-	private Button coDriverRS = new JoystickButton(coDriver, 10);
+	private Button coDriverL3 = new JoystickButton(coDriver, 9);
+	private Button coDriverR3 = new JoystickButton(coDriver, 10);
 	
 	//MANUAL BOARD
 	private Joystick board = new Joystick(2);
@@ -58,6 +60,9 @@ public class OI {
 //		coDriverA.whenReleased(new ManualClimberGoStopped());
 //		coDriverB.whenPressed(new ManualGoAtClimbSpeed());
 //		coDriver*/B.whenReleased(new ManualClimberGoStopped());
+		
+		driverL3.whenPressed(new DriveDropWheels());
+		driverR3.whenPressed(new DriveRaiseWheels());
 		
 		//Manual testing for claw
 		driverX.whenPressed(new ManualArmClose());
