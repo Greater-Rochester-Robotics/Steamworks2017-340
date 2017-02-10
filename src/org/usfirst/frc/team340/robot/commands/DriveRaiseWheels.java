@@ -13,6 +13,6 @@ public class DriveRaiseWheels extends InstantCommand {
     
     @Override
     protected void execute() {
-	Robot.drive.setWheelsDown(false);
+	Robot.drive.setDrop(false);
     }
 }

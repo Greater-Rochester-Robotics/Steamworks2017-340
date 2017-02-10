@@ -70,7 +70,7 @@ public class Drive extends Subsystem {
      * @param isDown true for the wheel
      * down position and vice versa
      */
-    public void setWheelsDown(boolean isDown) {
+    public void setDrop(boolean isDown) {
     	drop.set(isDown);
     }
     
