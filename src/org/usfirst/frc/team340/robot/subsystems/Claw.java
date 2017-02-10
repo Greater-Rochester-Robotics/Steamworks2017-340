@@ -21,8 +21,8 @@ public class Claw extends Subsystem {
 	
 	private static final Value ARM_UP = Value.kReverse;
 	private static final Value ARM_DOWN = Value.kForward;
-	private static final Value CLAW_OPEN = Value.kForward; //TODO: see if forward is open or closed
-	private static final Value CLAW_CLOSED = Value.kReverse; //TODO: see if reverse is open or closed
+	private static final Value CLAW_OPEN = Value.kReverse;
+	private static final Value CLAW_CLOSED = Value.kForward;
 	private static final boolean PUSHER_OUT = true;
 	private static final boolean PUSHER_IN = false;
 	
