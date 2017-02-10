@@ -4,7 +4,6 @@ import org.usfirst.frc.team340.robot.RobotMap;
 import org.usfirst.frc.team340.robot.commands.DriveXbox;
 
 import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -17,7 +16,6 @@ public class Drive extends Subsystem {
 	private double leftMotorSpeed;
     private double rightMotorSpeed;
     
-    private Solenoid drop;
     private Talon leftDrive;
     private Talon rightDrive;
     
@@ -33,7 +31,6 @@ public class Drive extends Subsystem {
     	leftMotorSpeed = 0;
     	rightMotorSpeed = 0;
     	
-		drop = new Solenoid(RobotMap.DROP_SOLENOID_CHANNEL);
 		leftDrive = new Talon(RobotMap.LEFT_DRIVE_PORT);
 		rightDrive = new Talon(RobotMap.RIGHT_DRIVE_PORT);
 		
@@ -56,22 +53,6 @@ public class Drive extends Subsystem {
     
     public int getBackUltrasonic() {
     	return backUltrasonic.getValue();
-    }
-    
-    /**
-     * Switch the value of the solenoid
-     */
-    public void toggleWheelsDown() {
-    	drop.set(!drop.get());
-    }
-    
-    /**
-     * Set the value of the solenoid
-     * @param isDown true for the wheel
-     * down position and vice versa
-     */
-    public void setDrop(boolean isDown) {
-    	drop.set(isDown);
     }
     
     /**

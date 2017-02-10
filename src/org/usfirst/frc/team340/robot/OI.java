@@ -56,10 +56,10 @@ public class OI {
 	public OI() {
 		
 		//Manual testing for climber
-//		coDriver/*A.whenPressed(new ManualClimberGoAtEngagementSpeed());
+//		coDriverA.whenPressed(new ManualClimberGoAtEngagementSpeed());
 //		coDriverA.whenReleased(new ManualClimberGoStopped());
 //		coDriverB.whenPressed(new ManualGoAtClimbSpeed());
-//		coDriver*/B.whenReleased(new ManualClimberGoStopped());
+//		coDriverB.whenReleased(new ManualClimberGoStopped());
 		
 		driverL3.whenPressed(new DriveDropWheels());
 		driverR3.whenPressed(new DriveRaiseWheels());

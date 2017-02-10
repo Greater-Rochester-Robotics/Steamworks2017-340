@@ -8,11 +8,11 @@ public class DriveRaiseWheels extends InstantCommand {
     
     @Override
     protected void initialize() {
-	requires(Robot.drive);
+    	requires(Robot.drop);
     }
     
     @Override
     protected void execute() {
-	Robot.drive.setDrop(false);
+    	Robot.drop.setDrop(false);
     }
 }
