@@ -69,6 +69,13 @@ public class Robot extends IterativeRobot {
 	public static void setMode(int mode) {
 		visionTable.putNumber("mode", mode);
 	}
+	
+	/**
+	 * Save a calibration picture to the pi sd card
+	 */
+	public static void calibrate() {
+		visionTable.putBoolean("calibrate", true);
+	}
 
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
