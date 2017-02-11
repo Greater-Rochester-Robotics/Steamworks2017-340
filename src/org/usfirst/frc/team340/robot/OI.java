@@ -1,7 +1,8 @@
 package org.usfirst.frc.team340.robot;
 
-import org.usfirst.frc.team340.robot.commands.DriveDropWheels;
-import org.usfirst.frc.team340.robot.commands.DriveRaiseWheels;
+import org.usfirst.frc.team340.robot.commands.DropLowerWheels;
+import org.usfirst.frc.team340.robot.commands.DropRaiseWheels;
+import org.usfirst.frc.team340.robot.commands.DropToggleWheels;
 import org.usfirst.frc.team340.robot.commands.climb.manual.ManualRollDrum;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualArmClose;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualArmOpen;
@@ -63,8 +64,9 @@ public class OI {
 //		coDriverB.whenPressed(new ManualGoAtClimbSpeed());
 //		coDriverB.whenReleased(new ManualClimberGoStopped());
 		
-		driverL3.whenPressed(new DriveDropWheels());
-		driverR3.whenPressed(new DriveRaiseWheels());
+		driverL3.whenPressed(new DropLowerWheels());
+		driverL3.whenReleased(new DropRaiseWheels());
+		driverR3.whenPressed(new DropToggleWheels());
 		
 		//Manual testing for claw
 		driverX.whenPressed(new ManualArmClose());

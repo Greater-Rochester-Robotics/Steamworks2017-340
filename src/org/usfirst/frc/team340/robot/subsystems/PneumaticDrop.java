@@ -1,7 +1,7 @@
 package org.usfirst.frc.team340.robot.subsystems;
 
 import org.usfirst.frc.team340.robot.RobotMap;
-import org.usfirst.frc.team340.robot.commands.DriveRaiseWheels;
+import org.usfirst.frc.team340.robot.commands.DropRaiseWheels;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -26,7 +26,7 @@ public class PneumaticDrop extends Subsystem {
 	/**
      * Switch the value of the solenoid
      */
-    public void toggleWheels() {
+    public void toggleOmni() {
     	drop.set(!drop.get());
     }
     
@@ -58,7 +58,7 @@ public class PneumaticDrop extends Subsystem {
      * drop on-enable
      */
     public void initDefaultCommand() {
-    	setDefaultCommand(new DriveRaiseWheels());
+    	setDefaultCommand(new DropRaiseWheels());
     }
 }
 
