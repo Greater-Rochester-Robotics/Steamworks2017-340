@@ -16,11 +16,10 @@ public class Drive extends Subsystem {
 	private double leftMotorSpeed;
     private double rightMotorSpeed;
     
-    private Talon leftDrive;
-    private Talon rightDrive;
-    
     private AnalogInput frontUltrasonic;
     private AnalogInput backUltrasonic;
+    private Talon leftDrive;
+    private Talon rightDrive;
     
     /**
      * Sets the variables for each of the
@@ -31,11 +30,10 @@ public class Drive extends Subsystem {
     	leftMotorSpeed = 0;
     	rightMotorSpeed = 0;
     	
+    	frontUltrasonic = new AnalogInput(RobotMap.FRONT_ULTRASONIC_PORT);
+		backUltrasonic = new AnalogInput(RobotMap.BACK_ULTRASONIC_PORT);
 		leftDrive = new Talon(RobotMap.LEFT_DRIVE_PORT);
 		rightDrive = new Talon(RobotMap.RIGHT_DRIVE_PORT);
-		
-		frontUltrasonic = new AnalogInput(RobotMap.FRONT_ULTRASONIC_PORT);
-		backUltrasonic = new AnalogInput(RobotMap.BACK_ULTRASONIC_PORT);
     }
     
     /**
