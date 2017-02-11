@@ -2,6 +2,7 @@ package org.usfirst.frc.team340.robot;
 
 import org.usfirst.frc.team340.robot.commands.DriveDropWheels;
 import org.usfirst.frc.team340.robot.commands.DriveRaiseWheels;
+import org.usfirst.frc.team340.robot.commands.climb.manual.ManualRollDrum;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualArmClose;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualArmOpen;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualClawDown;
@@ -52,6 +53,7 @@ public class OI {
 	
 	//MANUAL BOARD
 	private Joystick board = new Joystick(2);
+	private Button climbSwitch = new JoystickButton(board, 0);
 	
 	public OI() {
 		
@@ -77,6 +79,9 @@ public class OI {
 		driverLB.whenReleased(new ManualSpinStop());
 		driverRB.whenPressed(new ManualRollersSpinOut());
 		driverRB.whenReleased(new ManualSpinStop());
+		
+		//Manual override climbing
+		climbSwitch.whileHeld(new ManualRollDrum());
 	}
 	
 	/**
