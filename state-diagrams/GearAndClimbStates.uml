@@ -7,9 +7,9 @@ idle: Natural idle state when\n no commands are running
 ClawReferenceImage: <img:/Claw20170121_resized.JPG>
 ClimberReferenceImage: <img:/Climber_resized.JPG>
 
-	PneumaticDrop: drops the omni wheel 
+	PneumaticDrop: dropOmni
 	
-	Drive: drive here
+	Drive: driveMotors=humanControl
 
 state Climbing {
 
@@ -120,8 +120,8 @@ state ReleaseGear {
 idle -left-> ScoreGear: Score Button Pressed
 idle -down-> HarvestGear: Harvest Button Pressed 
 idle -up-> ReleaseGear: Release Button Pressed
-idle -right-> Climbing: Climb Button Pressed
-idle -right-> PneumaticDrop: Pneumatic Drop Button Pressed
+idle -right-> Climbing: Hold Climb Button
+idle -right-> PneumaticDrop: Hold PneumaticDrop Button
 idle -left-> Drive: Drive
 
 HarvestGear -down-> AbortHarvest: Harvest Button Released
