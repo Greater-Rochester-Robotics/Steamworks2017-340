@@ -9,6 +9,8 @@ ClimberReferenceImage: <img:/Climber_resized.JPG>
 
 	PneumaticDrop: dropOmni
 	
+	AbortPneumaticDrop: raiseOmni
+	
 	Drive: driveMotors=humanControl
 
 state Climbing {
@@ -29,8 +31,8 @@ state Climbing {
 		Climb: driveMotors= <b>goStop
 		Climb: ClimbMotors= <b>goAtClimbSpeed
 	
-		stopClimb: driveMotors= goStop
-		stopClimb: ClimbMotors= <b>goStayingSpeed
+		stayAtTop: driveMotors= goStop
+		stayAtTop: ClimbMotors= <b>goStayingSpeed
 	
 	}
 }
@@ -126,6 +128,8 @@ idle -right-> Climbing: Hold Climb Button
 idle -right-> PneumaticDrop: Hold PneumaticDrop Button
 idle -left-> Drive: Drive
 
+PneumaticDrop -down-> AbortPneumaticDrop: Release PneumaticDrop
+
 HarvestGear -down-> AbortHarvest: Harvest Button Released
 
 ReleaseGear -right-> AbortRelease: Release Button Released
@@ -142,7 +146,7 @@ ClimbMotorsOn -down-> DriveIntoRope: timeDelay= 0.5
 
 DriveIntoRope -down-> ClimbToTop: ClimbMotors=isEngagedWithRope
 
-Climb -down-> stopClimb: ClimbMotors=isEngagedWithTouchPad
+Climb -down-> stayAtTop: ClimbMotors=isEngagedWithTouchPad
 
 HarvestMode -right-> GearClamp: whenGearIsAcquired
 
@@ -155,8 +159,6 @@ MoveToPeg -down-> PlaceGear: doPlaceGearSequence
 PlaceGear -down-> ReturnToStart: timeDelay &\n whenGearIsNotAcquired
 
 ReturnToStart -down-> gearScored: pusherPos=IsRetracted
-
-gearScored -down-> PlaceGear: retry?
 
 ReadyToReleaseGear -right-> RegurgitateGear: clawPos=IsDown
 
