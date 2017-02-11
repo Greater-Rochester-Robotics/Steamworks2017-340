@@ -7,11 +7,18 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- *
+ * This class handles the pneumatic drop aka
+ * the omni-drop aka the parallel drop aka the
+ * not-so-perpendicular drop
  */
 public class PneumaticDrop extends Subsystem {
 	private Solenoid drop;
 	
+	/**
+	 * Constructs a new instance of {@link PneumaticDrop}
+	 * by assigning the drop's solenoid to the correct
+	 * channel
+	 */
 	public PneumaticDrop() {
 		drop = new Solenoid(RobotMap.DROP_SOLENOID_CHANNEL);
 	}
@@ -32,6 +39,10 @@ public class PneumaticDrop extends Subsystem {
     	drop.set(isDown);
     }
 
+    /**
+     * Sets the default command by raising the
+     * drop on-enable
+     */
     public void initDefaultCommand() {
     	setDefaultCommand(new DriveRaiseWheels());
     }

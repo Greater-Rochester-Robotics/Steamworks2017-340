@@ -29,9 +29,9 @@ public class Claw extends Subsystem {
 	private DoubleSolenoid claw;
 	private DoubleSolenoid hinge;
 	private Solenoid pusher;
+	private TalonSRX rollers;
 	private VotableInput gearSensorLeft;
 	private VotableInput gearSensorRight;
-	private TalonSRX rollers;
 	
 	/**
 	 * Constructs a {@link Claw} and sets all
@@ -43,9 +43,9 @@ public class Claw extends Subsystem {
 		claw = new DoubleSolenoid(RobotMap.CLAW_SOLENOID_FORWARD_CHANNEL, RobotMap.CLAW_SOLENOID_REVERSE_CHANNEL);
 		hinge = new DoubleSolenoid(RobotMap.ARM_SOLENOID_FORWARD_CHANNEL, RobotMap.ARM_SOLENOID_REVERSE_CHANNEL);
 		pusher = new Solenoid(RobotMap.PUSHER_SOLENOID_CHANNEL);
+		rollers = new TalonSRX(RobotMap.CLAW_ROLLERS_PORT);
 		gearSensorLeft = new VotableInput(RobotMap.GEAR_SENSOR_LEFT_CHANNEL);
 		gearSensorRight = new VotableInput(RobotMap.GEAR_SENSOR_RIGHT_CHANNEL);
-		rollers = new TalonSRX(RobotMap.CLAW_ROLLERS_PORT);
 	}
     
 	/*
