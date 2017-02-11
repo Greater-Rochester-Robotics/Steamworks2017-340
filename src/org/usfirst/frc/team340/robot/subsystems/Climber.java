@@ -18,10 +18,10 @@ public class Climber extends Subsystem {
 	
 	private static final double ENGAGEMENT_SPEED = 0.5; //TODO: perfect this
 	private static final double CLIMB_SPEED = 0.75; //TODO: perfect this
-	private static final double STAY_SPEED = 0.5; //TODO: figure out what the speed is
+	private static final double STAY_SPEED = 0.5; //TODO: perfect this
 	
 	private CANTalon drumOne;
-	private CANTalon drumTwo; //TODO: see if we need to worry about both (check for sync)
+	private CANTalon drumTwo;
 	
 	public Climber() {
 		drumOne = new CANTalon(RobotMap.CLIMBER_DRUM_PORT_ONE);
@@ -70,7 +70,7 @@ public class Climber extends Subsystem {
 	 * latched onto the rope
 	 */
 	public boolean isEngagedWithRope(){
-		return getCurrent()>this.LIFTOFF_CURRENT; //TODO: make this
+		return getCurrent() > LIFTOFF_CURRENT;
 	}
 	
 	/**
@@ -87,7 +87,7 @@ public class Climber extends Subsystem {
 	 * engaged the touchpad
 	 */
 	public boolean isEngagedWithTouchPad(){
-		return getCurrent()>this.TOUCHPAD_CURRENT;
+		return getCurrent() > TOUCHPAD_CURRENT;
 	}
 	
 	public void goStayingSpeed(){
