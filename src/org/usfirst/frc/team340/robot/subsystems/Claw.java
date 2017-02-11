@@ -19,10 +19,10 @@ public class Claw extends Subsystem {
 	private static final double ROLLER_IN_SPEED = 1.0; //TODO: perfect this
 	private static final double ROLLER_OUT_SPEED = -1.0; //TODO: perfect this too
 	
-	private static final Value ARM_UP = Value.kReverse;
-	private static final Value ARM_DOWN = Value.kForward;
-	private static final Value CLAW_OPEN = Value.kReverse;
-	private static final Value CLAW_CLOSED = Value.kForward;
+	private static final Value ARM_UP = Value.kForward;
+	private static final Value ARM_DOWN = Value.kReverse;
+	private static final Value CLAW_OPEN = Value.kForward;
+	private static final Value CLAW_CLOSED = Value.kReverse;
 	private static final boolean PUSHER_OUT = true;
 	private static final boolean PUSHER_IN = false;
 	
