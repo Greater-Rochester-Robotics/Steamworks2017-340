@@ -3,6 +3,7 @@ package org.usfirst.frc.team340.robot.commands.groups;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import org.usfirst.frc.team340.robot.commands.climb.ClimbMotorsOn;
 import org.usfirst.frc.team340.robot.commands.climb.DriveIntoRope;
+import org.usfirst.frc.team340.robot.commands.climb.StayAtTop;
 import org.usfirst.frc.team340.robot.RobotMap;
 import org.usfirst.frc.team340.robot.commands.climb.Climb;
 
@@ -18,6 +19,6 @@ public class Climbing extends CommandGroup {
     	addSequential(new ClimbMotorsOn(RobotMap.CLIMB_MOTORS_ENGAGEMENT_SPIN_UP_TIME));
     	addSequential(new DriveIntoRope());
     	addSequential(new Climb());
-
+    	addSequential(new StayAtTop());
     }
 }

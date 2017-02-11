@@ -2,8 +2,8 @@ package org.usfirst.frc.team340.robot.subsystems;
 
 import org.usfirst.frc.team340.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import com.ctre.CANTalon;
 
 /**
  * <h1><em>Climber</em></h1>
@@ -12,22 +12,35 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * more specifically the controlled rotation of the
  * drum
  */
-@SuppressWarnings("unused")
 public class Climber extends Subsystem {
 	private static final int TOUCHPAD_CURRENT = 120; //TODO: perfect this
 	private static final int LIFTOFF_CURRENT = 100; //TODO: perfect this
 	
 	private static final double ENGAGEMENT_SPEED = 0.5; //TODO: perfect this
 	private static final double CLIMB_SPEED = 0.75; //TODO: perfect this
+	private static final double STAY_SPEED = 0.5; //TODO: figure out what the speed is
 	
-	private Spark drumOne;
-	private Spark drumTwo; //TODO: see if we need to worry about both (check for sync)
+	private CANTalon drumOne;
+	private CANTalon drumTwo; //TODO: see if we need to worry about both (check for sync)
 	
 	public Climber() {
-		drumOne = new Spark(RobotMap.CLIMBER_DRUM_PORT_ONE);
-		drumTwo = new Spark(RobotMap.CLIMBER_DRUM_PORT_TWO);
+		drumOne = new CANTalon(RobotMap.CLIMBER_DRUM_PORT_ONE);
+		drumTwo = new CANTalon(RobotMap.CLIMBER_DRUM_PORT_TWO);
+		
 	}
-
+	
+	public double getCurrent() {
+		return (drumOne.getOutputCurrent() + drumTwo.getOutputCurrent()) / 2;
+	}
+	
+	public double getCurrentDrumOne() {
+		return drumOne.getOutputCurrent();
+	}
+	
+	public double getCurrentDrumTwo() {
+		return drumTwo.getOutputCurrent();
+	}
+	
     /**
      * Bring the drum to its
      * engagement speed, used
@@ -57,7 +70,7 @@ public class Climber extends Subsystem {
 	 * latched onto the rope
 	 */
 	public boolean isEngagedWithRope(){
-		return false; //TODO: make this
+		return getCurrent()>this.LIFTOFF_CURRENT; //TODO: make this
 	}
 	
 	/**
@@ -74,7 +87,11 @@ public class Climber extends Subsystem {
 	 * engaged the touchpad
 	 */
 	public boolean isEngagedWithTouchPad(){
-		return false;
+		return getCurrent()>this.TOUCHPAD_CURRENT;
+	}
+	
+	public void goStayingSpeed(){
+		goToSpeed(STAY_SPEED);
 	}
 	
 	/**
