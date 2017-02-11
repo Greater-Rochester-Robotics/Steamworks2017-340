@@ -35,8 +35,22 @@ public class PneumaticDrop extends Subsystem {
      * @param isDown true for the wheel
      * down position and vice versa
      */
-    public void setDrop(boolean isDown) {
+    private void setDrop(boolean isDown) {
     	drop.set(isDown);
+    }
+    
+    /**
+     * Drop the omnis
+     */
+    public void dropOmni() {
+    	setDrop(true);
+    }
+    
+    /**
+     * Raise the omnis
+     */
+    public void raiseOmni() {
+    	setDrop(false);
     }
 
     /**
