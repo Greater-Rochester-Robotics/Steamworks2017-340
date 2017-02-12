@@ -6,7 +6,7 @@ import org.usfirst.frc.team340.robot.VotableInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.TalonSRX;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -19,17 +19,17 @@ public class Claw extends Subsystem {
 	private static final double ROLLER_IN_SPEED = 1.0; //TODO: perfect this
 	private static final double ROLLER_OUT_SPEED = -1.0; //TODO: perfect this too
 	
-	private static final Value ARM_UP = Value.kReverse;
-	private static final Value ARM_DOWN = Value.kForward;
-	private static final Value CLAW_OPEN = Value.kReverse;
-	private static final Value CLAW_CLOSED = Value.kForward;
+	private static final Value ARM_UP = Value.kForward;
+	private static final Value ARM_DOWN = Value.kReverse;
+	private static final Value CLAW_OPEN = Value.kForward;
+	private static final Value CLAW_CLOSED = Value.kReverse;
 	private static final boolean PUSHER_OUT = true;
 	private static final boolean PUSHER_IN = false;
 	
 	private DoubleSolenoid claw;
 	private DoubleSolenoid hinge;
 	private Solenoid pusher;
-	private TalonSRX rollers;
+	private Talon rollers;
 	private VotableInput gearSensorLeft;
 	private VotableInput gearSensorRight;
 	
@@ -43,7 +43,7 @@ public class Claw extends Subsystem {
 		claw = new DoubleSolenoid(RobotMap.CLAW_SOLENOID_FORWARD_CHANNEL, RobotMap.CLAW_SOLENOID_REVERSE_CHANNEL);
 		hinge = new DoubleSolenoid(RobotMap.ARM_SOLENOID_FORWARD_CHANNEL, RobotMap.ARM_SOLENOID_REVERSE_CHANNEL);
 		pusher = new Solenoid(RobotMap.PUSHER_SOLENOID_CHANNEL);
-		rollers = new TalonSRX(RobotMap.CLAW_ROLLERS_PORT);
+		rollers = new Talon(RobotMap.CLAW_ROLLERS_PORT);
 		gearSensorLeft = new VotableInput(RobotMap.GEAR_SENSOR_LEFT_CHANNEL);
 		gearSensorRight = new VotableInput(RobotMap.GEAR_SENSOR_RIGHT_CHANNEL);
 	}

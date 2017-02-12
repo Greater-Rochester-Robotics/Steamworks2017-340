@@ -7,8 +7,6 @@ package org.usfirst.frc.team340.robot;
  * floating around.
  */
 public class RobotMap {
-    
-    //FIXME: talk to electrical about the correct numbers
     public static final int LEFT_DRIVE_PORT = 0;
     public static final int RIGHT_DRIVE_PORT = 1;
     public static final int CLAW_ROLLERS_PORT = 2;
@@ -20,8 +18,8 @@ public class RobotMap {
     public static final int CLAW_SOLENOID_REVERSE_CHANNEL = 1;
     public static final int PUSHER_SOLENOID_CHANNEL = 5;
     
-    public static final int CLIMBER_DRUM_PORT_ONE = 11;
-    public static final int CLIMBER_DRUM_PORT_TWO = 12;
+    public static final int CLIMBER_DRUM_ONE_ID = 6;
+    public static final int CLIMBER_DRUM_TWO_ID = 5;
     public static final int GEAR_SENSOR_LEFT_CHANNEL = 13;
     public static final int GEAR_SENSOR_RIGHT_CHANNEL = 14;
     

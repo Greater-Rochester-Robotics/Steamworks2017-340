@@ -3,6 +3,9 @@ package org.usfirst.frc.team340.robot;
 import org.usfirst.frc.team340.robot.commands.DropLowerWheels;
 import org.usfirst.frc.team340.robot.commands.DropRaiseWheels;
 import org.usfirst.frc.team340.robot.commands.DropToggleWheels;
+import org.usfirst.frc.team340.robot.commands.climb.manual.ManualClimberGoAtEngagementSpeed;
+import org.usfirst.frc.team340.robot.commands.climb.manual.ManualClimberGoStopped;
+import org.usfirst.frc.team340.robot.commands.climb.manual.ManualGoAtClimbSpeed;
 import org.usfirst.frc.team340.robot.commands.climb.manual.ManualRollDrum;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualArmClose;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualArmOpen;
@@ -54,15 +57,15 @@ public class OI {
 	
 	//MANUAL BOARD
 	private Joystick board = new Joystick(2);
-	private Button climbSwitch = new JoystickButton(board, 0);
+	private Button climbSwitch = new JoystickButton(board, 1);
 	
 	public OI() {
 		
 		//Manual testing for climber
-//		coDriverA.whenPressed(new ManualClimberGoAtEngagementSpeed());
-//		coDriverA.whenReleased(new ManualClimberGoStopped());
-//		coDriverB.whenPressed(new ManualGoAtClimbSpeed());
-//		coDriverB.whenReleased(new ManualClimberGoStopped());
+		coDriverA.whenPressed(new ManualClimberGoAtEngagementSpeed());
+		coDriverA.whenReleased(new ManualClimberGoStopped());
+		coDriverB.whenPressed(new ManualGoAtClimbSpeed());
+		coDriverB.whenReleased(new ManualClimberGoStopped());
 		
 		driverL3.whenPressed(new DropLowerWheels());
 		driverL3.whenReleased(new DropRaiseWheels());

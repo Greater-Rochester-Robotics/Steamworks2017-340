@@ -6,9 +6,13 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
 
 public class DropLowerWheels extends InstantCommand {
     
+	public DropLowerWheels() {
+		requires(Robot.drop);
+	}
+	
     @Override
     protected void initialize() {
-    	requires(Robot.drop);
+    	
     }
     
     @Override

@@ -1,7 +1,6 @@
 package org.usfirst.frc.team340.robot.subsystems;
 
 import org.usfirst.frc.team340.robot.RobotMap;
-import org.usfirst.frc.team340.robot.commands.DropRaiseWheels;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -58,7 +57,8 @@ public class PneumaticDrop extends Subsystem {
      * drop on-enable
      */
     public void initDefaultCommand() {
-    	setDefaultCommand(new DropRaiseWheels());
+//    	setDefaultCommand(new DropRaiseWheels());
+    	//Commented out to prevent auto-raise after drop
     }
 }
 

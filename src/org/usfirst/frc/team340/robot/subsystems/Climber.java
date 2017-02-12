@@ -2,8 +2,9 @@ package org.usfirst.frc.team340.robot.subsystems;
 
 import org.usfirst.frc.team340.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
 import com.ctre.CANTalon;
+
+import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  * <h1><em>Climber</em></h1>
@@ -24,9 +25,8 @@ public class Climber extends Subsystem {
 	private CANTalon drumTwo; //TODO: see if we need to worry about both (check for sync)
 	
 	public Climber() {
-		drumOne = new CANTalon(RobotMap.CLIMBER_DRUM_PORT_ONE);
-		drumTwo = new CANTalon(RobotMap.CLIMBER_DRUM_PORT_TWO);
-		
+		drumOne = new CANTalon(RobotMap.CLIMBER_DRUM_TWO_ID);
+		drumTwo = new CANTalon(RobotMap.CLIMBER_DRUM_TWO_ID);
 	}
 	
 	public double getCurrent() {
@@ -60,6 +60,7 @@ public class Climber extends Subsystem {
 	 */
 	private void goToSpeed(double speed){
 		drumOne.set(speed);
+		drumTwo.set(speed);
 	}
 	
 	/**
