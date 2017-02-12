@@ -17,15 +17,15 @@ public class Climber extends Subsystem {
 	private static final int TOUCHPAD_CURRENT = 120; //TODO: perfect this
 	private static final int LIFTOFF_CURRENT = 100; //TODO: perfect this
 	
-	private static final double ENGAGEMENT_SPEED = 0.5; //TODO: perfect this
-	private static final double CLIMB_SPEED = 0.75; //TODO: perfect this
+	private static final double ENGAGEMENT_SPEED = 0.3; //TODO: perfect this
+	private static final double CLIMB_SPEED = 0.95; //TODO: perfect this
 	private static final double STAY_SPEED = 0.5; //TODO: perfect this
 	
 	private CANTalon drumOne;
 	private CANTalon drumTwo;
 	
 	public Climber() {
-		drumOne = new CANTalon(RobotMap.CLIMBER_DRUM_TWO_ID);
+		drumOne = new CANTalon(RobotMap.CLIMBER_DRUM_ONE_ID);
 		drumTwo = new CANTalon(RobotMap.CLIMBER_DRUM_TWO_ID);
 	}
 	
