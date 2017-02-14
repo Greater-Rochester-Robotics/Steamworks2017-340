@@ -1,5 +1,6 @@
 package org.usfirst.frc.team340.robot;
 
+import org.usfirst.frc.team340.robot.DPad.Direction;
 import org.usfirst.frc.team340.robot.commands.DropLowerWheels;
 import org.usfirst.frc.team340.robot.commands.DropRaiseWheels;
 import org.usfirst.frc.team340.robot.commands.DropToggleWheels;
@@ -7,6 +8,8 @@ import org.usfirst.frc.team340.robot.commands.climb.manual.ManualClimberGoAtEnga
 import org.usfirst.frc.team340.robot.commands.climb.manual.ManualClimberGoStopped;
 import org.usfirst.frc.team340.robot.commands.climb.manual.ManualGoAtClimbSpeed;
 import org.usfirst.frc.team340.robot.commands.climb.manual.ManualRollDrum;
+import org.usfirst.frc.team340.robot.commands.gears.AbortHarvest;
+import org.usfirst.frc.team340.robot.commands.gears.AbortScore;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualArmClose;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualArmOpen;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualClawDown;
@@ -16,6 +19,9 @@ import org.usfirst.frc.team340.robot.commands.gears.manual.ManualPusherRetract;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualRollersSpinIn;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualRollersSpinOut;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualSpinStop;
+import org.usfirst.frc.team340.robot.commands.groups.HarvestGear;
+import org.usfirst.frc.team340.robot.commands.groups.ReleaseGear;
+import org.usfirst.frc.team340.robot.commands.groups.ScoreGear;
 
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
@@ -41,6 +47,10 @@ public class OI {
 	private Button driverStart = new JoystickButton(driver, 8);
 	private Button driverL3 = new JoystickButton(driver, 9);
 	private Button driverR3 = new JoystickButton(driver, 10);
+	private Button driverDPadUp = new DPad(driver, Direction.up);
+	private Button driverDPadDown = new DPad(driver, Direction.down);
+	private Button driverDPadRight = new DPad(driver, Direction.right);
+	private Button driverDPadLeft = new DPad(driver, Direction.left);
 	
 	//CO-DRIVER
 	private Joystick coDriver = new Joystick(1);
@@ -62,10 +72,10 @@ public class OI {
 	public OI() {
 		
 		//Manual testing for climber
-		coDriverA.whenPressed(new ManualClimberGoAtEngagementSpeed());
-		coDriverA.whenReleased(new ManualClimberGoStopped());
-		coDriverB.whenPressed(new ManualGoAtClimbSpeed());
-		coDriverB.whenReleased(new ManualClimberGoStopped());
+		coDriverBack.whenPressed(new ManualClimberGoAtEngagementSpeed());
+		coDriverBack.whenReleased(new ManualClimberGoStopped());
+		coDriverStart.whenPressed(new ManualGoAtClimbSpeed());
+		coDriverStart.whenReleased(new ManualClimberGoStopped());
 		
 		driverL3.whenPressed(new DropLowerWheels());
 		driverL3.whenReleased(new DropRaiseWheels());
@@ -87,6 +97,13 @@ public class OI {
 		
 		//Manual override climbing
 		climbSwitch.whileHeld(new ManualRollDrum());
+		
+		// Claw command testing
+		driverDPadDown.whenPressed(new HarvestGear());
+		driverDPadDown.whenReleased(new AbortHarvest());
+		
+		driverDPadLeft.whenPressed(new ScoreGear());
+		driverDPadLeft.whenReleased(new AbortScore());
 	}
 	
 	/**

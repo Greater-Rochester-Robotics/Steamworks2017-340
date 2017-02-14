@@ -3,6 +3,7 @@ package org.usfirst.frc.team340.robot;
 import org.usfirst.frc.team340.robot.subsystems.Claw;
 import org.usfirst.frc.team340.robot.subsystems.Climber;
 import org.usfirst.frc.team340.robot.subsystems.Drive;
+import org.usfirst.frc.team340.robot.subsystems.NoSub;
 import org.usfirst.frc.team340.robot.subsystems.PneumaticDrop;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -23,6 +24,7 @@ public class Robot extends IterativeRobot {
     public static Claw claw;
     public static Climber climber;
     public static PneumaticDrop drop;
+    public static NoSub noSub;
     public static OI oi;
 
     Command autonomousCommand;
@@ -42,6 +44,7 @@ public class Robot extends IterativeRobot {
 	    claw = new Claw();
 	    climber = new Climber();
 	    drop = new PneumaticDrop();
+	    noSub = new NoSub();
 	    oi = new OI();
 	    
 	    visionTable = NetworkTable.getTable("vision");

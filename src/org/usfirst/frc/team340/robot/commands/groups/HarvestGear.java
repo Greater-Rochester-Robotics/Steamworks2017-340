@@ -2,6 +2,7 @@ package org.usfirst.frc.team340.robot.commands.groups;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import org.usfirst.frc.team340.robot.commands.gears.HarvestMode;
+import org.usfirst.frc.team340.robot.commands.DoNothing;
 import org.usfirst.frc.team340.robot.commands.gears.GearClamp;
 import org.usfirst.frc.team340.robot.commands.gears.RaisingClaw;
 
@@ -17,6 +18,7 @@ public class HarvestGear extends CommandGroup {
     	
     	addSequential(new HarvestMode());
     	addSequential(new GearClamp());
+    	addSequential(new DoNothing(), 0.2);
     	addSequential(new RaisingClaw());
 
     }

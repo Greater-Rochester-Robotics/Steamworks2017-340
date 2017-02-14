@@ -20,8 +20,8 @@ public class RobotMap {
     
     public static final int CLIMBER_DRUM_ONE_ID = 6;
     public static final int CLIMBER_DRUM_TWO_ID = 5;
-    public static final int GEAR_SENSOR_LEFT_CHANNEL = 13;
-    public static final int GEAR_SENSOR_RIGHT_CHANNEL = 14;
+    public static final int GEAR_SENSOR_LEFT_CHANNEL = 9;
+    public static final int GEAR_SENSOR_RIGHT_CHANNEL = 10;
     
 	public static final double CLIMB_MOTORS_ENGAGEMENT_SPIN_UP_TIME = 0.5;
 	
