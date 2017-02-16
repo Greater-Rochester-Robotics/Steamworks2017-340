@@ -48,7 +48,7 @@ public class Claw extends Subsystem {
 		gearSensorRight = new VotableInput(RobotMap.GEAR_SENSOR_RIGHT_CHANNEL);
 	}
     
-	/*
+	/**
 	 * Raise the "arm" (the entire claw)
 	 */
 	public void goUp() {
@@ -165,8 +165,7 @@ public class Claw extends Subsystem {
 	 * successfully been acquired
 	 */
 	public boolean whenGearIsAcquired() {
-//		System.out.println(gearSensorLeft.get());
-		return !gearSensorLeft.get() || !gearSensorRight.get();
+		return gearSensorLeft.get() || gearSensorRight.get();
 	}
 	
 	/**
