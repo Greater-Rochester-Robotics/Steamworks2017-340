@@ -28,6 +28,7 @@ public class DriveXbox extends Command {
 
     @Override
     protected void execute() {
+//    	System.out.println(Robot.drive.getFrontUltrasonic());
     	if(Math.abs(Robot.oi.getDriverAxis(Axis.LEFT_X)) > 0.1 || //At least 10% away from center of left X
     			Math.abs(Robot.oi.getDriverAxis(Axis.LEFT_Y)) > 0.1) { //At least 10% away from center of left Y
     			Robot.drive.arcadeDrive(Robot.oi.getDriverAxis(Axis.LEFT_Y), //Movement speed

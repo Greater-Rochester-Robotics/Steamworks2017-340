@@ -1,9 +1,11 @@
 package org.usfirst.frc.team340.robot;
 
 import org.usfirst.frc.team340.robot.DPad.Direction;
+import org.usfirst.frc.team340.robot.commands.DriveXbox;
 import org.usfirst.frc.team340.robot.commands.DropLowerWheels;
 import org.usfirst.frc.team340.robot.commands.DropRaiseWheels;
 import org.usfirst.frc.team340.robot.commands.DropToggleWheels;
+import org.usfirst.frc.team340.robot.commands.MoveToPeg;
 import org.usfirst.frc.team340.robot.commands.climb.manual.ManualClimberGoAtEngagementSpeed;
 import org.usfirst.frc.team340.robot.commands.climb.manual.ManualClimberGoStopped;
 import org.usfirst.frc.team340.robot.commands.climb.manual.ManualGoAtClimbSpeed;
@@ -86,8 +88,12 @@ public class OI {
 		driverY.whenPressed(new ManualArmOpen());
 		driverA.whenPressed(new ManualClawDown());
 		driverB.whenPressed(new ManualClawUp());
-		driverStart.whenPressed(new ManualPusherExtend());
-		driverBack.whenPressed(new ManualPusherRetract());
+		driverBack.whenPressed(new MoveToPeg());
+		driverBack.whenReleased(new DriveXbox());
+		driverStart.whenPressed(new HarvestGear());
+		driverStart.whenReleased(new AbortHarvest());
+//		driverStart.whenPressed(new ManualPusherExtend());
+//		driverBack.whenPressed(new ManualPusherRetract());
 		
 		//Manual testing for rollers
 		driverLB.whenPressed(new ManualRollersSpinIn());

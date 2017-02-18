@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class MoveToPeg extends Command {
 
-	double speed = -0.85;
+	double speed = -0.8;
 	double tolerance = 30;
 	double forwardMod = 6;
 	double fastMod = 8;
@@ -41,7 +41,7 @@ public class MoveToPeg extends Command {
 	boolean tstarted = false;
 	double gyro = 0;
 	boolean lined = true;
-	double endDist = 150;
+	double endDist = 100;
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
@@ -65,8 +65,8 @@ public class MoveToPeg extends Command {
 			Robot.drive.setLeftDrive(-speed/3);
 		} else if (center - avg > tolerance) {
 			if(center - avg <= tolerance * forwardMod) {
-				Robot.drive.setRightDrive(speed/3); // arcing motion
-				Robot.drive.setLeftDrive(speed/6);
+				Robot.drive.setRightDrive(speed/2); // arcing motion
+				Robot.drive.setLeftDrive(speed/7);
 			} else {
 				Robot.drive.setRightDrive(speed/4);
 				Robot.drive.setLeftDrive(-speed/4); // slower spin on point
@@ -76,8 +76,8 @@ public class MoveToPeg extends Command {
 			Robot.drive.setLeftDrive(speed/3);
 		} else if (avg - center > tolerance) {
 			if(avg - center <= tolerance * forwardMod) {
-				Robot.drive.setRightDrive(speed/6); // arcing
-				Robot.drive.setLeftDrive(speed/3);
+				Robot.drive.setRightDrive(speed/7); // arcing
+				Robot.drive.setLeftDrive(speed/2);
 			} else {
 				Robot.drive.setRightDrive(-speed/4); // slower spin on point
 				Robot.drive.setLeftDrive(speed/4);
