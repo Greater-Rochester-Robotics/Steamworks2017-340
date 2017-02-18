@@ -13,9 +13,7 @@ import org.usfirst.frc.team340.robot.commands.climb.Climb;
  * Once the climb has started the drive motors stop and climb motors run at climb speed.
  */
 public class Climbing extends CommandGroup {
-
     public Climbing() {
-    	
     	addSequential(new ClimbMotorsOn(RobotMap.CLIMB_MOTORS_ENGAGEMENT_SPIN_UP_TIME));
     	addSequential(new DriveIntoRope());
     	addSequential(new Climb());
