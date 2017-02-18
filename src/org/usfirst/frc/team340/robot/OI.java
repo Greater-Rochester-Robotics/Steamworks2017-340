@@ -18,6 +18,7 @@ import org.usfirst.frc.team340.robot.commands.gears.AbortScore;
 import org.usfirst.frc.team340.robot.commands.gears.GST;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualRollersSpinIn;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualSpinStop;
+import org.usfirst.frc.team340.robot.commands.groups.AutoScoreGear;
 import org.usfirst.frc.team340.robot.commands.groups.HarvestGear;
 import org.usfirst.frc.team340.robot.commands.groups.ReleaseGear;
 import org.usfirst.frc.team340.robot.commands.groups.ScoreGear;
@@ -90,8 +91,8 @@ public class OI {
 		driverA.whenPressed(new HarvestGear());
 		driverA.whenReleased(new AbortHarvest());
 		driverB.whenPressed(new DropToggleWheels());
-		driverBack.whenPressed(new MoveToPeg());
-		driverBack.whenReleased(new DriveXbox());
+//		driverBack.whenPressed(new MoveToPeg());
+//		driverBack.whenReleased(new DriveXbox());
 		driverStart.whenPressed(new HarvestGear());
 		driverStart.whenReleased(new AbortHarvest());
 		driverRT.whenPressed(new DropLowerWheels());
@@ -102,8 +103,8 @@ public class OI {
 		//Manual testing for rollers
 		driverLB.whenPressed(new ManualRollersSpinIn());
 		driverLB.whenReleased(new ManualSpinStop());
-		driverRB.whenPressed(new Climb());
-		driverRB.whenReleased(new AbortClimb());
+		//driverRB.whenPressed(new Climb());
+		//driverRB.whenReleased(new AbortClimb());
 		
 		//Manual override climbing
 		climbSwitch.whileHeld(new ManualRollDrum());
@@ -119,6 +120,12 @@ public class OI {
 		driverDPadUp.whenReleased(new AbortRelease());
 		
 		driverDPadRight.whileHeld(new GST());
+		
+		coDriverA.whenPressed(new MoveToPeg());
+		coDriverA.whenReleased(new DriveXbox());
+		
+		coDriverB.whenPressed(new AutoScoreGear());
+		coDriverB.whenPressed(new AutoScoreGear());
 	}
 	
 	
