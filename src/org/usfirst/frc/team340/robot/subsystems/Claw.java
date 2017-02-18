@@ -165,7 +165,7 @@ public class Claw extends Subsystem {
 	 * successfully been acquired
 	 */
 	public boolean whenGearIsAcquired() {
-		System.out.println(!gearSensorLeft.get());
+//		System.out.println(!gearSensorLeft.get());
 		return !gearSensorLeft.get() || !gearSensorRight.get();
 	}
 	
@@ -174,7 +174,7 @@ public class Claw extends Subsystem {
 	 * regurgitate the gear
 	 */
 	public void spinOut() {
-		rollers.set(ROLLER_OUT_SPEED); //Negative to push out
+		rollers.set(ROLLER_OUT_SPEED);
 	}
 	
 	/**
@@ -185,13 +185,20 @@ public class Claw extends Subsystem {
 		return !whenGearIsAcquired();
 	}
 	
-	/** Gets the left sensor */
+	/**
+	 * Gets the left sensor
+	 * @return true if sensor is down
+	 */
 	public boolean getLeftSensor() {
-		return gearSensorLeft.get();
+		return !gearSensorLeft.get();
 	}
-	/** Gets the right sensor */
+	
+	/**
+	 * Gets the right sensor
+	 * @return true if sensor is down
+	 */
 	public boolean getRightSensor() {
-		return gearSensorRight.get();
+		return !gearSensorRight.get();
 	}
 	
 	/**

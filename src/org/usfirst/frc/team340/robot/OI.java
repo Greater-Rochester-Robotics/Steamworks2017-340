@@ -16,13 +16,10 @@ import org.usfirst.frc.team340.robot.commands.gears.manual.ManualArmClose;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualArmOpen;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualClawDown;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualClawUp;
-import org.usfirst.frc.team340.robot.commands.gears.manual.ManualPusherExtend;
-import org.usfirst.frc.team340.robot.commands.gears.manual.ManualPusherRetract;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualRollersSpinIn;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualRollersSpinOut;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualSpinStop;
 import org.usfirst.frc.team340.robot.commands.groups.HarvestGear;
-import org.usfirst.frc.team340.robot.commands.groups.ReleaseGear;
 import org.usfirst.frc.team340.robot.commands.groups.ScoreGear;
 
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;

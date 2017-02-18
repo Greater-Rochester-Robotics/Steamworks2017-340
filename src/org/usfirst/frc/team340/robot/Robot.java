@@ -23,8 +23,8 @@ public class Robot extends IterativeRobot {
     public static Drive drive;
     public static Claw claw;
     public static Climber climber;
-    public static PneumaticDrop drop;
     public static NoSub noSub;
+    public static PneumaticDrop drop;
     public static OI oi;
 
     Command autonomousCommand;
