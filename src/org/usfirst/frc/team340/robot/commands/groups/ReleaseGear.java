@@ -16,7 +16,7 @@ public class ReleaseGear extends CommandGroup {
     	
     	addSequential(new ReadyToReleaseGear());
     	addSequential(new RegurgitateGear());
-    	addSequential(new ReturnToPosition());
+    	//addSequential(new ReturnToPosition());
 
     }
 }

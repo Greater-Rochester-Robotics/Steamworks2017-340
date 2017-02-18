@@ -201,6 +201,10 @@ public class Claw extends Subsystem {
 		return !gearSensorRight.get();
 	}
 	
+	public void printSensors() {
+		System.out.println("Left (9): " + getLeftSensor() + "; right (8): " + getRightSensor());
+	}
+	
 	/**
 	 * Sets the default command by
 	 * not setting a default command

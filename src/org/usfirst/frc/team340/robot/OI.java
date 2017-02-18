@@ -11,7 +11,9 @@ import org.usfirst.frc.team340.robot.commands.climb.manual.ManualClimberGoStoppe
 import org.usfirst.frc.team340.robot.commands.climb.manual.ManualGoAtClimbSpeed;
 import org.usfirst.frc.team340.robot.commands.climb.manual.ManualRollDrum;
 import org.usfirst.frc.team340.robot.commands.gears.AbortHarvest;
+import org.usfirst.frc.team340.robot.commands.gears.AbortRelease;
 import org.usfirst.frc.team340.robot.commands.gears.AbortScore;
+import org.usfirst.frc.team340.robot.commands.gears.GST;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualArmClose;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualArmOpen;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualClawDown;
@@ -20,6 +22,7 @@ import org.usfirst.frc.team340.robot.commands.gears.manual.ManualRollersSpinIn;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualRollersSpinOut;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualSpinStop;
 import org.usfirst.frc.team340.robot.commands.groups.HarvestGear;
+import org.usfirst.frc.team340.robot.commands.groups.ReleaseGear;
 import org.usfirst.frc.team340.robot.commands.groups.ScoreGear;
 
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
@@ -107,6 +110,11 @@ public class OI {
 		
 		driverDPadLeft.whenPressed(new ScoreGear());
 		driverDPadLeft.whenReleased(new AbortScore());
+		
+		driverDPadUp.whenPressed(new ReleaseGear());
+		driverDPadUp.whenReleased(new AbortRelease());
+		
+		driverDPadRight.whileHeld(new GST());
 	}
 	
 	/**
