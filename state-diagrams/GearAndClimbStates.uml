@@ -42,25 +42,25 @@ state Climbing {
 
 state HarvestGear {
 
-	HarvestMode : <b>clawPos=GoDown
+	HarvestMode : <b>armPos=GoDown
 	HarvestMode : <b>armPos=GoOpen
 	HarvestMode : pusherPos=GoRetract
 	HarvestMode : <b>rollers=SpinIn
 	
-	GearClamp : clawPos=GoDown
-	GearClamp : <b>armPos=GoClose
+	GearClamp : armPos=GoDown
+	GearClamp : <b>clawPos=GoClose
 	GearClamp : pusherPos=GoRetract
 	GearClamp : <b>rollers=SpinStop
 	
-	RaisingClaw : <b>clawPos=GoUp
-	RaisingClaw : armPos=GoClose
+	RaisingClaw : <b>armPos=GoUp
+	RaisingClaw : clawPos=GoClose
 	RaisingClaw : pusherPos=GoRetract
 	RaisingClaw : rollers=SpinStop
 	
 }
 
-	AbortHarvest: clawPos=GoUp
-	AbortHarvest: armPos=GoClose
+	AbortHarvest: armPos=GoUp
+	AbortHarvest: clawPos=GoClose
 	AbortHarvest: pusherPos=GoRetract
 	AbortHarvest: rollers=SpinStop
 
@@ -68,54 +68,54 @@ state ScoreGear {
 
 	MoveToPeg : visionTracking/squaringUp
 	
-	PlaceGear : clawPos=GoUp
-	PlaceGear : <b>armPos=GoOpen
+	PlaceGear : armPos=GoUp
+	PlaceGear : <b>clawPos=GoOpen
 	PlaceGear : <b>pusherPos=GoExtend
 	PlaceGear : rollers=SpinStop
 	
-	ReturnToStart : clawPos=GoUp
-	ReturnToStart : armPos=GoOpen
+	ReturnToStart : armPos=GoUp
+	ReturnToStart : clawPos=GoOpen
 	ReturnToStart : <b>pusherPos=GoRetract
 	ReturnToStart : rollers=SpinStop
 	
-	gearScored : clawPos=GoUp
-	gearScored : <b>armPos=GoClose
+	gearScored : armPos=GoUp
+	gearScored : <b>clawPos=GoClose
 	gearScored : pusherPos=GoRetract
 	gearScored : rollers=SpinStop
 
 }
 
-	AbortScore: clawPos=GoUp
-	AbortScore: armPos=GoClose
+	AbortScore: armPos=GoUp
+	AbortScore: clawPos=GoClose
 	AbortScore: pusherPos=GoRetract
 	AbortScore: rollers=SpinStop
 
 state ReleaseGear {
 
-	ReadyToReleaseGear : <b>clawPos=GoDown
-	ReadyToReleaseGear : armPos=GoClose
+	ReadyToReleaseGear : <b>armPos=GoDown
+	ReadyToReleaseGear : clawPos=GoClose
 	ReadyToReleaseGear : pusherPos=GoRetract
 	ReadyToReleaseGear : rollers=SpinStop
 
-	RegurgitateGear : clawPos=GoDown
-	RegurgitateGear : <b>armPos=GoOpen
+	RegurgitateGear : armPos=GoDown
+	RegurgitateGear : <b>clawPos=GoOpen
 	RegurgitateGear : pusherPos=GoRetract
 	RegurgitateGear : <b>rollers=SpinOut
 	
-	ReturnToPosition : <b>clawPos=GoUp
-	ReturnToPosition : <b>armPos=GoClose
+	ReturnToPosition : <b>armPos=GoUp
+	ReturnToPosition : <b>clawPos=GoClose
 	ReturnToPosition : pusherPos=GoRetract
 	ReturnToPosition : <b>rollers=SpinStop
 
-	safeModeResume : clawPos=GoUp
-	safeModeResume : armPos=GoClose
+	safeModeResume : armPos=GoUp
+	safeModeResume : clawPos=GoClose
 	safeModeResume : pusherPos=GoRetract
 	safeModeResume : rollers=SpinStop
 
 }
 
-	AbortRelease: clawPos=GoUp
-	AbortRelease: armPos=GoClose
+	AbortRelease: armPos=GoUp
+	AbortRelease: clawPos=GoClose
 	AbortRelease: pusherPos=GoRetract
 	AbortRelease: rollers=SpinStop
 
