@@ -46,6 +46,16 @@ public class VotableInput extends DigitalInput {
 	}
 	
 	/**
+	 * Get the DI boolean value
+	 * @return the inverse of {@link DigitalInput#get()}
+	 * to account for electrical inversion
+	 */
+	@Override
+	public boolean get() {
+		return !super.get();
+	}
+	
+	/**
 	 * Get the number of votes this sensor has during the poll process
 	 * @return number of votes
 	 */
@@ -74,6 +84,10 @@ public class VotableInput extends DigitalInput {
 		}
 	}
 	
+	/**
+	 * Sets the number of votes this DI has
+	 * @param votes number of votes
+	 */
 	public void setVotes(int votes) {
 		this.votes = votes;
 	}
