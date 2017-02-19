@@ -6,6 +6,8 @@ import org.usfirst.frc.team340.robot.commands.DropLowerWheels;
 import org.usfirst.frc.team340.robot.commands.DropRaiseWheels;
 import org.usfirst.frc.team340.robot.commands.DropToggleWheels;
 import org.usfirst.frc.team340.robot.commands.MoveToPeg;
+import org.usfirst.frc.team340.robot.commands.climb.AbortClimb;
+import org.usfirst.frc.team340.robot.commands.climb.Climb;
 import org.usfirst.frc.team340.robot.commands.climb.manual.ManualClimberGoAtEngagementSpeed;
 import org.usfirst.frc.team340.robot.commands.climb.manual.ManualClimberGoStopped;
 import org.usfirst.frc.team340.robot.commands.climb.manual.ManualGoAtClimbSpeed;
@@ -77,9 +79,9 @@ public class OI {
 		coDriverStart.whenPressed(new ManualGoAtClimbSpeed());
 		coDriverStart.whenReleased(new ManualClimberGoStopped());
 		
-		driverL3.whenPressed(new DropLowerWheels());
-		driverL3.whenReleased(new DropRaiseWheels());
-		driverR3.whenPressed(new DropToggleWheels());
+//		driverL3.whenPressed(new DropLowerWheels());
+//		driverL3.whenReleased(new DropRaiseWheels());
+//		driverR3.whenPressed(new DropToggleWheels());
 		
 		//Manual testing for claw
 		driverX.whenPressed(new ScoreGear());
@@ -101,8 +103,8 @@ public class OI {
 		//Manual testing for rollers
 		driverLB.whenPressed(new ManualRollersSpinIn());
 		driverLB.whenReleased(new ManualSpinStop());
-//		driverRB.whenPressed(new Climbing());
-//		driverRB.whenReleased(new AbortClimb());
+		//driverRB.whenPressed(new Climb());
+		//driverRB.whenReleased(new AbortClimb());
 		
 		//Manual override climbing
 		climbSwitch.whileHeld(new ManualRollDrum());
