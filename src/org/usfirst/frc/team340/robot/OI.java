@@ -19,6 +19,7 @@ import org.usfirst.frc.team340.robot.commands.gears.GST;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualRollersSpinIn;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualSpinStop;
 import org.usfirst.frc.team340.robot.commands.groups.AutoScoreGear;
+import org.usfirst.frc.team340.robot.commands.groups.GearSensorTraining;
 import org.usfirst.frc.team340.robot.commands.groups.HarvestGear;
 import org.usfirst.frc.team340.robot.commands.groups.ReleaseGear;
 import org.usfirst.frc.team340.robot.commands.groups.ScoreGear;
@@ -126,8 +127,9 @@ public class OI {
 		
 		coDriverB.whenPressed(new AutoScoreGear());
 		coDriverB.whenPressed(new AutoScoreGear());
+		
+		coDriverX.whenPressed(new GearSensorTraining());
 	}
-	
 	
 	/**
 	 * Enumerates the raw numbers assigned to
