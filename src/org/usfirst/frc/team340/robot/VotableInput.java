@@ -42,7 +42,7 @@ public class VotableInput extends DigitalInput {
 			}
 		}
 		
-		return ((double) trueVotes)/totalVotes >= .5;
+		return ((double) trueVotes)/totalVotes >= .5; //Percent of true votes at least 50%
 	}
 	
 	/**
@@ -61,12 +61,20 @@ public class VotableInput extends DigitalInput {
 			if(get()) {
 				votes++;
 				prevVal = true;
+			} else {
+				votes--;
 			}
 		} else {
 			if(!get()) {
 				votes++;
 				prevVal = false;
+			} else {
+				votes--;
 			}
 		}
+	}
+	
+	public void setVotes(int votes) {
+		this.votes = votes;
 	}
 }
