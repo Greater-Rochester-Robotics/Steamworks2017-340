@@ -23,6 +23,8 @@ public class ManualGoAtClimbSpeed extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	System.out.println("current draw motor 1 ;" + Robot.climber.getCurrentDrumOne() 
+			+ "; motor 2 ;" + Robot.climber.getCurrentDrumTwo() + ";"); 
     }
 
     // Make this return true when this Command no longer needs to run execute()
