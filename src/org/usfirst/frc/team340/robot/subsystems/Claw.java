@@ -165,8 +165,8 @@ public class Claw extends Subsystem {
 	 * successfully been acquired
 	 */
 	public boolean whenGearIsAcquired() {
-//		System.out.println(!gearSensorLeft.get());
-		return !gearSensorLeft.get() || !gearSensorRight.get();
+//		return getLeftSensorValue() || getRightSensorValue();
+		return VotableInput.vote(new VotableInput[] {gearSensorLeft, gearSensorRight});
 	}
 	
 	/**
@@ -186,23 +186,43 @@ public class Claw extends Subsystem {
 	}
 	
 	/**
-	 * Gets the left sensor
+	 * Gets the left sensor. Accommodates
+	 * for electrical inversion
 	 * @return true if sensor is down
 	 */
-	public boolean getLeftSensor() {
+	public boolean getLeftSensorValue() {
 		return !gearSensorLeft.get();
 	}
 	
 	/**
-	 * Gets the right sensor
+	 * Gets the right sensor value. Accommodates
+	 * for electrical inversion
 	 * @return true if sensor is down
 	 */
-	public boolean getRightSensor() {
+	public boolean getRightSensorValue() {
 		return !gearSensorRight.get();
 	}
 	
+	/**
+	 * Prints the sensor values, their DIO port
+	 * numbers, and their side
+	 */
 	public void printSensors() {
-		System.out.println("Left (9): " + getLeftSensor() + "; right (8): " + getRightSensor());
+		System.out.println("Left (9): " + getLeftSensorValue() + "; right (8): " + getRightSensorValue());
+	}
+	
+	/**
+	 * @return the left sensor object
+	 */
+	public VotableInput getLeftSensor() {
+		return gearSensorLeft;
+	}
+	
+	/**
+	 * @return the right sensor object
+	 */
+	public VotableInput getRightSensor() {
+		return gearSensorRight;
 	}
 	
 	/**
