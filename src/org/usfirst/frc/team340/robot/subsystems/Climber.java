@@ -3,6 +3,7 @@ package org.usfirst.frc.team340.robot.subsystems;
 import org.usfirst.frc.team340.robot.RobotMap;
 
 import com.ctre.CANTalon;
+import com.ctre.CANTalon.TalonControlMode;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -17,9 +18,9 @@ public class Climber extends Subsystem {
 	private static final int TOUCHPAD_CURRENT = 120; //TODO: perfect this
 	private static final int LIFTOFF_CURRENT = 100; //TODO: perfect this
 	
-	private static final double ENGAGEMENT_SPEED = 0.3; //TODO: perfect this
-	private static final double CLIMB_SPEED = 0.95; //TODO: perfect this
-	private static final double STAY_SPEED = 0.5; //TODO: perfect this
+	private static final double ENGAGEMENT_SPEED = 8; //TODO: perfect this
+	private static final double CLIMB_SPEED = 10; //TODO: perfect this
+	private static final double STAY_SPEED = 8; //TODO: perfect this
 	
 	private CANTalon drumOne;
 	private CANTalon drumTwo;
@@ -27,6 +28,8 @@ public class Climber extends Subsystem {
 	public Climber() {
 		drumOne = new CANTalon(RobotMap.CLIMBER_DRUM_ONE_ID);
 		drumTwo = new CANTalon(RobotMap.CLIMBER_DRUM_TWO_ID);
+		drumOne.setControlMode(TalonControlMode.Voltage.value);
+		drumTwo.setControlMode(TalonControlMode.Voltage.value);
 	}
 	
 	public double getCurrent() {
