@@ -128,7 +128,7 @@ public class OI {
 //		coDriverB.whenPressed(new AutoScoreGear());
 //		coDriverB.whenPressed(new AutoScoreGear());
 		
-		coDriverX.whenPressed(new ManualArmDown());
+/*		coDriverX.whenPressed(new ManualArmDown());
 		coDriverX.whenReleased(new ManualArmUp());
 		coDriverY.whenPressed(new ManualClawOpen());
 		coDriverY.whenReleased(new ManualClawClose());
@@ -143,6 +143,7 @@ public class OI {
 		coDriverBack.whenReleased(new ManualClimberGoStopped());
 		coDriverStart.whenPressed(new ManualGoAtClimbSpeed());
 		coDriverStart.whenReleased(new ManualClimberGoStopped());
+		*/
 	}
 	
 	/**
