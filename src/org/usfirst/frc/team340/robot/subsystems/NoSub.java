@@ -10,4 +10,3 @@ public class NoSub extends Subsystem {
         //No default command
     }
 }
-
