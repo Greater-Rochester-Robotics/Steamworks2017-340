@@ -6,7 +6,6 @@ import org.usfirst.frc.team340.robot.commands.MoveToPeg;
 import org.usfirst.frc.team340.robot.commands.auto.ReverseInArc;
 import org.usfirst.frc.team340.robot.commands.auto.StartMovingBack;
 import org.usfirst.frc.team340.robot.commands.auto.StartMovingForward;
-import org.usfirst.frc.team340.robot.commands.auto.TurnTowardsPeg;
 import org.usfirst.frc.team340.robot.commands.gears.AbortHarvest;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
