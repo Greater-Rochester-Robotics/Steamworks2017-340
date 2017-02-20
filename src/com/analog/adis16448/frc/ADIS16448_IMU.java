@@ -5,6 +5,8 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+//Code slightly modified by Jeremiah Daley for cleanup
+
 package com.analog.adis16448.frc;
 
 import java.nio.ByteBuffer;
@@ -517,7 +519,7 @@ public class ADIS16448_IMU extends GyroBase implements Gyro, PIDSource, LiveWind
 
       switch (m_algorithm) {
         case kMadgwick:
-          calculateMadgwick(sample, 0.4);
+          calculateMadgwick(sample);
           break;
         case kComplementary:
         default:
@@ -527,7 +529,7 @@ public class ADIS16448_IMU extends GyroBase implements Gyro, PIDSource, LiveWind
     }
   }
 
-  private void calculateMadgwick(Sample sample, double beta) {
+  private void calculateMadgwick(Sample sample) {
     // Make local copy of quaternion and angle global state
     double q1, q2, q3, q4;
     synchronized (this) {
