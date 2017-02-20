@@ -103,8 +103,8 @@ public class OI {
 //		driverBack.whenPressed(new ManualPusherRetract());
 		
 		//Manual testing for rollers
-		driverLB.whenPressed(new ManualRollersSpinIn());
-		driverLB.whenReleased(new ManualSpinStop());
+		driverLB.whenPressed(new GearSensorTraining());
+//		driverLB.whenReleased(new ManualSpinStop());
 		//driverRB.whenPressed(new Climb());
 		//driverRB.whenReleased(new AbortClimb());
 		
