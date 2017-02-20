@@ -128,7 +128,7 @@ public class Robot extends IterativeRobot {
 		
 		try {
 			char[] chars = new char[8]; //char array to hold the chars in the file
-			FileReader reader = new FileReader("sensor_votes.txt"); //Object to read the chars in the file
+			FileReader reader = new FileReader("/home/lvuser/sensor_vote_results/sensor_votes.txt"); //Object to read the chars in the file
 			
 			reader.read(chars); //Put all the file's chars into the proper array
 			reader.close(); //Close the reader

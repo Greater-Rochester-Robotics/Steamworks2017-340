@@ -52,6 +52,8 @@ state HarvestGear {
 	GearClamp : pusherPos=GoRetract
 	GearClamp : <b>rollers=SpinStop
 	
+	WaitingForClawToClose : wait for 0.2 seconds
+	
 	RaisingClaw : <b>armPos=GoUp
 	RaisingClaw : clawPos=GoClose
 	RaisingClaw : pusherPos=GoRetract
@@ -73,15 +75,12 @@ state ScoreGear {
 	PlaceGear : <b>pusherPos=GoExtend
 	PlaceGear : rollers=SpinStop
 	
+	WaitingForPusherToExtend : wait for 0.2 seconds
+	
 	ReturnToStart : armPos=GoUp
 	ReturnToStart : clawPos=GoOpen
 	ReturnToStart : <b>pusherPos=GoRetract
 	ReturnToStart : rollers=SpinStop
-	
-	gearScored : armPos=GoUp
-	gearScored : <b>clawPos=GoClose
-	gearScored : pusherPos=GoRetract
-	gearScored : rollers=SpinStop
 
 }
 
@@ -97,20 +96,12 @@ state ReleaseGear {
 	ReadyToReleaseGear : pusherPos=GoRetract
 	ReadyToReleaseGear : rollers=SpinStop
 
+	WaitingForArmToLower : wait for 0.5 seconds
+
 	RegurgitateGear : armPos=GoDown
 	RegurgitateGear : <b>clawPos=GoOpen
 	RegurgitateGear : pusherPos=GoRetract
 	RegurgitateGear : <b>rollers=SpinOut
-	
-	ReturnToPosition : <b>armPos=GoUp
-	ReturnToPosition : <b>clawPos=GoClose
-	ReturnToPosition : pusherPos=GoRetract
-	ReturnToPosition : <b>rollers=SpinStop
-
-	safeModeResume : armPos=GoUp
-	safeModeResume : clawPos=GoClose
-	safeModeResume : pusherPos=GoRetract
-	safeModeResume : rollers=SpinStop
 
 }
 
@@ -152,18 +143,18 @@ HarvestMode -right-> GearClamp: whenGearIsAcquired
 
 GearClamp -left-> HarvestMode: whenGearIsNotAcquired
 
-GearClamp -right-> RaisingClaw: timeDelay &\n whenGearIsAcquired
+GearClamp -right-> WaitingForClawToClose
 
-MoveToPeg -down-> PlaceGear: doPlaceGearSequence
+WaitingForClawToClose -right-> RaisingClaw: timeDelay &\n whenGearIsAcquired
 
-PlaceGear -down-> ReturnToStart: timeDelay &\n whenGearIsNotAcquired
+MoveToPeg -down-> PlaceGear: doScoreGearSequence
 
-ReturnToStart -down-> gearScored: pusherPos=IsRetracted
+PlaceGear -down-> WaitingForPusherToExtend
 
-ReadyToReleaseGear -right-> RegurgitateGear: clawPos=IsDown
+WaitingForPusherToExtend -down-> ReturnToStart: timeDelay &\n whenGearIsNotAcquired
 
-RegurgitateGear -right-> ReturnToPosition: timeDelay &\n whenGearIsNotAcquired
+ReadyToReleaseGear -right-> WaitingForArmToLower: doReleaseGearSequence
 
-ReturnToPosition -right-> safeModeResume: clawPos=IsUp\n armPos=IsClosed\n rollers=IsStopped
+WaitingForArmToLower -right-> RegurgitateGear: timeDelay
 
 @enduml

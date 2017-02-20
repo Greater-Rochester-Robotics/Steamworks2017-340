@@ -15,7 +15,7 @@ public class SaveGearSensorVotes extends InstantCommand {
 	@Override
 	protected void initialize() {
 		try {
-			PrintWriter writer = new PrintWriter("sensor_votes.txt", "UTF-8");
+			PrintWriter writer = new PrintWriter("/home/lvuser/sensor_vote_results/sensor_votes.txt", "UTF-8");
 			
 			writer.print(Robot.claw.getLeftSensor().getChannel() + ":" + Robot.claw.getLeftSensor().getVotes() + "\n");
 			writer.print(Robot.claw.getRightSensor().getChannel() + ":" + Robot.claw.getLeftSensor().getVotes());
