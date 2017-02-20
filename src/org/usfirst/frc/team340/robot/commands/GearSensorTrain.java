@@ -38,5 +38,6 @@ public class GearSensorTrain extends TimedCommand {
 	@Override
 	protected void end() {
 		Robot.claw.getRightSensor().train();
+		System.out.println("-TRAIN COMPLETE-");
 	}
 }

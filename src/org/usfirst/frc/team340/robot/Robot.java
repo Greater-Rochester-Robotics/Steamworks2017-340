@@ -162,6 +162,8 @@ public class Robot extends IterativeRobot {
 					System.err.println("Mismatch between saved port and true port!");
 				}
 			}
+			
+			System.out.println("Left (9): " + claw.getLeftSensor().getVotes() + "; right (8): " + claw.getRightSensor().getVotes());
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
