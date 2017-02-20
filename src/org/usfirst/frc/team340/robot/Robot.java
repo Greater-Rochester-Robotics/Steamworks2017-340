@@ -4,6 +4,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.usfirst.frc.team340.robot.commands.groups.LoadingStationAuto;
+import org.usfirst.frc.team340.robot.commands.groups.LoadingStationTwoGearAuto;
 import org.usfirst.frc.team340.robot.subsystems.Claw;
 import org.usfirst.frc.team340.robot.subsystems.Climber;
 import org.usfirst.frc.team340.robot.subsystems.Drive;
@@ -112,7 +114,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-//		autonomousCommand = chooser.getSelected();
+		autonomousCommand = new LoadingStationTwoGearAuto();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -126,47 +128,47 @@ public class Robot extends IterativeRobot {
 			autonomousCommand.start();
 		}
 		
-		try {
-			char[] chars = new char[8]; //char array to hold the chars in the file
-			FileReader reader = new FileReader("/home/lvuser/sensor_vote_results/sensor_votes.txt"); //Object to read the chars in the file
-			
-			reader.read(chars); //Put all the file's chars into the proper array
-			reader.close(); //Close the reader
-			
-			String str = new String(chars); //String containing the full char array
-			String[] lines = str.split("\n"); //Splits the String into two - one per line
-			ArrayList<String> numsList = new ArrayList<String>(4); //ArrayList of Strings that will contain the numbers
-			
-			//Double for-each loop to set each String in numsList to the numbers in the file
-			for(String line : lines) {
-				for(String num : line.split(":")) {
-					numsList.add(num);
-				}
-			}
-			
-			String[] numsArray = numsList.toArray(new String[4]); //String array version of the String ArrayList
-			int[] nums = new int[4]; //int array that will contain the numbers from the file as ints
-			
-			//Puts all the numbers in the String array into the int array
-			for(int i = 0; i < 4; i++) {
-				nums[i] = Integer.parseInt(numsArray[i]);
-			}
-			
-			//Applies the vote numbers to the sensors
-			for(int i = 0; i < 4; i += 2) {
-				if(nums[i] == claw.getLeftSensor().getChannel()) {
-					claw.getLeftSensor().setVotes(nums[i + 1]);
-				} else if(nums[i] == claw.getRightSensor().getChannel()) {
-					claw.getRightSensor().setVotes(nums[i + 1]);
-				} else {
-					System.err.println("Mismatch between saved port and true port!");
-				}
-			}
-			
-			System.out.println("Left (9): " + claw.getLeftSensor().getVotes() + "; right (8): " + claw.getRightSensor().getVotes());
-		} catch(IOException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			char[] chars = new char[8]; //char array to hold the chars in the file
+//			FileReader reader = new FileReader("sensor_votes.txt"); //Object to read the chars in the file
+//			
+//			reader.read(chars); //Put all the file's chars into the proper array
+//			reader.close(); //Close the reader
+//			
+//			String str = new String(chars); //String containing the full char array
+//			String[] lines = str.split("\n"); //Splits the String into two - one per line
+//			ArrayList<String> numsList = new ArrayList<String>(4); //ArrayList of Strings that will contain the numbers
+//			
+//			//Double for-each loop to set each String in numsList to the numbers in the file
+//			for(String line : lines) {
+//				for(String num : line.split(":")) {
+//					numsList.add(num);
+//				}
+//			}
+//			
+//			String[] numsArray = numsList.toArray(new String[4]); //String array version of the String ArrayList
+//			int[] nums = new int[4]; //int array that will contain the numbers from the file as ints
+//			
+//			//Puts all the numbers in the String array into the int array
+//			for(int i = 0; i < 4; i++) {
+//				nums[i] = Integer.parseInt(numsArray[i]);
+//			}
+//			
+//			//Applies the vote numbers to the sensors
+//			for(int i = 0; i < 4; i += 2) {
+//				if(nums[i] == claw.getLeftSensor().getChannel()) {
+//					claw.getLeftSensor().setVotes(nums[i + 1]);
+//				} else if(nums[i] == claw.getRightSensor().getChannel()) {
+//					claw.getRightSensor().setVotes(nums[i + 1]);
+//				} else {
+//					System.err.println("Mismatch between saved port and true port!");
+//				}
+//			}
+//			
+//			System.out.println("Left (9): " + claw.getLeftSensor().getVotes() + "; right (8): " + claw.getRightSensor().getVotes());
+//		} catch(IOException e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	/**

@@ -13,12 +13,12 @@ public class StartMovingForward extends Command {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.drive);
-    	setTimeout(2); //Two seconds
+    	setTimeout(0.7);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.drive.setBothDrive(1);
+    	Robot.drive.setBothDrive(-0.5);
     }
 
     // Called repeatedly when this Command is scheduled to run

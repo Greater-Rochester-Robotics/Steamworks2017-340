@@ -13,12 +13,12 @@ public class TurnTowardsPeg extends Command {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.drive);
-    	setTimeout(2); //Two seconds
+    	setTimeout(0.2); //Two seconds
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.drive.setBothDrive(-0.5, 0.5);
+    	Robot.drive.setBothDrive(0.5, -0.5);
     }
 
     // Called repeatedly when this Command is scheduled to run
