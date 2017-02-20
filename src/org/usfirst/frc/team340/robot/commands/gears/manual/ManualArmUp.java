@@ -17,7 +17,7 @@ public class ManualArmUp extends Command {
 
     // Called just before tis Command runs the first time
     protected void initialize() {
-    	System.out.println("initialize ManualClawUp");
+    	System.out.println("initialize ManualArmUp");
     	Robot.claw.goUp();
     }
 
@@ -32,7 +32,7 @@ public class ManualArmUp extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println("end ManualClawUp");
+    	System.out.println("end ManualArmUp");
     }
 
     // Called when another command which requires one or more of the same

@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 public class VotableInput extends DigitalInput {
 	
 	/** The previous value of the DI */
-	private boolean prevVal = false;
+	private boolean prevVal = true;
 	
 	/** Number of votes this DI gets, based on transitions detected */
 	private int votes = 3;

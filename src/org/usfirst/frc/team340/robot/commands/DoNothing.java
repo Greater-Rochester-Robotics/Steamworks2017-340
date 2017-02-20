@@ -16,4 +16,8 @@ public class DoNothing extends Command {
     protected boolean isFinished() {
         return false;
     }
+    
+    protected void end() {
+    	System.out.println("-FINISHED DOING NOTHING-");
+    }
 }
