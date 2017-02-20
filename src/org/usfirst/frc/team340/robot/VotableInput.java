@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 public class VotableInput extends DigitalInput {
 	
 	/** The previous value of the DI */
-	private boolean prevVal = false;
+	private boolean prevVal = true;
 	
 	/** Number of votes this DI gets, based on transitions detected */
 	private int votes = 3;
@@ -42,7 +42,17 @@ public class VotableInput extends DigitalInput {
 			}
 		}
 		
-		return ((double) trueVotes)/totalVotes >= .5;
+		return ((double) trueVotes)/totalVotes >= .5; //Percent of true votes at least 50%
+	}
+	
+	/**
+	 * Get the DI boolean value
+	 * @return the inverse of {@link DigitalInput#get()}
+	 * to account for electrical inversion
+	 */
+	@Override
+	public boolean get() {
+		return !super.get();
 	}
 	
 	/**
@@ -61,12 +71,24 @@ public class VotableInput extends DigitalInput {
 			if(get()) {
 				votes++;
 				prevVal = true;
+			} else {
+				votes--;
 			}
 		} else {
 			if(!get()) {
 				votes++;
 				prevVal = false;
+			} else {
+				votes--;
 			}
 		}
+	}
+	
+	/**
+	 * Sets the number of votes this DI has
+	 * @param votes number of votes
+	 */
+	public void setVotes(int votes) {
+		this.votes = votes;
 	}
 }

@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ManualArmOpen extends Command {
+public class ManualClawOpen extends Command {
 
-    public ManualArmOpen() {
+    public ManualClawOpen() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.claw);
@@ -17,7 +17,7 @@ public class ManualArmOpen extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	System.out.println("initialize ManualArmOpen");
+    	System.out.println("initialize ManualClawOpen");
     	Robot.claw.goOpen();
     }
 
@@ -32,7 +32,7 @@ public class ManualArmOpen extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println("end ManualArmOpen");
+    	System.out.println("end ManualClawOpen");
     }
 
     // Called when another command which requires one or more of the same
