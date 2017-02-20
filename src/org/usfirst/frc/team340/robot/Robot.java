@@ -1,10 +1,9 @@
 package org.usfirst.frc.team340.robot;
 
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
+//import java.io.FileReader;
+//import java.io.IOException;
+//import java.util.ArrayList;
 
-import org.usfirst.frc.team340.robot.commands.groups.LoadingStationAuto;
 import org.usfirst.frc.team340.robot.commands.groups.LoadingStationTwoGearAuto;
 import org.usfirst.frc.team340.robot.subsystems.Claw;
 import org.usfirst.frc.team340.robot.subsystems.Climber;
