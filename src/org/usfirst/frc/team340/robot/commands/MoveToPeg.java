@@ -10,12 +10,12 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class MoveToPeg extends Command {
 
-	double speed = -0.8;
+	double speed = -0.7;
 	double tolerance = 30;
 	double forwardMod = 6;
 	double fastMod = 8;
 	
-	int center = 320;
+	int center = 310;
 	
 	double dist = 0;
 	double targetDeg = 0;

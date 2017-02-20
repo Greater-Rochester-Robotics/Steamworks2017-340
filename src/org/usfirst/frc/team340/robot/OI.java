@@ -93,8 +93,8 @@ public class OI {
 		driverA.whenPressed(new HarvestGear());
 		driverA.whenReleased(new AbortHarvest());
 		driverB.whenPressed(new DropToggleWheels());
-//		driverBack.whenPressed(new MoveToPeg());
-//		driverBack.whenReleased(new DriveXbox());
+		driverBack.whenPressed(new MoveToPeg());
+		driverBack.whenReleased(new DriveXbox());
 		driverStart.whenPressed(new HarvestGear());
 		driverStart.whenReleased(new AbortHarvest());
 		driverRT.whenPressed(new DropLowerWheels());
