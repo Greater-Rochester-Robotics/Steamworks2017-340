@@ -8,6 +8,7 @@ import org.usfirst.frc.team340.robot.commands.DropToggleWheels;
 import org.usfirst.frc.team340.robot.commands.MoveToPeg;
 import org.usfirst.frc.team340.robot.commands.climb.AbortClimb;
 import org.usfirst.frc.team340.robot.commands.climb.Climb;
+import org.usfirst.frc.team340.robot.commands.climb.StayAtTop;
 import org.usfirst.frc.team340.robot.commands.climb.manual.ManualClimberGoAtEngagementSpeed;
 import org.usfirst.frc.team340.robot.commands.climb.manual.ManualClimberGoStopped;
 import org.usfirst.frc.team340.robot.commands.climb.manual.ManualGoAtClimbSpeed;
@@ -122,7 +123,6 @@ public class OI {
 		driverDPadUp.whenReleased(new AbortRelease());
 		
 		driverDPadRight.whileHeld(new GST());
-		
 //		coDriverA.whenPressed(new MoveToPeg());
 //		coDriverA.whenReleased(new DriveXbox());
 //		coDriverB.whenPressed(new AutoScoreGear());

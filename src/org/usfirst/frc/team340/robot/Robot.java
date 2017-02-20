@@ -57,7 +57,7 @@ public class Robot extends IterativeRobot {
 		ledTable = NetworkTable.getTable("led");
 		led = new PiLED(ledTable);
 	    // chooser.addObject("My Auto", new MyAutoCommand());
-//	    SmartDashboard.putData("Auto mode", chooser);
+//	    SmartDashboard.putData("Auto modes", chooser);
 	}
 	
 	public static double avgValue() {
