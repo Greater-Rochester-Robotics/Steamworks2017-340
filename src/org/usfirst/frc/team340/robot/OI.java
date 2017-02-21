@@ -146,10 +146,10 @@ public class OI {
 		coDriverA.whenPressed(new ManualPusherExtend());
 		coDriverA.whenReleased(new ManualPusherRetract());
 		coDriverB.whenPressed(new DropToggleWheels());
-/*		coDriverBack.whenPressed(new ManualClimberGoAtEngagementSpeed());
+		coDriverBack.whenPressed(new ManualClimberGoAtEngagementSpeed());
 		coDriverBack.whenReleased(new ManualClimberGoStopped());
 		coDriverStart.whenPressed(new ManualGoAtClimbSpeed());
-		coDriverStart.whenReleased(new ManualClimberGoStopped()); */
+		coDriverStart.whenReleased(new ManualClimberGoStopped()); 
 		
 	}
 	
