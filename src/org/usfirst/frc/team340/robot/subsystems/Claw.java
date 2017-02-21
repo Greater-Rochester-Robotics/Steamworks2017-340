@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * <h1><em>Claw</em></h1>
@@ -191,6 +192,7 @@ public class Claw extends Subsystem {
 	 */
 	public void printSensors() {
 		System.out.println("Left (9): " + gearSensorLeft.get() + "; right (8): " + gearSensorRight.get());
+		SmartDashboard.putString("Gear Sensors", "Left (9): " + gearSensorLeft.get() + "; right (8): " + gearSensorRight.get());
 	}
 	
 	/**
