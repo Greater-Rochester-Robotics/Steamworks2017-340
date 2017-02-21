@@ -3,6 +3,9 @@ package org.usfirst.frc.team340.robot.subsystems;
 import org.usfirst.frc.team340.robot.RobotMap;
 import org.usfirst.frc.team340.robot.commands.DriveXbox;
 
+import com.analog.adis16448.frc.ADIS16448_IMU;
+import com.analog.adis16448.frc.ADIS16448_IMU.Axis;
+
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -21,6 +24,8 @@ public class Drive extends Subsystem {
     private Talon leftDrive;
     private Talon rightDrive;
     
+    private ADIS16448_IMU imu;
+    
     /**
      * Sets the variables for each of the
      * drive base's objects to the necessary
@@ -34,6 +39,8 @@ public class Drive extends Subsystem {
 		backUltrasonic = new AnalogInput(RobotMap.BACK_ULTRASONIC_PORT);
 		leftDrive = new Talon(RobotMap.LEFT_DRIVE_PORT);
 		rightDrive = new Talon(RobotMap.RIGHT_DRIVE_PORT);
+		
+		imu = new ADIS16448_IMU(Axis.kX);
     }
     
     /**
@@ -43,6 +50,13 @@ public class Drive extends Subsystem {
     @Override
     public void initDefaultCommand() {
         setDefaultCommand(new DriveXbox());
+    }
+    
+    private double[] vals = new double[] {0, 0, 0};
+    
+    public double getAccelY() {
+    	vals[(int) Math.random() * 3] = imu.getAccelY();
+    	return (vals[0] + vals[1] + vals[2])/3;
     }
     
     public int getFrontUltrasonic() {

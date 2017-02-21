@@ -62,7 +62,6 @@ public class Climber extends Subsystem {
 	 * spin [-1 ~ 1]
 	 */
 	private void goToSpeed(double speed){
-		System.out.println(getCurrent());
 		drumOne.set(speed);
 		drumTwo.set(speed);
 	}

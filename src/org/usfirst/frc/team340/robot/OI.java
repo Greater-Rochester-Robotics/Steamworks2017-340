@@ -123,6 +123,13 @@ public class OI {
 		driverDPadUp.whenReleased(new AbortRelease());
 		
 		driverDPadRight.whileHeld(new GST());
+		
+		coDriverA.whenPressed(new ManualClimberGoAtEngagementSpeed());
+		coDriverA.whenReleased(new ManualClimberGoStopped());
+		coDriverB.whenPressed(new ManualGoAtClimbSpeed());
+		coDriverB.whenReleased(new ManualClimberGoStopped());
+		coDriverY.whenPressed(new StayAtTop());
+		coDriverY.whenReleased(new ManualClimberGoStopped());
 //		coDriverA.whenPressed(new MoveToPeg());
 //		coDriverA.whenReleased(new DriveXbox());
 //		coDriverB.whenPressed(new AutoScoreGear());
