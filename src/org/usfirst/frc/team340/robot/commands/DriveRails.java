@@ -11,12 +11,26 @@ public class DriveRails extends Command {
 
 	private double leftSpeed = 0;
 	private double rightSpeed = 0;
+	private double endAngle = 0;
+	private boolean useAngle = false;
+	private double angleTolerance = 10;
+	
     public DriveRails(double leftSpeed, double rightSpeed) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.drive);
     	this.leftSpeed = leftSpeed;
     	this.rightSpeed = rightSpeed;
+    }
+    public DriveRails(double leftSpeed, double rightSpeed, double endAngle, double angleTolerance) {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+    	requires(Robot.drive);
+    	this.leftSpeed = leftSpeed;
+    	this.rightSpeed = rightSpeed;
+    	this.endAngle = endAngle;
+    	useAngle = true;
+    	this.angleTolerance = angleTolerance;
     }
 
     // Called just before this Command runs the first time
@@ -30,11 +44,15 @@ public class DriveRails extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+    	if(useAngle && Math.abs(Robot.drive.getYaw() - endAngle) < angleTolerance) {
+    		System.out.println("GOT ANGLE");
+    	}
+        return useAngle && Math.abs(Robot.drive.getYaw() - endAngle) < angleTolerance;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	System.out.println("YAW: " + Robot.drive.getYaw());
     	Robot.drive.setBothDrive(0, 0);
     }
 

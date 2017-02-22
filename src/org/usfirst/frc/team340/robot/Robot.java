@@ -61,7 +61,6 @@ public class Robot extends IterativeRobot {
 	
 	public static double avgValue() {
 //		return 0;
-		
 		return visionTable.getNumber("avg", 0);
 	}
 	

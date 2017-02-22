@@ -24,8 +24,7 @@ public class Drive extends Subsystem {
     private Talon leftDrive;
     private Talon rightDrive;
     
-    private ADIS16448_IMU imu;
-    
+    private ADIS16448_IMU imu;   
     /**
      * Sets the variables for each of the
      * drive base's objects to the necessary
@@ -54,9 +53,12 @@ public class Drive extends Subsystem {
     
     private double[] vals = new double[] {0, 0, 0};
     
-    public double getAccelY() {
-    	vals[(int) Math.random() * 3] = imu.getAccelY();
-    	return (vals[0] + vals[1] + vals[2])/3;
+    public double getYaw() {
+    	vals[(int) Math.random() * 3] = imu.getAngleX();
+    	return (vals[0] + vals[1] + vals[2]); // ghetto averaging
+    }
+    public void resetGyro() {
+    	imu.reset();
     }
     
     public int getFrontUltrasonic() {

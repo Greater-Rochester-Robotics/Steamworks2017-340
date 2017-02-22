@@ -5,6 +5,7 @@ import org.usfirst.frc.team340.robot.commands.DriveXbox;
 import org.usfirst.frc.team340.robot.commands.DropLowerWheels;
 import org.usfirst.frc.team340.robot.commands.DropRaiseWheels;
 import org.usfirst.frc.team340.robot.commands.DropToggleWheels;
+import org.usfirst.frc.team340.robot.commands.MoveToGear;
 import org.usfirst.frc.team340.robot.commands.MoveToPeg;
 import org.usfirst.frc.team340.robot.commands.climb.AbortClimb;
 import org.usfirst.frc.team340.robot.commands.climb.Climb;
@@ -94,7 +95,7 @@ public class OI {
 		driverA.whenPressed(new HarvestGear());
 		driverA.whenReleased(new AbortHarvest());
 		driverB.whenPressed(new DropToggleWheels());
-		driverBack.whenPressed(new MoveToPeg());
+		driverBack.whenPressed(new MoveToGear());
 		driverBack.whenReleased(new DriveXbox());
 		driverStart.whenPressed(new HarvestGear());
 		driverStart.whenReleased(new AbortHarvest());
