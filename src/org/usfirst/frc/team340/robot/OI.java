@@ -55,8 +55,8 @@ public class OI {
 	private Button driverRB = new JoystickButton(driver, 6);
 	private Button driverBack = new JoystickButton(driver, 7);
 	private Button driverStart = new JoystickButton(driver, 8);
-	private Button driverL3 = new JoystickButton(driver, 9);
-	private Button driverR3 = new JoystickButton(driver, 10);
+	private Button driverLS = new JoystickButton(driver, 9);
+	private Button driverRS = new JoystickButton(driver, 10);
 	private Button driverDPadUp = new DPad(driver, Direction.up);
 	private Button driverDPadDown = new DPad(driver, Direction.down);
 	private Button driverDPadRight = new DPad(driver, Direction.right);
@@ -74,8 +74,8 @@ public class OI {
 	private Button coDriverRB = new JoystickButton(coDriver, 6);
 	private Button coDriverBack = new JoystickButton(coDriver, 7);
 	private Button coDriverStart = new JoystickButton(coDriver, 8);
-	private Button coDriverL3 = new JoystickButton(coDriver, 9);
-	private Button coDriverR3 = new JoystickButton(coDriver, 10);
+	private Button coDriverLS = new JoystickButton(coDriver, 9);
+	private Button coDriverRS = new JoystickButton(coDriver, 10);
 	
 	//MANUAL BOARD
 	private Joystick board = new Joystick(2);
@@ -83,9 +83,9 @@ public class OI {
 	
 	public OI() {
 		
-//		driverL3.whenPressed(new DropLowerWheels());
-//		driverL3.whenReleased(new DropRaiseWheels());
-//		driverR3.whenPressed(new DropToggleWheels());
+//		driverLS.whenPressed(new DropLowerWheels());
+//		driverLS.whenReleased(new DropRaiseWheels());
+//		driverRS.whenPressed(new DropToggleWheels());
 		
 		//Manual testing for claw
 		driverX.whenPressed(new ScoreGear());
@@ -111,7 +111,7 @@ public class OI {
 		//driverRB.whenReleased(new AbortClimb());
 		
 		//Manual override climbing
-		climbSwitch.whileHeld(new ManualRollDrum());
+//		climbSwitch.whileHeld(new ManualRollDrum());
 		
 		// Claw command testing
 		driverDPadDown.whenPressed(new HarvestGear());
@@ -125,18 +125,18 @@ public class OI {
 		
 		driverDPadRight.whileHeld(new GST());
 		
-		coDriverA.whenPressed(new ManualClimberGoAtEngagementSpeed());
+/*		coDriverA.whenPressed(new ManualClimberGoAtEngagementSpeed());
 		coDriverA.whenReleased(new ManualClimberGoStopped());
 		coDriverB.whenPressed(new ManualGoAtClimbSpeed());
 		coDriverB.whenReleased(new ManualClimberGoStopped());
 		coDriverY.whenPressed(new StayAtTop());
 		coDriverY.whenReleased(new ManualClimberGoStopped());
-//		coDriverA.whenPressed(new MoveToPeg());
-//		coDriverA.whenReleased(new DriveXbox());
-//		coDriverB.whenPressed(new AutoScoreGear());
-//		coDriverB.whenPressed(new AutoScoreGear());
+		coDriverA.whenPressed(new MoveToPeg());
+		coDriverA.whenReleased(new DriveXbox());
+		coDriverB.whenPressed(new AutoScoreGear());
+		coDriverB.whenPressed(new AutoScoreGear()); */
 		
-/*		coDriverX.whenPressed(new ManualArmDown());
+		coDriverX.whenPressed(new ManualArmDown());
 		coDriverX.whenReleased(new ManualArmUp());
 		coDriverY.whenPressed(new ManualClawOpen());
 		coDriverY.whenReleased(new ManualClawClose());
@@ -150,8 +150,8 @@ public class OI {
 		coDriverBack.whenPressed(new ManualClimberGoAtEngagementSpeed());
 		coDriverBack.whenReleased(new ManualClimberGoStopped());
 		coDriverStart.whenPressed(new ManualGoAtClimbSpeed());
-		coDriverStart.whenReleased(new ManualClimberGoStopped());
-		*/
+		coDriverStart.whenReleased(new ManualClimberGoStopped()); 
+		
 	}
 	
 	/**

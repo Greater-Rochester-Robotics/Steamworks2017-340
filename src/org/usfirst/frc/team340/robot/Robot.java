@@ -7,6 +7,7 @@ package org.usfirst.frc.team340.robot;
 import org.usfirst.frc.team340.robot.commands.groups.LoadingStationTwoGearAuto;
 import org.usfirst.frc.team340.robot.subsystems.Claw;
 import org.usfirst.frc.team340.robot.subsystems.Climber;
+import org.usfirst.frc.team340.robot.subsystems.CompressorSub;
 import org.usfirst.frc.team340.robot.subsystems.Drive;
 import org.usfirst.frc.team340.robot.subsystems.NoSub;
 import org.usfirst.frc.team340.robot.subsystems.PneumaticDrop;
@@ -28,6 +29,7 @@ public class Robot extends IterativeRobot {
     public static Drive drive;
     public static Claw claw;
     public static Climber climber;
+    public static CompressorSub compressor;
     public static NoSub noSub;
     public static PneumaticDrop drop;
     public static OI oi;
@@ -48,6 +50,7 @@ public class Robot extends IterativeRobot {
 	    drive = new Drive();
 	    claw = new Claw();
 	    climber = new Climber();
+	    compressor = new CompressorSub();
 	    drop = new PneumaticDrop();
 	    noSub = new NoSub();
 	    oi = new OI();

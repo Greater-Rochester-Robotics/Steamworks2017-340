@@ -22,10 +22,15 @@ public class GearClamp extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	System.out.println("initialize GearClamp");
-    	Robot.claw.goClose();
-    	Robot.claw.spinStop();
-    	Robot.claw.goRetract();
-    	Robot.claw.goDown();
+    	
+    	if(Robot.claw.whenGearIsNotAcquired()) {
+    		Robot.claw.goClose();
+        	Robot.claw.spinStop();
+        	Robot.claw.goRetract();
+        	Robot.claw.goDown();
+    	} else {
+    		System.out.println("gear still acquired; do nothing");
+    	}
     }
 
     // Called repeatedly when this Command is scheduled to run
