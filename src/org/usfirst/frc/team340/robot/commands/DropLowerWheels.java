@@ -4,15 +4,19 @@ import org.usfirst.frc.team340.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
 
-public class DriveDropWheels extends InstantCommand {
+public class DropLowerWheels extends InstantCommand {
     
+	public DropLowerWheels() {
+		requires(Robot.drop);
+	}
+	
     @Override
     protected void initialize() {
-	requires(Robot.drive);
+    	
     }
     
     @Override
     protected void execute() {
-	Robot.drive.setWheelsDown(true);
+    	Robot.drop.dropOmni();
     }
 }

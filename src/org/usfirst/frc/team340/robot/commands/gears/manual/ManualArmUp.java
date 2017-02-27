@@ -1,4 +1,4 @@
-package org.usfirst.frc.team340.robot.commands.gears;
+package org.usfirst.frc.team340.robot.commands.gears.manual;
 
 import org.usfirst.frc.team340.robot.Robot;
 
@@ -7,18 +7,18 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ManualArmOpen extends Command {
+public class ManualArmUp extends Command {
 
-    public ManualArmOpen() {
+    public ManualArmUp() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.claw);
     }
 
-    // Called just before this Command runs the first time
+    // Called just before tis Command runs the first time
     protected void initialize() {
-    	System.out.println("initialize ManualArmOpen");
-    	Robot.claw.goOpen();
+    	System.out.println("initialize ManualArmUp");
+    	Robot.claw.goUp();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -32,7 +32,7 @@ public class ManualArmOpen extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println("end ManualArmOpen");
+    	System.out.println("end ManualArmUp");
     }
 
     // Called when another command which requires one or more of the same

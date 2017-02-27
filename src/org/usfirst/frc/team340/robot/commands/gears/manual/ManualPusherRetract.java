@@ -1,30 +1,24 @@
-package org.usfirst.frc.team340.robot.commands.climb;
+package org.usfirst.frc.team340.robot.commands.gears.manual;
 
 import org.usfirst.frc.team340.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * The robot is no longer being driven by human control, it is on it's own.
- * The climb motors are now going to get to their climb speed.
- * 
- * The command ends when the robot is engaged with the touch pad,
- * which is marked with a current spike.
+ *
  */
-public class Climb extends Command {
+public class ManualPusherRetract extends Command {
 
-    public Climb() {
+    public ManualPusherRetract() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.climber);
-    	requires(Robot.drive);
+    	requires(Robot.claw);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	System.out.println("initialize Climb");
-    	Robot.climber.goAtClimbSpeed();
-    	Robot.drive.goStop();
+    	System.out.println("initialize ManualPusherRetract");
+    	Robot.claw.goRetract();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -33,12 +27,12 @@ public class Climb extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.climber.isEngagedWithTouchPad();
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println("end Climb");
+    	System.out.println("end ManualPusherRetract");
     }
 
     // Called when another command which requires one or more of the same

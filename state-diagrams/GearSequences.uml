@@ -10,20 +10,20 @@ state HarvestGear {
 	safeModeWithoutGear : pusherPos=GoRetract
 	safeModeWithoutGear : rollers=SpinStop
 	
-	harvestMode : <b>clawPos=GoDown
-	harvestMode : <b>armPos=GoOpen
-	harvestMode : pusherPos=GoRetract
-	harvestMode : <b>rollers=SpinIn
+	HarvestMode : <b>clawPos=GoDown
+	HarvestMode : <b>armPos=GoOpen
+	HarvestMode : pusherPos=GoRetract
+	HarvestMode : <b>rollers=SpinIn
 	
-	gearClamp : clawPos=GoDown
-	gearClamp : <b>armPos=GoClose
-	gearClamp : pusherPos=GoRetract
-	gearClamp : <b>rollers=SpinStop
+	GearClamp : clawPos=GoDown
+	GearClamp : <b>armPos=GoClose
+	GearClamp : pusherPos=GoRetract
+	GearClamp : <b>rollers=SpinStop
 	
-	raisingClaw : <b>clawPos=GoUp
-	raisingClaw : armPos=GoClose
-	raisingClaw : pusherPos=GoRetract
-	raisingClaw : rollers=SpinStop
+	RaisingClaw : <b>clawPos=GoUp
+	RaisingClaw : armPos=GoClose
+	RaisingClaw : pusherPos=GoRetract
+	RaisingClaw : rollers=SpinStop
 	
 	safeModeWithGear : clawPos=GoUp
 	safeModeWithGear : armPos=GoClose

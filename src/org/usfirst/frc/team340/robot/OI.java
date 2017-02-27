@@ -1,29 +1,48 @@
 package org.usfirst.frc.team340.robot;
 
-import org.usfirst.frc.team340.robot.commands.ConditionalCommandTest;
-import org.usfirst.frc.team340.robot.commands.climb.ManualClimberGoAtEngagementSpeed;
-import org.usfirst.frc.team340.robot.commands.climb.ManualClimberGoStopped;
-import org.usfirst.frc.team340.robot.commands.climb.ManualGoAtClimbSpeed;
-import org.usfirst.frc.team340.robot.commands.gears.ManualArmClose;
-import org.usfirst.frc.team340.robot.commands.gears.ManualArmOpen;
-import org.usfirst.frc.team340.robot.commands.gears.ManualClawDown;
-import org.usfirst.frc.team340.robot.commands.gears.ManualClawUp;
-import org.usfirst.frc.team340.robot.commands.gears.ManualPusherExtend;
-import org.usfirst.frc.team340.robot.commands.gears.ManualPusherRetract;
-import org.usfirst.frc.team340.robot.commands.gears.ManualRollersSpinIn;
-import org.usfirst.frc.team340.robot.commands.gears.ManualRollersSpinOut;
-import org.usfirst.frc.team340.robot.commands.gears.ManualSpinStop;
+import org.usfirst.frc.team340.robot.DPad.Direction;
+import org.usfirst.frc.team340.robot.commands.DriveXbox;
+import org.usfirst.frc.team340.robot.commands.DropLowerWheels;
+import org.usfirst.frc.team340.robot.commands.DropRaiseWheels;
+import org.usfirst.frc.team340.robot.commands.DropToggleWheels;
+import org.usfirst.frc.team340.robot.commands.MoveToGear;
+import org.usfirst.frc.team340.robot.commands.MoveToPeg;
+import org.usfirst.frc.team340.robot.commands.climb.AbortClimb;
+import org.usfirst.frc.team340.robot.commands.climb.Climb;
+import org.usfirst.frc.team340.robot.commands.climb.StayAtTop;
+import org.usfirst.frc.team340.robot.commands.climb.manual.ManualClimberGoAtEngagementSpeed;
+import org.usfirst.frc.team340.robot.commands.climb.manual.ManualClimberGoStopped;
+import org.usfirst.frc.team340.robot.commands.climb.manual.ManualGoAtClimbSpeed;
+import org.usfirst.frc.team340.robot.commands.climb.manual.ManualRollDrum;
+import org.usfirst.frc.team340.robot.commands.gears.AbortHarvest;
+import org.usfirst.frc.team340.robot.commands.gears.AbortRelease;
+import org.usfirst.frc.team340.robot.commands.gears.AbortScore;
+import org.usfirst.frc.team340.robot.commands.gears.GST;
+import org.usfirst.frc.team340.robot.commands.gears.manual.ManualArmDown;
+import org.usfirst.frc.team340.robot.commands.gears.manual.ManualArmUp;
+import org.usfirst.frc.team340.robot.commands.gears.manual.ManualClawClose;
+import org.usfirst.frc.team340.robot.commands.gears.manual.ManualClawOpen;
+import org.usfirst.frc.team340.robot.commands.gears.manual.ManualPusherExtend;
+import org.usfirst.frc.team340.robot.commands.gears.manual.ManualPusherRetract;
+import org.usfirst.frc.team340.robot.commands.gears.manual.ManualRollersSpinIn;
+import org.usfirst.frc.team340.robot.commands.gears.manual.ManualRollersSpinOut;
+import org.usfirst.frc.team340.robot.commands.gears.manual.ManualSpinStop;
+import org.usfirst.frc.team340.robot.commands.groups.AutoScoreGear;
+import org.usfirst.frc.team340.robot.commands.groups.GearSensorTraining;
+import org.usfirst.frc.team340.robot.commands.groups.HarvestGear;
+import org.usfirst.frc.team340.robot.commands.groups.ReleaseGear;
+import org.usfirst.frc.team340.robot.commands.groups.ScoreGear;
 
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
-@SuppressWarnings({"deprecation", "unused"})
+@SuppressWarnings("unused")
 public class OI {
 	
 	//DRIVER
@@ -38,6 +57,12 @@ public class OI {
 	private Button driverStart = new JoystickButton(driver, 8);
 	private Button driverLS = new JoystickButton(driver, 9);
 	private Button driverRS = new JoystickButton(driver, 10);
+	private Button driverDPadUp = new DPad(driver, Direction.up);
+	private Button driverDPadDown = new DPad(driver, Direction.down);
+	private Button driverDPadRight = new DPad(driver, Direction.right);
+	private Button driverDPadLeft = new DPad(driver, Direction.left);
+	private Button driverRT = new JoyTrigger(driver, Axis.RIGHT_TRIGGER.getAxis(), .2);
+	
 	
 	//CO-DRIVER
 	private Joystick coDriver = new Joystick(1);
@@ -54,28 +79,79 @@ public class OI {
 	
 	//MANUAL BOARD
 	private Joystick board = new Joystick(2);
+	private Button climbSwitch = new JoystickButton(board, 1);
 	
 	public OI() {
 		
-		//Manual testing for climber
-		coDriverA.whenPressed(new ManualClimberGoAtEngagementSpeed());
+//		driverLS.whenPressed(new DropLowerWheels());
+//		driverLS.whenReleased(new DropRaiseWheels());
+//		driverRS.whenPressed(new DropToggleWheels());
+		
+		//Manual testing for claw
+		driverX.whenPressed(new ScoreGear());
+		driverX.whenReleased(new AbortScore());
+		driverY.whenPressed(new ReleaseGear());
+		driverY.whenReleased(new AbortRelease());
+		driverA.whenPressed(new HarvestGear());
+		driverA.whenReleased(new AbortHarvest());
+		driverB.whenPressed(new DropToggleWheels());
+		driverBack.whenPressed(new MoveToGear());
+		driverBack.whenReleased(new DriveXbox());
+		driverStart.whenPressed(new HarvestGear());
+		driverStart.whenReleased(new AbortHarvest());
+		driverRT.whenPressed(new DropLowerWheels());
+		driverRT.whenReleased(new DropRaiseWheels());
+//		driverStart.whenPressed(new ManualPusherExtend());
+//		driverBack.whenPressed(new ManualPusherRetract());
+		
+		//Manual testing for rollers
+		driverLB.whenPressed(new GearSensorTraining());
+//		driverLB.whenReleased(new ManualSpinStop());
+		//driverRB.whenPressed(new Climb());
+		//driverRB.whenReleased(new AbortClimb());
+		
+		//Manual override climbing
+//		climbSwitch.whileHeld(new ManualRollDrum());
+		
+		// Claw command testing
+		driverDPadDown.whenPressed(new HarvestGear());
+		driverDPadDown.whenReleased(new AbortHarvest());
+		
+		driverDPadLeft.whenPressed(new ScoreGear());
+		driverDPadLeft.whenReleased(new AbortScore());
+		
+		driverDPadUp.whenPressed(new ReleaseGear());
+		driverDPadUp.whenReleased(new AbortRelease());
+		
+		driverDPadRight.whileHeld(new GST());
+		
+/*		coDriverA.whenPressed(new ManualClimberGoAtEngagementSpeed());
 		coDriverA.whenReleased(new ManualClimberGoStopped());
 		coDriverB.whenPressed(new ManualGoAtClimbSpeed());
 		coDriverB.whenReleased(new ManualClimberGoStopped());
+		coDriverY.whenPressed(new StayAtTop());
+		coDriverY.whenReleased(new ManualClimberGoStopped());
+		coDriverA.whenPressed(new MoveToPeg());
+		coDriverA.whenReleased(new DriveXbox());
+		coDriverB.whenPressed(new AutoScoreGear());
+		coDriverB.whenPressed(new AutoScoreGear()); */
 		
-		//Manual testing for claw
-		coDriverX.whenPressed(new ManualArmClose());
-		coDriverY.whenPressed(new ManualArmOpen());
-		coDriverLS.whenPressed(new ManualClawDown());
-		coDriverLB.whenPressed(new ManualClawUp());
-		coDriverStart.whenPressed(new ManualPusherExtend());
-		coDriverBack.whenPressed(new ManualPusherRetract());
-		
-		//Manual testing for rollers
-		coDriverRB.whenPressed(new ManualRollersSpinIn());
+		coDriverX.whenPressed(new ManualArmDown());
+		coDriverX.whenReleased(new ManualArmUp());
+		coDriverY.whenPressed(new ManualClawOpen());
+		coDriverY.whenReleased(new ManualClawClose());
+		coDriverLB.whenPressed(new ManualRollersSpinIn());
+		coDriverLB.whenReleased(new ManualSpinStop());
+		coDriverRB.whenPressed(new ManualRollersSpinOut());
 		coDriverRB.whenReleased(new ManualSpinStop());
-		coDriverRS.whenPressed(new ManualRollersSpinOut());
-		coDriverRS.whenReleased(new ManualSpinStop());
+		coDriverA.whenPressed(new ManualPusherExtend());
+		coDriverA.whenReleased(new ManualPusherRetract());
+		coDriverB.whenPressed(new DropToggleWheels());
+		coDriverBack.whenPressed(new ManualClimberGoAtEngagementSpeed());
+		coDriverBack.whenReleased(new ManualClimberGoStopped());
+		coDriverStart.whenPressed(new ManualGoAtClimbSpeed());
+		coDriverStart.whenReleased(new ManualClimberGoStopped()); 
+		
 	}
 	
 	/**
@@ -123,5 +199,14 @@ public class OI {
 	 */
 	public double getCoDriverAxis(Axis axis) {
 	    return (coDriver.getRawAxis(axis.getAxis()) < -.05 || coDriver.getRawAxis(axis.getAxis()) > .05) ? coDriver.getRawAxis(axis.getAxis()) : 0;
+	}
+	
+	/**
+	 * Rumble the driver's controller at the specified intensity
+	 * @param intensity the intensity
+	 */
+	public void rumbleDriver(float intensity) {
+		driver.setRumble(RumbleType.kLeftRumble, intensity);
+		driver.setRumble(RumbleType.kRightRumble, intensity);
 	}
 }

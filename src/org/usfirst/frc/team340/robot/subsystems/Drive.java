@@ -3,7 +3,10 @@ package org.usfirst.frc.team340.robot.subsystems;
 import org.usfirst.frc.team340.robot.RobotMap;
 import org.usfirst.frc.team340.robot.commands.DriveXbox;
 
-import edu.wpi.first.wpilibj.Solenoid;
+import com.analog.adis16448.frc.ADIS16448_IMU;
+import com.analog.adis16448.frc.ADIS16448_IMU.Axis;
+
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -16,10 +19,12 @@ public class Drive extends Subsystem {
 	private double leftMotorSpeed;
     private double rightMotorSpeed;
     
-    private Solenoid drop;
+    private AnalogInput frontUltrasonic;
+    private AnalogInput backUltrasonic;
     private Talon leftDrive;
     private Talon rightDrive;
     
+    private ADIS16448_IMU imu;   
     /**
      * Sets the variables for each of the
      * drive base's objects to the necessary
@@ -29,9 +34,12 @@ public class Drive extends Subsystem {
     	leftMotorSpeed = 0;
     	rightMotorSpeed = 0;
     	
-		drop = new Solenoid(RobotMap.DROP_SOLENOID_CHANNEL);
+    	frontUltrasonic = new AnalogInput(RobotMap.FRONT_ULTRASONIC_PORT);
+		backUltrasonic = new AnalogInput(RobotMap.BACK_ULTRASONIC_PORT);
 		leftDrive = new Talon(RobotMap.LEFT_DRIVE_PORT);
 		rightDrive = new Talon(RobotMap.RIGHT_DRIVE_PORT);
+		
+		imu = new ADIS16448_IMU(Axis.kX);
     }
     
     /**
@@ -43,20 +51,22 @@ public class Drive extends Subsystem {
         setDefaultCommand(new DriveXbox());
     }
     
-    /**
-     * Switch the value of the solenoid
-     */
-    public void toggleWheelsDown() {
-    	drop.set(!drop.get());
+    private double[] vals = new double[] {0, 0, 0};
+    
+    public double getYaw() {
+    	vals[(int) Math.random() * 3] = imu.getAngleX();
+    	return (vals[0] + vals[1] + vals[2]); // ghetto averaging
+    }
+    public void resetGyro() {
+    	imu.reset();
     }
     
-    /**
-     * Set the value of the solenoid
-     * @param isDown true for the wheel
-     * down position and vice versa
-     */
-    public void setWheelsDown(boolean isDown) {
-    	drop.set(isDown);
+    public int getFrontUltrasonic() {
+    	return frontUltrasonic.getValue();
+    }
+    
+    public int getBackUltrasonic() {
+    	return backUltrasonic.getValue();
     }
     
     /**
@@ -71,7 +81,7 @@ public class Drive extends Subsystem {
     		speed = 1;
     	}
 	
-    	leftDrive.set(speed);
+    	leftDrive.set(-speed);
     }
     
     /**
@@ -87,7 +97,7 @@ public class Drive extends Subsystem {
     		speed = 1;
     	}
 	
-    	rightDrive.set(-speed);
+    	rightDrive.set(speed);
     }
     
     /**

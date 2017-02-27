@@ -1,6 +1,8 @@
 package org.usfirst.frc.team340.robot.commands.groups;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+
+import org.usfirst.frc.team340.robot.commands.DoNothing;
 import org.usfirst.frc.team340.robot.commands.gears.PlaceGear;
 import org.usfirst.frc.team340.robot.commands.gears.ReturnToStart;
 
@@ -13,6 +15,7 @@ public class ScoreGear extends CommandGroup {
     public ScoreGear() {
     	
     	addSequential(new PlaceGear());
+    	addSequential(new DoNothing(), 0.2);
     	addSequential(new ReturnToStart());
     	
     }

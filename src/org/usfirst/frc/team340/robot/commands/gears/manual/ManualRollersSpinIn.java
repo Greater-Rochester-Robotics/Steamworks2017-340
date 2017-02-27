@@ -1,4 +1,4 @@
-package org.usfirst.frc.team340.robot.commands.gears;
+package org.usfirst.frc.team340.robot.commands.gears.manual;
 
 import org.usfirst.frc.team340.robot.Robot;
 

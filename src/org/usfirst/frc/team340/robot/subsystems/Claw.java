@@ -1,12 +1,14 @@
 package org.usfirst.frc.team340.robot.subsystems;
 
 import org.usfirst.frc.team340.robot.RobotMap;
+import org.usfirst.frc.team340.robot.VotableInput;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.TalonSRX;
+import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * <h1><em>Claw</em></h1>
@@ -15,22 +17,22 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * the pusher piston, arm, and claw itself.
  */
 public class Claw extends Subsystem {
-	private static final double ROLLER_IN_SPEED = .75; //TODO: perfect this
-	private static final double ROLLER_OUT_SPEED = -.75; //TODO: perfect this too
+	private static final double ROLLER_IN_SPEED = 1.0; //TODO: perfect this
+	private static final double ROLLER_OUT_SPEED = -1.0; //TODO: perfect this too
 	
-	private static final Value ARM_UP = Value.kReverse;
-	private static final Value ARM_DOWN = Value.kForward;
-	private static final Value CLAW_OPEN = Value.kForward; //TODO: see if forward is open or closed
-	private static final Value CLAW_CLOSED = Value.kReverse; //TODO: see if reverse is open or closed
-	private static final Value PUSHER_OUT = Value.kForward;
-	private static final Value PUSHER_IN = Value.kReverse;
+	private static final Value ARM_UP = Value.kForward;
+	private static final Value ARM_DOWN = Value.kReverse;
+	private static final Value CLAW_OPEN = Value.kForward;
+	private static final Value CLAW_CLOSED = Value.kReverse;
+	private static final boolean PUSHER_OUT = true;
+	private static final boolean PUSHER_IN = false;
 	
-	private DigitalInput gearSensorLeft;
-	private DigitalInput gearSensorRight;
 	private DoubleSolenoid claw;
 	private DoubleSolenoid hinge;
-	private DoubleSolenoid pusher;
-	private TalonSRX rollers;
+	private Solenoid pusher;
+	private Talon rollers;
+	private VotableInput gearSensorLeft;
+	private VotableInput gearSensorRight;
 	
 	/**
 	 * Constructs a {@link Claw} and sets all
@@ -39,12 +41,12 @@ public class Claw extends Subsystem {
 	 * solenoids
 	 */
 	public Claw() {
-		gearSensorLeft = new DigitalInput(RobotMap.GEAR_SENSOR_LEFT_CHANNEL);
-		gearSensorRight = new DigitalInput(RobotMap.GEAR_SENSOR_RIGHT_CHANNEL);
 		claw = new DoubleSolenoid(RobotMap.CLAW_SOLENOID_FORWARD_CHANNEL, RobotMap.CLAW_SOLENOID_REVERSE_CHANNEL);
 		hinge = new DoubleSolenoid(RobotMap.ARM_SOLENOID_FORWARD_CHANNEL, RobotMap.ARM_SOLENOID_REVERSE_CHANNEL);
-		pusher = new DoubleSolenoid(RobotMap.PUSHER_SOLENOID_FORWARD_CHANNEL, RobotMap.PUSHER_SOLENOID_REVERSE_CHANNEL);
-		rollers = new TalonSRX(RobotMap.CLAW_ROLLERS_PORT);
+		pusher = new Solenoid(RobotMap.PUSHER_SOLENOID_CHANNEL);
+		rollers = new Talon(RobotMap.CLAW_ROLLERS_PORT);
+		gearSensorLeft = new VotableInput(RobotMap.GEAR_SENSOR_LEFT_CHANNEL);
+		gearSensorRight = new VotableInput(RobotMap.GEAR_SENSOR_RIGHT_CHANNEL);
 	}
     
 	/**
@@ -117,7 +119,7 @@ public class Claw extends Subsystem {
 	 * retracted
 	 */
 	public boolean isRetracted() {
-		return pusher.get().equals(PUSHER_IN);
+		return !pusher.get();
 	}
 	
 	/**
@@ -132,7 +134,7 @@ public class Claw extends Subsystem {
 	 * extended
 	 */
 	public boolean isExtended() {
-		return pusher.get().equals(PUSHER_OUT);
+		return pusher.get();
 	}
 	
 	/**
@@ -165,6 +167,7 @@ public class Claw extends Subsystem {
 	 */
 	public boolean whenGearIsAcquired() {
 		return gearSensorLeft.get() || gearSensorRight.get();
+//		return VotableInput.vote(new VotableInput[] {gearSensorLeft, gearSensorRight});
 	}
 	
 	/**
@@ -172,7 +175,7 @@ public class Claw extends Subsystem {
 	 * regurgitate the gear
 	 */
 	public void spinOut() {
-		rollers.set(ROLLER_OUT_SPEED); //Negative to push out
+		rollers.set(ROLLER_OUT_SPEED);
 	}
 	
 	/**
@@ -181,6 +184,29 @@ public class Claw extends Subsystem {
 	 */
 	public boolean whenGearIsNotAcquired() {
 		return !whenGearIsAcquired();
+	}
+	
+	/**
+	 * Prints the sensor values, their DIO port
+	 * numbers, and their side
+	 */
+	public void printSensors() {
+		System.out.println("Left (9): " + gearSensorLeft.get() + "; right (8): " + gearSensorRight.get());
+		SmartDashboard.putString("Gear Sensors", "Left (9): " + gearSensorLeft.get() + "; right (8): " + gearSensorRight.get());
+	}
+	
+	/**
+	 * @return the left sensor object
+	 */
+	public VotableInput getLeftSensor() {
+		return gearSensorLeft;
+	}
+	
+	/**
+	 * @return the right sensor object
+	 */
+	public VotableInput getRightSensor() {
+		return gearSensorRight;
 	}
 	
 	/**
