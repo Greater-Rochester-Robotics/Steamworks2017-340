@@ -19,10 +19,13 @@ public class LoadingStationTwoGearAuto extends CommandGroup {
 
     public LoadingStationTwoGearAuto() {
     	addSequential(new ResetGyro());
-    	addSequential(new StartMovingForward(), 0.4);
+//    	addSequential(new StartMovingForward(), 0.4);
 //		addSequential(new TurnTowardsPeg());
-    	addSequential(new DriveRails(-0.45, -0.75, 50, 4), 1.4);
-		addSequential(new MoveToPeg(), 2.5); // vision
+    	addSequential(new DriveRails(-0.75, -0.67, -30, 4), 2);
+    	addSequential(new ResetGyro());
+    	addSequential(new DriveRails(.5, -.5, 85, 5), 1);
+    	addSequential(new MoveToPeg(), 2.5);
+		/*addSequential(new MoveToPeg(), 2.5); // vision
 		addSequential(new ScoreGear());
 		addSequential(new StartMovingBack(), 0.5);
 		addSequential(new ResetGyro());
@@ -41,6 +44,6 @@ public class LoadingStationTwoGearAuto extends CommandGroup {
 		addSequential(new ScoreGear());
 		addSequential(new StartMovingBack(), 0.5);
 		addSequential(new ReverseInArc());
-		addSequential(new DriveRails(0.8, 0.8));
+		addSequential(new DriveRails(0.8, 0.8));*/
     }
 }
