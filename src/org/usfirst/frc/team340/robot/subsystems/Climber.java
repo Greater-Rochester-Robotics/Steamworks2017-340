@@ -117,8 +117,8 @@ public class Climber extends Subsystem {
 		return drumOne.get() ==0;
 	}
 	
-	public boolean ifLiftingOff() {
-		 return false; //TODO: this
+	public boolean isLiftingOff() {
+		return false; //TODO: this
 	}
 
 	/**
