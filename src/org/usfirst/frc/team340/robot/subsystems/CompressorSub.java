@@ -5,6 +5,7 @@ import org.usfirst.frc.team340.robot.commands.CompressorRegulation;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Relay.Direction;
 import edu.wpi.first.wpilibj.Relay.Value;
@@ -13,17 +14,18 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class CompressorSub extends Subsystem {
 	private AnalogPotentiometer transducer;
 	private Compressor compressor;
+	private DigitalInput altPressureSwitch;
 	private Relay spike;
 	
 	public CompressorSub() {
 		transducer = new AnalogPotentiometer(RobotMap.TRANSDUCER_CHANNEL, 250, -25);
 		compressor = new Compressor();
+		altPressureSwitch = new DigitalInput(RobotMap.ALT_SWITCH_CHANNEL);
 		spike = new Relay(RobotMap.COMPRESSOR_SPIKE_CHANNEL, Direction.kForward);
 	}
 
 	/**
-	 * This will <em>eventually</em> set
-	 * the default command :P
+	 * Constantly regulates compressor
 	 */
 	@Override
 	protected void initDefaultCommand() {
@@ -62,6 +64,13 @@ public class CompressorSub extends Subsystem {
 	}
 	
 	/**
+	 * @return value of alt switch
+	 */
+	public boolean getAltPressureSwitchStatus() {
+		return altPressureSwitch.get();
+	}
+	
+	/**
 	 * @return true/false if Spike is forward/off
 	 */
 	public boolean getSpikeStatus() {
@@ -87,6 +96,13 @@ public class CompressorSub extends Subsystem {
 	 */
 	public Compressor getCompressor() {
 		return compressor;
+	}
+	
+	/**
+	 * @return the alternate switch object
+	 */
+	public DigitalInput getAltPressureSwitch() {
+		return altPressureSwitch;
 	}
 	
 	/**
