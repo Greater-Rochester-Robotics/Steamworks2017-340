@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class CompressorRegulation extends Command {
 	public CompressorRegulation() {
 		requires(Robot.compressor);
+		setRunWhenDisabled(true);
 	}
 	
 	@Override
