@@ -33,7 +33,9 @@ public class DPad extends Button {
     
     /**
      * Enumerates all of the eight possible
-     * directions for a d-pad
+     * directions for a d-pad. The all-caps
+     * version may fix a problem that popped
+     * up out-of-the-blue, so don't touch them!
      */
     public enum Direction {
     	right(90),
@@ -43,7 +45,15 @@ public class DPad extends Button {
     	left(270),
     	downLeft(225),
     	down(180),
-    	downRight(135);
+    	downRight(135),
+    	UP(0),
+    	UP_LEFT(45),
+    	LEFT(90),
+    	DOWN_LEFT(135),
+    	DOWN(180),
+    	DOWN_RIGHT(225),
+    	RIGHT(270),
+    	UP_RIGHT(315);
     	
     	private int dir;
     	
