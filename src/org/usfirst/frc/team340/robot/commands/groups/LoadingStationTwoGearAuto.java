@@ -1,14 +1,8 @@
 package org.usfirst.frc.team340.robot.commands.groups;
 
-import org.usfirst.frc.team340.robot.commands.DoNothing;
 import org.usfirst.frc.team340.robot.commands.DriveRails;
-import org.usfirst.frc.team340.robot.commands.MoveToGear;
 import org.usfirst.frc.team340.robot.commands.MoveToPeg;
 import org.usfirst.frc.team340.robot.commands.ResetGyro;
-import org.usfirst.frc.team340.robot.commands.auto.ReverseInArc;
-import org.usfirst.frc.team340.robot.commands.auto.StartMovingBack;
-import org.usfirst.frc.team340.robot.commands.auto.StartMovingForward;
-import org.usfirst.frc.team340.robot.commands.gears.AbortHarvest;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
