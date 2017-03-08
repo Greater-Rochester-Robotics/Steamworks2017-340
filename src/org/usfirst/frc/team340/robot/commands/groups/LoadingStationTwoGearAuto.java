@@ -19,12 +19,43 @@ public class LoadingStationTwoGearAuto extends CommandGroup {
 
     public LoadingStationTwoGearAuto() {
     	addSequential(new ResetGyro());
+//    	addSequential(new DriveRails(-1));
 //    	addSequential(new StartMovingForward(), 0.4);
 //		addSequential(new TurnTowardsPeg());
-    	addSequential(new DriveRails(-0.75, -0.67, -30, 4), 2);
-    	addSequential(new ResetGyro());
-    	addSequential(new DriveRails(.5, -.5, 85, 5), 1);
-    	addSequential(new MoveToPeg(), 2.5);
+//    	
+    	addSequential(new DriveRails(-0.7), 1.5);
+//    	addSequential(new DriveRails(-0.75, -0.35, -30, 4), 2);
+//    	addSequential(new ResetGyro());
+    	addSequential(new DriveRails(.5, -.5, 65, 6), 1);
+    	addSequential(new DriveRails(-0.5), 0.3);
+    	addSequential(new MoveToPeg(), 1.5);
+    	
+    	
+    //	addSequential(new DriveRails(-.2,0), 0.1);
+    //	addSequential(new DriveRails(0,-.2), 0.1);
+    //	addSequential(new DriveRails(-.2,0), 0.1);
+    //	addSequential(new DriveRails(0,-.2), 0.1);
+    	
+    	addSequential(new ScoreGear(), 0.5);
+//    	addSequential(new ResetGyro());
+    	addSequential(new DriveRails(0.6), 0.4);
+    	addSequential(new DriveRails(-0.6, 0.6, -65, 10), 2);
+    	addSequential(new DoNothing(), 0.5);
+    	addParallel(new HarvestGear(), 2.5);
+    	addSequential(new DriveRails(-0.6), 0.5);
+    	addParallel(new MoveToGear(), 2.5);
+    	addSequential(new HarvestGear(), 2.5);
+    	addSequential(new AbortHarvest());
+    	addSequential(new DoNothing(), 0.3);
+    	addSequential(new DriveRails(0.6), 0.69);
+    	addSequential(new DriveRails(0.6, -0.6, 65, 6));
+    	addSequential(new DriveRails(-0.5), 0.5);
+    	addSequential(new MoveToPeg(), 1.5);
+    	addSequential(new ScoreGear(), 1);
+    	addSequential(new DriveRails(0.5), 0.5);
+    	addSequential(new DriveRails(0.75, .1, 215, 10), 2);
+    	addSequential(new DriveRails(1),5);
+//    	
 		/*addSequential(new MoveToPeg(), 2.5); // vision
 		addSequential(new ScoreGear());
 		addSequential(new StartMovingBack(), 0.5);

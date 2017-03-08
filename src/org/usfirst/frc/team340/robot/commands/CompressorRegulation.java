@@ -22,7 +22,7 @@ public class CompressorRegulation extends Command {
 		} else {
 			Robot.compressor.setSpike(false);
 		}
-		
+//		System.out.println(Robot.compressor.getCompressorStatus());
 		SmartDashboard.putNumber("Pressure", Robot.compressor.getPressure());
 	}
 	

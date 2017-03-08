@@ -24,7 +24,7 @@ public class RobotMap {
     public static final int GEAR_SENSOR_RIGHT_CHANNEL = 8;
     
     public static final int COMPRESSOR_SPIKE_CHANNEL = 0; //TODO: get the channel for this
-    public static final int TRANSDUCER_CHANNEL = 3; //TODO: Czech this number
+    public static final int TRANSDUCER_CHANNEL = 3; //TODO: Check this number
     
 	public static final double CLIMB_MOTORS_ENGAGEMENT_SPIN_UP_TIME = 0.5;
 	

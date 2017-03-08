@@ -2,6 +2,7 @@ package org.usfirst.frc.team340.robot.commands;
 
 import org.usfirst.frc.team340.robot.Robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -14,7 +15,9 @@ public class DriveRails extends Command {
 	private double endAngle = 0;
 	private boolean useAngle = false;
 	private double angleTolerance = 10;
-	
+	private double startAngle = 0;
+	private boolean goStraight = false;
+	private double arcDivisor = 50;
     public DriveRails(double leftSpeed, double rightSpeed) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -32,14 +35,29 @@ public class DriveRails extends Command {
     	useAngle = true;
     	this.angleTolerance = angleTolerance;
     }
+    
+    public DriveRails(double speed) {
+    	requires(Robot.drive);
+    	this.leftSpeed = speed;
+    	this.rightSpeed = speed;
+    	this.goStraight = true;
+    }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.drive.setBothDrive(leftSpeed, rightSpeed);
+    	startAngle = Robot.drive.getYaw();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	System.out.println(Robot.drive.getYaw());
+    	if(goStraight) {
+        	Robot.drive.setBothDrive(leftSpeed-((Robot.drive.getYaw()-startAngle)/(arcDivisor/Math.abs(leftSpeed))), 
+        			rightSpeed+(((Robot.drive.getYaw()-startAngle)/(arcDivisor/Math.abs(leftSpeed)))));
+    	} else {
+        	Robot.drive.setBothDrive(leftSpeed, rightSpeed);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

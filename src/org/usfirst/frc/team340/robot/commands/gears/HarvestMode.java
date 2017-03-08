@@ -1,5 +1,6 @@
 package org.usfirst.frc.team340.robot.commands.gears;
 
+import org.usfirst.frc.team340.robot.PiLED;
 import org.usfirst.frc.team340.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -21,6 +22,7 @@ public class HarvestMode extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.led.hookLEDs();
     	System.out.println("initialize HarvestMode");
     	
     	if(Robot.claw.whenGearIsNotAcquired()) {
@@ -36,6 +38,16 @@ public class HarvestMode extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	if(Robot.claw.leftSensorState()) {
+    		Robot.led.setLeftColor(0, 0, 255, 1000, true);
+    	} else {
+    		Robot.led.setLeftColor(255, 0, 0);
+    	}
+    	if(Robot.claw.rightSensorState()) {
+    		Robot.led.setRightColor(0, 0, 255, 1000, true);
+    	} else {
+    		Robot.led.setRightColor(255, 0, 0);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -45,6 +57,7 @@ public class HarvestMode extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+//    	Robot.led.unhookLEDs();
     	Robot.claw.spinStop();
     	Robot.oi.rumbleDriver(0f);
     	System.out.println("end HarvestMode");
@@ -53,6 +66,7 @@ public class HarvestMode extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	Robot.led.unhookLEDs();
     	end();
     }
 }

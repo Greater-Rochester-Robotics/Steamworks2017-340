@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class MoveToGear extends Command {
 
-	double speed = -0.7;
+	double speed = -0.8;
 	double tolerance = 30;
 	double forwardMod = 6;
 	double fastMod = 8;

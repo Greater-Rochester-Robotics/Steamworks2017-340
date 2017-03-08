@@ -166,8 +166,16 @@ public class Claw extends Subsystem {
 	 * successfully been acquired
 	 */
 	public boolean whenGearIsAcquired() {
-		return gearSensorLeft.get() || gearSensorRight.get();
+		return leftSensorState() || rightSensorState();
 //		return VotableInput.vote(new VotableInput[] {gearSensorLeft, gearSensorRight});
+	}
+	
+	public boolean leftSensorState() {
+		return gearSensorLeft.get();
+	}
+	
+	public boolean rightSensorState() {
+		return gearSensorRight.get();
 	}
 	
 	/**

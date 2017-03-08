@@ -1,10 +1,15 @@
 package org.usfirst.frc.team340.robot;
 
+import org.usfirst.frc.team340.robot.commands.DoNothing;
+import org.usfirst.frc.team340.robot.commands.LeftSideGearAuto;
+
 //import java.io.FileReader;
 //import java.io.IOException;
 //import java.util.ArrayList;
 
 import org.usfirst.frc.team340.robot.commands.groups.LoadingStationTwoGearAuto;
+import org.usfirst.frc.team340.robot.commands.groups.RightSideGearAuto;
+import org.usfirst.frc.team340.robot.commands.groups.StraightOnGearAuto;
 import org.usfirst.frc.team340.robot.subsystems.Claw;
 import org.usfirst.frc.team340.robot.subsystems.Climber;
 import org.usfirst.frc.team340.robot.subsystems.CompressorSub;
@@ -17,6 +22,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -33,14 +40,17 @@ public class Robot extends IterativeRobot {
     public static NoSub noSub;
     public static PneumaticDrop drop;
     public static OI oi;
-
+    
     Command autonomousCommand;
     
     public static NetworkTable visionTable;
 	public static NetworkTable ledTable;
+	public static NetworkTable cameraTable;
 	
 	public static PiLED led;
-
+	
+	SendableChooser chooser;
+	
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -52,23 +62,36 @@ public class Robot extends IterativeRobot {
 	    climber = new Climber();
 	    compressor = new CompressorSub();
 	    drop = new PneumaticDrop();
-	    noSub = new NoSub();
+	    noSub = new NoSub();	
 	    oi = new OI();
 	    
 	    visionTable = NetworkTable.getTable("vision");
-		ledTable = NetworkTable.getTable("led");
+	    ledTable = NetworkTable.getTable("led");
 		led = new PiLED(ledTable);
-	    // chooser.addObject("My Auto", new MyAutoCommand());
-//	    SmartDashboard.putData("Auto modes", chooser);
+		
+		chooser = new SendableChooser();
+		chooser.addDefault("Do nothing", new DoNothing());
+		chooser.addObject("LEFT One gear", new LeftSideGearAuto());
+		chooser.addObject("STRAIGHT ON one gear", new StraightOnGearAuto());
+		chooser.addObject("RIGHT One gear ", new RightSideGearAuto());
+		chooser.addObject("Two Gear Right", new LoadingStationTwoGearAuto());
+	    SmartDashboard.putData("Auto Modes", chooser);
+		
+		//in order to make the MJPEG streamer work, need a table called Camera Publisher
+		cameraTable = NetworkTable.getTable("CameraPublisher");
+		//
+		cameraTable.putStringArray("RasPi Camera/streams", new String[]{"mjpg:http://roborio-340-frc.local:5800/?action=stream&type=.mjpg", "mjpg:http://10.3.40.21:5800/?action=stream"});
+		//it doesn't matter that this is wrong, we need to tell the Dash top use usb
+		cameraTable.putString("RasPi Camera/source", "usb:/dev/video0");
+		//not sure if needed, but just say it is connected
+		cameraTable.putBoolean("RasPi Camera/connected", true);
 	}
 	
-	public static double avgValue() {
-//		return 0;
+	public static double avgValue() {	
 		return visionTable.getNumber("avg", 0);
 	}
 	
 	public static double distValue() {
-//		return 0;
 		return visionTable.getNumber("dist", 1);
 	}
 	
@@ -94,7 +117,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void disabledInit() {
-
+		SmartDashboard.putString("Camera Selection", "RasPi Camera");
 	}
 
 	@Override
@@ -103,28 +126,14 @@ public class Robot extends IterativeRobot {
 	}
 
 	/**
-	 * This autonomous (along with the chooser code above) shows how to select
-	 * between different autonomous modes using the dashboard. The sendable
-	 * chooser code works with the Java SmartDashboard. If you prefer the
-	 * LabVIEW Dashboard, remove all of the chooser code and uncomment the
-	 * getString code to get the auto name from the text box below the Gyro
-	 *
-	 * You can add additional auto modes by adding additional commands to the
-	 * chooser code above (like the commented example) or additional comparisons
-	 * to the switch structure below with additional strings & commands.
+	 * This is autonomous 
 	 */
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = new LoadingStationTwoGearAuto();
-
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
-
-		// schedule the autonomous command (example)
+        autonomousCommand = (Command) chooser.getSelected();
+    	
+    	// schedule the autonomous command (example)
+        if (autonomousCommand != null) autonomousCommand.start();
 		if(autonomousCommand != null) {
 			autonomousCommand.start();
 		}

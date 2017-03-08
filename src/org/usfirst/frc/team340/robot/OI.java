@@ -95,7 +95,7 @@ public class OI {
 		driverA.whenPressed(new HarvestGear());
 		driverA.whenReleased(new AbortHarvest());
 		driverB.whenPressed(new DropToggleWheels());
-		driverBack.whenPressed(new MoveToPeg());
+		driverBack.whenPressed(new MoveToGear());
 		driverBack.whenReleased(new DriveXbox());
 		driverStart.whenPressed(new HarvestGear());
 		driverStart.whenReleased(new AbortHarvest());
@@ -107,9 +107,9 @@ public class OI {
 		//Manual testing for rollers
 		driverLB.whenPressed(new GearSensorTraining());
 //		driverLB.whenReleased(new ManualSpinStop());
-		//driverRB.whenPressed(new Climb());
-		//driverRB.whenReleased(new AbortClimb());
 		
+		driverRB.whenPressed(new ManualGoAtClimbSpeed());
+		driverRB.whenReleased(new ManualClimberGoStopped()); 
 		//Manual override climbing
 //		climbSwitch.whileHeld(new ManualRollDrum());
 		

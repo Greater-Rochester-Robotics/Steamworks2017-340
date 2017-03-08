@@ -27,6 +27,8 @@ public class CompressorSub extends Subsystem {
 	 */
 	@Override
 	protected void initDefaultCommand() {
+//		compressor.setClosedLoopControl(false);
+//		compressor.start();
 		setDefaultCommand(new CompressorRegulation());
 	}
 	
@@ -59,6 +61,7 @@ public class CompressorSub extends Subsystem {
 	 */
 	public boolean getCompressorStatus() {
 		return compressor.enabled();
+//		return false;
 	}
 	
 	/**

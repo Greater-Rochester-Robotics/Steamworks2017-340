@@ -55,7 +55,7 @@ public class PiLED {
 	 * @param b the blue component of the color
 	 * @param time turn off the LEDs after this time has elapsed (milliseconds)
 	 */
-	public void setLeftColor(int r, int g, int b, double time) {
+	public void setLeftColor(int r, int g, int b, double time, boolean unhook) {
 		setLeftColor(r, g, b);
 		Thread t = new Thread(new Runnable() {
 			
@@ -65,6 +65,8 @@ public class PiLED {
 				try {
 					Thread.sleep((long) time);
 					leftOff();
+					if(unhook)
+						unhookLEDs();
 				} catch (Exception e) {
 					// TODO: handle exception
 				}
@@ -98,8 +100,9 @@ public class PiLED {
 	 * @param g the green component of the color
 	 * @param b the blue component of the color
 	 * @param time turn off the LEDs after this time has elapsed (milliseconds)
+	 * @param unhook unhook the LEDs after the time has elapsed
 	 */
-	public void setRightColor(int r, int g, int b, double time) {
+	public void setRightColor(int r, int g, int b, double time, boolean unhook) {
 		setRightColor(r, g, b);
 		Thread t = new Thread(new Runnable() {
 			
@@ -109,6 +112,8 @@ public class PiLED {
 				try {
 					Thread.sleep((long) time);
 					rightOff();
+					if(unhook)
+						unhookLEDs();
 				} catch (Exception e) {
 					// TODO: handle exception
 				}
@@ -142,7 +147,7 @@ public class PiLED {
 	 * @param b the blue component of the color
 	 * @param time turn off the LEDs after this time has elapsed (milliseconds)
 	 */
-	public void setAllColor(int r, int g, int b, double time) {
+	public void setAllColor(int r, int g, int b, double time, boolean unhook) {
 		setAllColor(r, g, b);
 		Thread t = new Thread(new Runnable() {
 			
@@ -152,6 +157,8 @@ public class PiLED {
 				try {
 					Thread.sleep((long) time);
 					allOff();
+					if(unhook)
+						unhookLEDs();
 				} catch (Exception e) {
 					// TODO: handle exception
 				}
