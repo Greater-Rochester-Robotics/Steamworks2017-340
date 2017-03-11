@@ -17,7 +17,7 @@ public class AbortClimb extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	System.out.println("initialize AbortClimb");
+//    	System.out.println("initialize AbortClimb");
     	Robot.climber.goStopped();
     }
 
@@ -32,7 +32,7 @@ public class AbortClimb extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println("end AbortClimb");
+//    	System.out.println("end AbortClimb");
     }
 
     // Called when another command which requires one or more of the same

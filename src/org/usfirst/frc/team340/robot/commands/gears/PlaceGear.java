@@ -22,7 +22,7 @@ public class PlaceGear extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	System.out.println("initialize PlaceGear");
+//    	System.out.println("initialize PlaceGear");
     	Robot.claw.goExtend();
     	Robot.claw.goUp();
     	Robot.claw.goOpen();
@@ -40,7 +40,7 @@ public class PlaceGear extends Command {
 
     // Called once after isFinished returns true
     protected void end() {    	
-    	System.out.println("end PlaceGear");
+//    	System.out.println("end PlaceGear");
     }
 
     // Called when another command which requires one or more of the same

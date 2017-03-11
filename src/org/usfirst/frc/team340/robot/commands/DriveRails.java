@@ -2,7 +2,6 @@ package org.usfirst.frc.team340.robot.commands;
 
 import org.usfirst.frc.team340.robot.Robot;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -19,16 +18,12 @@ public class DriveRails extends Command {
 	private boolean goStraight = false;
 	private double arcDivisor = 50;
     public DriveRails(double leftSpeed, double rightSpeed) {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	requires(Robot.drive);
+        requires(Robot.drive);
     	this.leftSpeed = leftSpeed;
     	this.rightSpeed = rightSpeed;
     }
     public DriveRails(double leftSpeed, double rightSpeed, double endAngle, double angleTolerance) {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	requires(Robot.drive);
+        requires(Robot.drive);
     	this.leftSpeed = leftSpeed;
     	this.rightSpeed = rightSpeed;
     	this.endAngle = endAngle;
@@ -51,7 +46,7 @@ public class DriveRails extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	System.out.println(Robot.drive.getYaw());
+//    	System.out.println(Robot.drive.getYaw());
     	if(goStraight) {
         	Robot.drive.setBothDrive(leftSpeed-((Robot.drive.getYaw()-startAngle)/(arcDivisor/Math.abs(leftSpeed))), 
         			rightSpeed+(((Robot.drive.getYaw()-startAngle)/(arcDivisor/Math.abs(leftSpeed)))));
@@ -63,14 +58,14 @@ public class DriveRails extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	if(useAngle && Math.abs(Robot.drive.getYaw() - endAngle) < angleTolerance) {
-    		System.out.println("GOT ANGLE");
+//    		System.out.println("GOT ANGLE");
     	}
         return useAngle && Math.abs(Robot.drive.getYaw() - endAngle) < angleTolerance;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println("YAW: " + Robot.drive.getYaw());
+//    	System.out.println("YAW: " + Robot.drive.getYaw());
     	Robot.drive.setBothDrive(0, 0);
     }
 

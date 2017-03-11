@@ -21,7 +21,7 @@ public class ReadyToReleaseGear extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	System.out.println("initialize ReadyToRelease");
+//    	System.out.println("initialize ReadyToRelease");
     	Robot.claw.goDown();
     	Robot.claw.goClose();
     	Robot.claw.spinStop();
@@ -39,7 +39,7 @@ public class ReadyToReleaseGear extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println("end ReadyToRelease");
+//    	System.out.println("end ReadyToRelease");
     }
 
     // Called when another command which requires one or more of the same

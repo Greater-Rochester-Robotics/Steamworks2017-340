@@ -19,7 +19,7 @@ public class ClimbMotorsOn extends TimedCommand {
 
 	// Called just before this Command runs the first time
     protected void initialize() {
-    	System.out.println("initialize ClimbMotorsOn");
+//    	System.out.println("initialize ClimbMotorsOn");
     	Robot.climber.goAtEngagementSpeed();
     	Robot.claw.goClose();
     	Robot.claw.goUp();
@@ -32,7 +32,7 @@ public class ClimbMotorsOn extends TimedCommand {
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println("end ClimbMotorsOn");
+//    	System.out.println("end ClimbMotorsOn");
     }
 
     // Called when another command which requires one or more of the same

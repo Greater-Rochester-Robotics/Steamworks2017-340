@@ -18,13 +18,9 @@ public class CompressorRegulation extends Command {
 	
 	@Override
 	protected void execute() {
-		if(Robot.compressor.getCompressor().getPressureSwitchValue() || Robot.compressor.getAltPressureSwitchStatus()) {
-			Robot.compressor.setSpike(true);
-		} else {
-			Robot.compressor.setSpike(false);
-		}
+		Robot.compressor.setSpike(Robot.compressor.getAltPressureSwitchStatus());
 //		System.out.println(Robot.compressor.getCompressorStatus());
-		SmartDashboard.putNumber("Pressure", Robot.compressor.getPressure());
+		SmartDashboard.putNumber("Pressure", Math.round(Robot.compressor.getPressure()/5) * 5);
 	}
 	
 	@Override

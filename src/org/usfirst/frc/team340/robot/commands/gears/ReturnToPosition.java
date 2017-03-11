@@ -22,7 +22,7 @@ public class ReturnToPosition extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	System.out.println("initialize ReturnToPosition");
+//    	System.out.println("initialize ReturnToPosition");
     	Robot.claw.goUp();
     	Robot.claw.goClose();
     	Robot.claw.spinStop();
@@ -40,7 +40,7 @@ public class ReturnToPosition extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println("end ReturnToPosition");
+//    	System.out.println("end ReturnToPosition");
     }
 
     // Called when another command which requires one or more of the same

@@ -18,6 +18,6 @@ public class DoNothing extends Command {
     }
     
     protected void end() {
-    	System.out.println("-FINISHED DOING NOTHING-");
+//    	System.out.println("-FINISHED DOING NOTHING-");
     }
 }

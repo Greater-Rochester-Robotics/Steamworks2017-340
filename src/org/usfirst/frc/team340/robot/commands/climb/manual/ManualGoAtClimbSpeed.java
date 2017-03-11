@@ -17,14 +17,14 @@ public class ManualGoAtClimbSpeed extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	System.out.println("initialize ManualGoAtClimbSpeed");
+//    	System.out.println("initialize ManualGoAtClimbSpeed");
     	Robot.climber.goAtClimbSpeed();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	System.out.println("current draw motor 1 ;" + Robot.climber.getCurrentDrumOne() 
-			+ "; motor 2 ;" + Robot.climber.getCurrentDrumTwo() + ";"); 
+//    	System.out.println("current draw motor 1 ;" + Robot.climber.getCurrentDrumOne() 
+//			+ "; motor 2 ;" + Robot.climber.getCurrentDrumTwo() + ";"); 
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -35,7 +35,7 @@ public class ManualGoAtClimbSpeed extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	Robot.climber.goStopped();
-    	System.out.println("end ManualGoAtClimbSpeed");
+//    	System.out.println("end ManualGoAtClimbSpeed");
     }
 
     // Called when another command which requires one or more of the same

@@ -6,14 +6,9 @@ import org.usfirst.frc.team340.robot.commands.DropLowerWheels;
 import org.usfirst.frc.team340.robot.commands.DropRaiseWheels;
 import org.usfirst.frc.team340.robot.commands.DropToggleWheels;
 import org.usfirst.frc.team340.robot.commands.MoveToGear;
-import org.usfirst.frc.team340.robot.commands.MoveToPeg;
-import org.usfirst.frc.team340.robot.commands.climb.AbortClimb;
-import org.usfirst.frc.team340.robot.commands.climb.Climb;
-import org.usfirst.frc.team340.robot.commands.climb.StayAtTop;
 import org.usfirst.frc.team340.robot.commands.climb.manual.ManualClimberGoAtEngagementSpeed;
 import org.usfirst.frc.team340.robot.commands.climb.manual.ManualClimberGoStopped;
 import org.usfirst.frc.team340.robot.commands.climb.manual.ManualGoAtClimbSpeed;
-import org.usfirst.frc.team340.robot.commands.climb.manual.ManualRollDrum;
 import org.usfirst.frc.team340.robot.commands.gears.AbortHarvest;
 import org.usfirst.frc.team340.robot.commands.gears.AbortRelease;
 import org.usfirst.frc.team340.robot.commands.gears.AbortScore;
@@ -27,7 +22,6 @@ import org.usfirst.frc.team340.robot.commands.gears.manual.ManualPusherRetract;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualRollersSpinIn;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualRollersSpinOut;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualSpinStop;
-import org.usfirst.frc.team340.robot.commands.groups.AutoScoreGear;
 import org.usfirst.frc.team340.robot.commands.groups.GearSensorTraining;
 import org.usfirst.frc.team340.robot.commands.groups.HarvestGear;
 import org.usfirst.frc.team340.robot.commands.groups.ReleaseGear;
@@ -42,7 +36,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({"deprecation", "unused"})
 public class OI {
 	
 	//DRIVER

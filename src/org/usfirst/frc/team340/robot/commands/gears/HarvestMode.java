@@ -1,6 +1,5 @@
 package org.usfirst.frc.team340.robot.commands.gears;
 
-import org.usfirst.frc.team340.robot.PiLED;
 import org.usfirst.frc.team340.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -23,7 +22,7 @@ public class HarvestMode extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.led.hookLEDs();
-    	System.out.println("initialize HarvestMode");
+//    	System.out.println("initialize HarvestMode");
     	
     	if(Robot.claw.whenGearIsNotAcquired()) {
     		Robot.claw.goDown();
@@ -32,7 +31,7 @@ public class HarvestMode extends Command {
         	Robot.claw.goRetract();
         	Robot.oi.rumbleDriver(1.0f);
     	} else {
-    		System.out.println("gear is already acquired do nothing");
+//    		System.out.println("gear is already acquired do nothing");
     	}
     }
 
@@ -60,7 +59,7 @@ public class HarvestMode extends Command {
 //    	Robot.led.unhookLEDs();
     	Robot.claw.spinStop();
     	Robot.oi.rumbleDriver(0f);
-    	System.out.println("end HarvestMode");
+//    	System.out.println("end HarvestMode");
     }
 
     // Called when another command which requires one or more of the same

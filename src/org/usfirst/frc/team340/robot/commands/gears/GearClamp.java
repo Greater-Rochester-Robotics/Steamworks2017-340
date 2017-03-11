@@ -21,7 +21,7 @@ public class GearClamp extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	System.out.println("initialize GearClamp");
+//    	System.out.println("initialize GearClamp");
     	
     	if(Robot.claw.whenGearIsNotAcquired()) {
     		Robot.claw.goClose();
@@ -29,7 +29,7 @@ public class GearClamp extends Command {
         	Robot.claw.goRetract();
         	Robot.claw.goDown();
     	} else {
-    		System.out.println("gear still acquired; do nothing");
+//    		System.out.println("gear still acquired; do nothing");
     	}
     }
 
@@ -44,7 +44,7 @@ public class GearClamp extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println("end GearClamp");
+//    	System.out.println("end GearClamp");
     }
 
     // Called when another command which requires one or more of the same

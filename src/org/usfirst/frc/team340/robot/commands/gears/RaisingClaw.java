@@ -21,7 +21,7 @@ public class RaisingClaw extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	System.out.println("initialize RaisingClaw");
+//    	System.out.println("initialize RaisingClaw");
     	Robot.claw.goUp();
     	Robot.claw.goRetract();
     	Robot.claw.goClose();
@@ -39,7 +39,7 @@ public class RaisingClaw extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println("end RaisingClaw");
+//    	System.out.println("end RaisingClaw");
     }
 
     // Called when another command which requires one or more of the same

@@ -17,7 +17,7 @@ public class ManualPusherExtend extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	System.out.println("initialize ManualPusherExtend");
+//    	System.out.println("initialize ManualPusherExtend");
     	Robot.claw.goExtend();
     }
 
@@ -32,7 +32,7 @@ public class ManualPusherExtend extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println("end ManualPusherExtend");
+//    	System.out.println("end ManualPusherExtend");
     }
 
     // Called when another command which requires one or more of the same

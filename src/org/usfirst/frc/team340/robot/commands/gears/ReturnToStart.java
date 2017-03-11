@@ -21,7 +21,7 @@ public class ReturnToStart extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	System.out.println("initialize ReturnToStart");
+//    	System.out.println("initialize ReturnToStart");
     	Robot.claw.goRetract();
     	Robot.claw.goUp();
     	Robot.claw.goOpen();
@@ -39,7 +39,7 @@ public class ReturnToStart extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println("end ReturnToStart");
+//    	System.out.println("end ReturnToStart");
     }
 
     // Called when another command which requires one or more of the same

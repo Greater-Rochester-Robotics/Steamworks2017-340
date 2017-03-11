@@ -1,7 +1,9 @@
 package org.usfirst.frc.team340.robot;
 
 import org.usfirst.frc.team340.robot.commands.DoNothing;
-import org.usfirst.frc.team340.robot.commands.LeftSideGearAuto;
+import org.usfirst.frc.team340.robot.commands.gears.LeftSideGearAuto;
+import org.usfirst.frc.team340.robot.commands.groups.GenericTwoGearAuto;
+import org.usfirst.frc.team340.robot.commands.groups.GenericTwoGearLeft;
 
 //import java.io.FileReader;
 //import java.io.IOException;
@@ -49,7 +51,7 @@ public class Robot extends IterativeRobot {
 	
 	public static PiLED led;
 	
-	SendableChooser chooser;
+	private SendableChooser<Command> chooser;
 	
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -69,17 +71,21 @@ public class Robot extends IterativeRobot {
 	    ledTable = NetworkTable.getTable("led");
 		led = new PiLED(ledTable);
 		
-		chooser = new SendableChooser();
+		chooser = new SendableChooser<Command>();
+		
 		chooser.addDefault("Do nothing", new DoNothing());
 		chooser.addObject("LEFT One gear", new LeftSideGearAuto());
 		chooser.addObject("STRAIGHT ON one gear", new StraightOnGearAuto());
 		chooser.addObject("RIGHT One gear ", new RightSideGearAuto());
 		chooser.addObject("Two Gear Right", new LoadingStationTwoGearAuto());
+		chooser.addObject("Center Right side Generic Two Gear Auto", new GenericTwoGearAuto());
+		chooser.addObject("Left side Generic Two Gear Auto", new GenericTwoGearLeft());
 	    SmartDashboard.putData("Auto Modes", chooser);
+	    
 		
 		//in order to make the MJPEG streamer work, need a table called Camera Publisher
 		cameraTable = NetworkTable.getTable("CameraPublisher");
-		//
+		//pass address of camera to dashboard
 		cameraTable.putStringArray("RasPi Camera/streams", new String[]{"mjpg:http://roborio-340-frc.local:5800/?action=stream&type=.mjpg", "mjpg:http://10.3.40.21:5800/?action=stream"});
 		//it doesn't matter that this is wrong, we need to tell the Dash top use usb
 		cameraTable.putString("RasPi Camera/source", "usb:/dev/video0");
@@ -123,6 +129,8 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		
+//		SmartDashboard.putString("Auto Selected", chooser.getSelected());
 	}
 
 	/**

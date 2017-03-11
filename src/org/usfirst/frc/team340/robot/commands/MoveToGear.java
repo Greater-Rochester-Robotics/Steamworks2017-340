@@ -49,7 +49,7 @@ public class MoveToGear extends Command {
 //		dist = Robot.distValue();
 //		dist = Robot.drive.getFrontUltrasonic();
 		lined = Robot.linedValue();
-		System.out.println(dist);
+//		System.out.println(dist);
 		if(!lined) { 
 			Robot.oi.rumbleDriver(0.9f);
 		} else {
