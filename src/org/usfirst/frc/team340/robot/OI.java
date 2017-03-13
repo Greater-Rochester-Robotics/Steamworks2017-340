@@ -6,6 +6,8 @@ import org.usfirst.frc.team340.robot.commands.DropLowerWheels;
 import org.usfirst.frc.team340.robot.commands.DropRaiseWheels;
 import org.usfirst.frc.team340.robot.commands.DropToggleWheels;
 import org.usfirst.frc.team340.robot.commands.MoveToGear;
+import org.usfirst.frc.team340.robot.commands.CompressorOff;
+import org.usfirst.frc.team340.robot.commands.CompressorBackToReg;
 import org.usfirst.frc.team340.robot.commands.climb.manual.ManualClimberGoAtEngagementSpeed;
 import org.usfirst.frc.team340.robot.commands.climb.manual.ManualClimberGoStopped;
 import org.usfirst.frc.team340.robot.commands.climb.manual.ManualGoAtClimbSpeed;
@@ -144,8 +146,9 @@ public class OI {
 		coDriverBack.whenPressed(new ManualClimberGoAtEngagementSpeed());
 		coDriverBack.whenReleased(new ManualClimberGoStopped());
 		coDriverStart.whenPressed(new ManualGoAtClimbSpeed());
+		coDriverStart.whenPressed(new CompressorOff());
 		coDriverStart.whenReleased(new ManualClimberGoStopped()); 
-		
+		coDriverStart.whenReleased(new CompressorBackToReg());
 	}
 	
 	/**

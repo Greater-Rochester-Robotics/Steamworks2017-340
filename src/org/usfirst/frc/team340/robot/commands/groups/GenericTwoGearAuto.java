@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class GenericTwoGearAuto extends CommandGroup {
 
     public GenericTwoGearAuto() {
-    	
     	addSequential(new ResetGyro());
     	addSequential(new DriveRails(-0.45), 1.2);
     	addSequential(new DoNothing(), 0.3);

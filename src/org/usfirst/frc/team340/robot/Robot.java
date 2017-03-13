@@ -26,7 +26,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+import edu.wpi.first.wpilibj.CameraServer;
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
@@ -52,20 +52,30 @@ public class Robot extends IterativeRobot {
 	public static PiLED led;
 	
 	private SendableChooser<Command> chooser;
-	
+
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
 	@Override
 	public void robotInit() {
-	    drive = new Drive();
+	    //Construct all the Subsystems
+		drive = new Drive();
 	    claw = new Claw();
 	    climber = new Climber();
 	    compressor = new CompressorSub();
 	    drop = new PneumaticDrop();
 	    noSub = new NoSub();	
+	    //AFTER subsystem construction, construct the OI with buttons
 	    oi = new OI();
+	    
+	    //pass subsystems to Dashboard for debug
+	    SmartDashboard.putData(drive);
+	    SmartDashboard.putData(claw);
+	    SmartDashboard.putData(climber);
+	    SmartDashboard.putData(compressor);
+	    SmartDashboard.putData(drop);
+	    SmartDashboard.putData(noSub);
 	    
 	    visionTable = NetworkTable.getTable("vision");
 	    ledTable = NetworkTable.getTable("led");
@@ -81,8 +91,7 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("Center Right side Generic Two Gear Auto", new GenericTwoGearAuto());
 		chooser.addObject("Left side Generic Two Gear Auto", new GenericTwoGearLeft());
 	    SmartDashboard.putData("Auto Modes", chooser);
-	    
-		
+//		CameraServer.getInstance().startAutomaticCapture();-=i0
 		//in order to make the MJPEG streamer work, need a table called Camera Publisher
 		cameraTable = NetworkTable.getTable("CameraPublisher");
 		//pass address of camera to dashboard

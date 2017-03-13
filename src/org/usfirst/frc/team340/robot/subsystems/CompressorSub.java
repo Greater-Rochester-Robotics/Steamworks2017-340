@@ -29,8 +29,6 @@ public class CompressorSub extends Subsystem {
 	 */
 	@Override
 	protected void initDefaultCommand() {
-//		compressor.setClosedLoopControl(false);
-//		compressor.start();
 		setDefaultCommand(new CompressorRegulation());
 	}
 	
