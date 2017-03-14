@@ -2,6 +2,8 @@ package org.usfirst.frc.team340.robot;
 
 import org.usfirst.frc.team340.robot.commands.DoNothing;
 import org.usfirst.frc.team340.robot.commands.gears.LeftSideGearAuto;
+import org.usfirst.frc.team340.robot.commands.groups.AutoMobility;
+import org.usfirst.frc.team340.robot.commands.groups.AutoStraightNoVision;
 import org.usfirst.frc.team340.robot.commands.groups.GenericTwoGearAuto;
 import org.usfirst.frc.team340.robot.commands.groups.GenericTwoGearLeft;
 
@@ -90,6 +92,8 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("Two Gear Right", new LoadingStationTwoGearAuto());
 		chooser.addObject("Center Right side Generic Two Gear Auto", new GenericTwoGearAuto());
 		chooser.addObject("Left side Generic Two Gear Auto", new GenericTwoGearLeft());
+		chooser.addObject("Straight on No Vision", new AutoStraightNoVision());
+		chooser.addObject("Mobility No gear", new AutoMobility());
 	    SmartDashboard.putData("Auto Modes", chooser);
 //		CameraServer.getInstance().startAutomaticCapture();-=i0
 		//in order to make the MJPEG streamer work, need a table called Camera Publisher
