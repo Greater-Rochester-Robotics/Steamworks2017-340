@@ -1,5 +1,6 @@
 package org.usfirst.frc.team340.robot.commands.gears;
 
+import org.usfirst.frc.team340.robot.commands.CalibrateVision;
 import org.usfirst.frc.team340.robot.commands.DoNothing;
 import org.usfirst.frc.team340.robot.commands.DriveRails;
 import org.usfirst.frc.team340.robot.commands.MoveToPeg;
@@ -15,11 +16,12 @@ public class LeftSideGearAuto extends CommandGroup {
 
     public LeftSideGearAuto() {
     	addSequential(new ResetGyro());
-    	addSequential(new DriveRails(-0.5), 1.75);
-    	addSequential(new DriveRails(-.3, .3, -65, 4), 1);
-    	addSequential(new DriveRails(-0.3), 0.3);
+    	addSequential(new DriveRails(-0.5), 1.8);
+    	addSequential(new DriveRails(-.3, .3, -67, 4), 1);
+    	addSequential(new DriveRails(-0.3), 1);
     	addSequential(new DoNothing(), 0.3);
-    	addSequential(new MoveToPeg(), 1.5);
+    	addSequential(new CalibrateVision());
+//    	addSequential(new MoveToPeg(), 1.7);
     	addSequential(new ScoreGear(), 0.5);
     	addSequential(new DriveRails(0.4), 0.6);
     	addSequential(new DriveRails(0.3, 0.7, -180, 7), 2);

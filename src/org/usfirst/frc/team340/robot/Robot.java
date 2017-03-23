@@ -89,9 +89,9 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("LEFT One gear", new LeftSideGearAuto());
 		chooser.addObject("STRAIGHT ON one gear", new StraightOnGearAuto());
 		chooser.addObject("RIGHT One gear ", new RightSideGearAuto());
-		chooser.addObject("Two Gear Right", new LoadingStationTwoGearAuto());
-		chooser.addObject("Center Right side Generic Two Gear Auto", new GenericTwoGearAuto());
-		chooser.addObject("Left side Generic Two Gear Auto", new GenericTwoGearLeft());
+//		chooser.addObject("Two Gear Right", new LoadingStationTwoGearAuto());
+//		chooser.addObject("Center Right side Generic Two Gear Auto", new GenericTwoGearAuto());
+//		chooser.addObject("Left side Generic Two Gear Auto", new GenericTwoGearLeft());
 		chooser.addObject("Straight on No Vision", new AutoStraightNoVision());
 		chooser.addObject("Mobility No gear", new AutoMobility());
 	    SmartDashboard.putData("Auto Modes", chooser);
@@ -137,13 +137,14 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void disabledInit() {
 		SmartDashboard.putString("Camera Selection", "RasPi Camera");
+//		SmartDashboard.putString("Auto Selected", SmartDashboard.getString("Auto Modes/selected",""));
 	}
 
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 		
-//		SmartDashboard.putString("Auto Selected", chooser.getSelected());
+		SmartDashboard.putString("Auto Selected", SmartDashboard.getString("Auto Modes/selected",""));
 	}
 
 	/**
@@ -155,9 +156,9 @@ public class Robot extends IterativeRobot {
     	
     	// schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
-		if(autonomousCommand != null) {
-			autonomousCommand.start();
-		}
+//		if(autonomousCommand != null) {
+//			autonomousCommand.start();
+//		}
 		
 //		try {
 //			char[] chars = new char[8]; //char array to hold the chars in the file
