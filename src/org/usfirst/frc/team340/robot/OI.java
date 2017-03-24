@@ -15,7 +15,6 @@ import org.usfirst.frc.team340.robot.commands.climb.manual.ManualGoAtClimbSpeed;
 import org.usfirst.frc.team340.robot.commands.gears.AbortHarvest;
 import org.usfirst.frc.team340.robot.commands.gears.AbortRelease;
 import org.usfirst.frc.team340.robot.commands.gears.AbortScore;
-import org.usfirst.frc.team340.robot.commands.gears.GST;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualArmDown;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualArmUp;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualClawClose;
@@ -39,7 +38,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
-@SuppressWarnings({"deprecation", "unused"})
+@SuppressWarnings("unused")
 public class OI {
 	
 	//DRIVER
@@ -120,7 +119,7 @@ public class OI {
 		driverDPadUp.whenPressed(new ReleaseGear());
 		driverDPadUp.whenReleased(new AbortRelease());
 		
-		driverDPadRight.whileHeld(new GST());
+//		driverDPadRight.whileHeld(new GST());
 		
 /*		coDriverA.whenPressed(new ManualClimberGoAtEngagementSpeed());
 		coDriverA.whenReleased(new ManualClimberGoStopped());

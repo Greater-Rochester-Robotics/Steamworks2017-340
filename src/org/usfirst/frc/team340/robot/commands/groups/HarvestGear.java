@@ -14,14 +14,11 @@ import org.usfirst.frc.team340.robot.commands.gears.manual.ManualClawClose;
  * to secure the gear. 
  */
 public class HarvestGear extends CommandGroup {
-
     public HarvestGear() {
-    	
     	addSequential(new HarvestMode());
     	addSequential(new GearClamp());
     	addSequential(new ManualClawClose(), 0.2);
     	addSequential(new DoNothing(), 0.5);
     	addSequential(new RaisingClaw());
-
     }
 }

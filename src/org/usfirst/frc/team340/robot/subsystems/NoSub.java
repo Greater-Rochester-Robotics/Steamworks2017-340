@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * Does literally nothing
  */
 public class NoSub extends Subsystem {
-	public void initDefaultCommand() {
+    public void initDefaultCommand() {
         //No default command
     }
 }

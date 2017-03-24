@@ -11,18 +11,18 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * not-so-perpendicular drop
  */
 public class PneumaticDrop extends Subsystem {
-	private Solenoid drop;
+    private Solenoid drop;
+    
+    /**
+     * Constructs a new instance of {@link PneumaticDrop}
+     * by assigning the drop's solenoid to the correct
+     * channel
+     */
+    public PneumaticDrop() {
+	drop = new Solenoid(RobotMap.DROP_SOLENOID_CHANNEL);
+    }
 	
-	/**
-	 * Constructs a new instance of {@link PneumaticDrop}
-	 * by assigning the drop's solenoid to the correct
-	 * channel
-	 */
-	public PneumaticDrop() {
-		drop = new Solenoid(RobotMap.DROP_SOLENOID_CHANNEL);
-	}
-	
-	/**
+    /**
      * Switch the value of the solenoid
      */
     public void toggleOmni() {
@@ -53,12 +53,9 @@ public class PneumaticDrop extends Subsystem {
     }
 
     /**
-     * Sets the default command by raising the
-     * drop on-enable
+     * No default command, as the intended
+     * default just kinda breaks things
      */
-    public void initDefaultCommand() {
-//    	setDefaultCommand(new DropRaiseWheels());
-    	//Commented out to prevent auto-raise after drop
-    }
+    public void initDefaultCommand() {}
 }
 

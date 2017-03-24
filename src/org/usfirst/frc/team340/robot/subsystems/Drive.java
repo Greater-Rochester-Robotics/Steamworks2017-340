@@ -15,9 +15,11 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Drive extends Subsystem {
 	
-	//Makes maths easier when deciding what speed to set the motors to
-	private double leftMotorSpeed;
+    //Makes maths easier when deciding what speed to set the motors to
+    private double leftMotorSpeed;
     private double rightMotorSpeed;
+    
+    private double[] logVals = new double[3];
     
     private AnalogInput frontUltrasonic;
     private AnalogInput backUltrasonic;
@@ -35,11 +37,11 @@ public class Drive extends Subsystem {
     	rightMotorSpeed = 0;
     	
     	frontUltrasonic = new AnalogInput(RobotMap.FRONT_ULTRASONIC_PORT);
-		backUltrasonic = new AnalogInput(RobotMap.BACK_ULTRASONIC_PORT);
-		leftDrive = new Talon(RobotMap.LEFT_DRIVE_PORT);
-		rightDrive = new Talon(RobotMap.RIGHT_DRIVE_PORT);
-		
-		imu = new ADIS16448_IMU(Axis.kX);
+	backUltrasonic = new AnalogInput(RobotMap.BACK_ULTRASONIC_PORT);
+	leftDrive = new Talon(RobotMap.LEFT_DRIVE_PORT);
+	rightDrive = new Talon(RobotMap.RIGHT_DRIVE_PORT);
+	
+	imu = new ADIS16448_IMU(Axis.kX);
     }
     
     /**
@@ -51,11 +53,9 @@ public class Drive extends Subsystem {
         setDefaultCommand(new DriveXbox());
     }
     
-    private double[] vals = new double[] {0, 0, 0};
-    
     public double getYaw() {
-    	vals[(int) Math.random() * 3] = imu.getAngleX();
-    	return (vals[0] + vals[1] + vals[2]); // ghetto averaging
+    	logVals[(int) Math.random() * 3] = imu.getAngleX();
+    	return (logVals[0] + logVals[1] + logVals[2]); // ghetto averaging
     }
     public void resetGyro() {
     	imu.reset();
@@ -122,35 +122,34 @@ public class Drive extends Subsystem {
     }
     
     /**
-	 * One joystick drive mode.
-u	 * 
-	 * @param moveValue
-	 * @param rotateValue
-	 */
-	public void arcadeDrive(double moveValue, double rotateValue) {
-		if (moveValue > 0.0) {
-			if (rotateValue > 0.0) {
-				leftMotorSpeed = moveValue - rotateValue;
-				rightMotorSpeed = Math.max(moveValue, rotateValue);
-			} else {
-				leftMotorSpeed = Math.max(moveValue, -rotateValue);
-				rightMotorSpeed = moveValue + rotateValue;
-			}
-		} else {
-			if (rotateValue > 0.0) {
-				leftMotorSpeed = -Math.max(-moveValue, rotateValue);
-				rightMotorSpeed = moveValue + rotateValue;
-			} else {
-				leftMotorSpeed = moveValue - rotateValue;
-				rightMotorSpeed = -Math.max(-moveValue, -rotateValue);
-			}
-		}
-		
-		setBothDrive(leftMotorSpeed, rightMotorSpeed);
+     * One joystick drive mode.
+     * 
+     * @param moveValue
+     * @param rotateValue
+     */
+    public void arcadeDrive(double moveValue, double rotateValue) {
+	if (moveValue > 0.0) {
+	    if (rotateValue > 0.0) {
+		leftMotorSpeed = moveValue - rotateValue;
+		rightMotorSpeed = Math.max(moveValue, rotateValue);
+	    } else {
+		leftMotorSpeed = Math.max(moveValue, -rotateValue);
+		rightMotorSpeed = moveValue + rotateValue;
+	    }
+	} else {
+	    if (rotateValue > 0.0) {
+		leftMotorSpeed = -Math.max(-moveValue, rotateValue);
+		rightMotorSpeed = moveValue + rotateValue;
+	    } else {
+		leftMotorSpeed = moveValue - rotateValue;
+		rightMotorSpeed = -Math.max(-moveValue, -rotateValue);
+	    }
 	}
 
-	public void goStop() {
-		// TODO Auto-generated method stub
-		
-	}
+	setBothDrive(leftMotorSpeed, rightMotorSpeed);
+    }
+
+    public void goStop() {
+	setBothDrive(0);
+    }
 }
