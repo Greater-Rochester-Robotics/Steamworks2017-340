@@ -4,14 +4,6 @@ import org.usfirst.frc.team340.robot.commands.DoNothing;
 import org.usfirst.frc.team340.robot.commands.gears.LeftSideGearAuto;
 import org.usfirst.frc.team340.robot.commands.groups.AutoMobility;
 import org.usfirst.frc.team340.robot.commands.groups.AutoStraightNoVision;
-import org.usfirst.frc.team340.robot.commands.groups.GenericTwoGearAuto;
-import org.usfirst.frc.team340.robot.commands.groups.GenericTwoGearLeft;
-
-//import java.io.FileReader;
-//import java.io.IOException;
-//import java.util.ArrayList;
-
-import org.usfirst.frc.team340.robot.commands.groups.LoadingStationTwoGearAuto;
 import org.usfirst.frc.team340.robot.commands.groups.RightSideGearAuto;
 import org.usfirst.frc.team340.robot.commands.groups.StraightOnGearAuto;
 import org.usfirst.frc.team340.robot.subsystems.Claw;
@@ -21,6 +13,8 @@ import org.usfirst.frc.team340.robot.subsystems.Drive;
 import org.usfirst.frc.team340.robot.subsystems.NoSub;
 import org.usfirst.frc.team340.robot.subsystems.PneumaticDrop;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -45,13 +39,15 @@ public class Robot extends IterativeRobot {
     public static PneumaticDrop drop;
     public static OI oi;
     
-    Command autonomousCommand;
+    private Command autonomousCommand;
     
     public static NetworkTable visionTable;
 	public static NetworkTable ledTable;
 	public static NetworkTable cameraTable;
 	
 	public static PiLED led;
+	
+	private UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
 	
 	private SendableChooser<Command> chooser;
 
@@ -83,6 +79,9 @@ public class Robot extends IterativeRobot {
 	    ledTable = NetworkTable.getTable("led");
 		led = new PiLED(ledTable);
 		
+		camera.setResolution(640, 320);
+		camera.setFPS(10);
+		
 		chooser = new SendableChooser<Command>();
 		
 		chooser.addDefault("Do nothing", new DoNothing());
@@ -95,7 +94,6 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("Straight on No Vision", new AutoStraightNoVision());
 		chooser.addObject("Mobility No gear", new AutoMobility());
 	    SmartDashboard.putData("Auto Modes", chooser);
-//		CameraServer.getInstance().startAutomaticCapture();-=i0
 		//in order to make the MJPEG streamer work, need a table called Camera Publisher
 		cameraTable = NetworkTable.getTable("CameraPublisher");
 		//pass address of camera to dashboard
@@ -143,7 +141,9 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
-		
+		SmartDashboard.putString("Auto Modes/selected",
+				SmartDashboard.getString("Auto Modes-selected",
+						SmartDashboard.getString("Auto Modes/selected", "")));
 		SmartDashboard.putString("Auto Selected", SmartDashboard.getString("Auto Modes/selected",""));
 	}
 
