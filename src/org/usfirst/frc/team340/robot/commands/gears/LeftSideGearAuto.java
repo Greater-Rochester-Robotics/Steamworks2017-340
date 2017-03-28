@@ -3,7 +3,6 @@ package org.usfirst.frc.team340.robot.commands.gears;
 import org.usfirst.frc.team340.robot.commands.CalibrateVision;
 import org.usfirst.frc.team340.robot.commands.DoNothing;
 import org.usfirst.frc.team340.robot.commands.DriveRails;
-import org.usfirst.frc.team340.robot.commands.MoveToPeg;
 import org.usfirst.frc.team340.robot.commands.ResetGyro;
 import org.usfirst.frc.team340.robot.commands.groups.ScoreGear;
 
