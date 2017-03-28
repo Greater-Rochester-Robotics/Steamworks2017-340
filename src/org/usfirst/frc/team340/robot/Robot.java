@@ -95,13 +95,13 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("Mobility No gear", new AutoMobility());
 	    SmartDashboard.putData("Auto Modes", chooser);
 		//in order to make the MJPEG streamer work, need a table called Camera Publisher
-		cameraTable = NetworkTable.getTable("CameraPublisher");
+//		cameraTable = NetworkTable.getTable("CameraPublisher");
 		//pass address of camera to dashboard
-		cameraTable.putStringArray("RasPi Camera/streams", new String[]{"mjpg:http://roborio-340-frc.local:5800/?action=stream&type=.mjpg", "mjpg:http://10.3.40.21:5800/?action=stream"});
+//		cameraTable.putStringArray("RasPi Camera/streams", new String[]{"mjpg:http://roborio-340-frc.local:5800/?action=stream&type=.mjpg", "mjpg:http://10.3.40.21:5800/?action=stream"});
 		//it doesn't matter that this is wrong, we need to tell the Dash top use usb
-		cameraTable.putString("RasPi Camera/source", "usb:/dev/video0");
+//		cameraTable.putString("RasPi Camera/source", "usb:/dev/video0");
 		//not sure if needed, but just say it is connected
-		cameraTable.putBoolean("RasPi Camera/connected", true);
+//		cameraTable.putBoolean("RasPi Camera/connected", true);
 	}
 	
 	public static double avgValue() {	
@@ -134,7 +134,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void disabledInit() {
-		SmartDashboard.putString("Camera Selection", "RasPi Camera");
+		SmartDashboard.putString("Camera Selection", "USB Camera 0");
 //		SmartDashboard.putString("Auto Selected", SmartDashboard.getString("Auto Modes/selected",""));
 	}
 
