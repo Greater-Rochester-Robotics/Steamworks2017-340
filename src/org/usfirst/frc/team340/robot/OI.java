@@ -1,8 +1,11 @@
 package org.usfirst.frc.team340.robot;
 
 import org.usfirst.frc.team340.robot.DPad.Direction;
+import org.usfirst.frc.team340.robot.commands.BlindHarvest;
+import org.usfirst.frc.team340.robot.commands.BlindScore;
 //import org.usfirst.frc.team340.robot.commands.CompressorBackToReg;
 import org.usfirst.frc.team340.robot.commands.CompressorOff;
+import org.usfirst.frc.team340.robot.commands.DelayedRaise;
 import org.usfirst.frc.team340.robot.commands.DriveXbox;
 import org.usfirst.frc.team340.robot.commands.DropLowerWheels;
 import org.usfirst.frc.team340.robot.commands.DropRaiseWheels;
@@ -101,11 +104,13 @@ public class OI {
 //		driverBack.whenPressed(new ManualPusherRetract());
 		
 		//Manual testing for rollers
-		driverLB.whenPressed(new GearSensorTraining());
+		driverLB.whenPressed(new BlindScore());
+		driverLB.whenReleased(new AbortScore());
+//		driverLB.whenPressed(new GearSensorTraining());
 //		driverLB.whenReleased(new ManualSpinStop());
 		
-		driverRB.whenPressed(new ManualGoAtClimbSpeed());
-		driverRB.whenReleased(new ManualClimberGoStopped()); 
+		driverRB.whenPressed(new BlindHarvest());
+		driverRB.whenReleased(new DelayedRaise()); 
 		//Manual override climbing
 //		climbSwitch.whileHeld(new ManualRollDrum());
 		

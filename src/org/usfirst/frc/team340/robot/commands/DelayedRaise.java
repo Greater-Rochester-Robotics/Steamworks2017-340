@@ -1,24 +1,17 @@
-package org.usfirst.frc.team340.robot.commands.groups;
+package org.usfirst.frc.team340.robot.commands;
 
-import org.usfirst.frc.team340.robot.commands.DoNothing;
-import org.usfirst.frc.team340.robot.commands.DriveRails;
+import org.usfirst.frc.team340.robot.commands.gears.RaisingClaw;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class AutoStraightNoVision extends CommandGroup {
+public class DelayedRaise extends CommandGroup {
 
-    public AutoStraightNoVision() {
-    	addSequential(new DriveRails(-0.3), 2.7);
-    	addSequential(new DoNothing(), 0.69);
-    	addSequential(new DriveRails(-0.3), 0.7);
+    public DelayedRaise() {
     	addSequential(new DoNothing(), 0.5);
-    	addSequential(new ScoreGear(), 0.3);
-    	addSequential(new DoNothing(), 0.3);
-    	addSequential(new DriveRails(0.3), 1);
-//    	addSequential(new DriveRails(0.5, -0.5), 0.7);
+    	addSequential(new RaisingClaw(), 0.5);
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

@@ -12,7 +12,7 @@ public class RobotMap {
     public static final int CLAW_ROLLERS_PORT = 2;
     
     public static final int DROP_SOLENOID_CHANNEL = 4;
-    public static final int ARM_SOLENOID_FORWARD_CHANNEL = 2;
+    public static final int ARM_SOLENOID_FORWARD_CHANNEL = 7;
     public static final int ARM_SOLENOID_REVERSE_CHANNEL = 3;
     public static final int CLAW_SOLENOID_FORWARD_CHANNEL = 0;
     public static final int CLAW_SOLENOID_REVERSE_CHANNEL = 1;

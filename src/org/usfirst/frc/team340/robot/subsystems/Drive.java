@@ -36,7 +36,7 @@ public class Drive extends Subsystem {
     	leftMotorSpeed = 0;
     	rightMotorSpeed = 0;
     	
-    	frontUltrasonic = new AnalogInput(RobotMap.FRONT_ULTRASONIC_PORT);
+    frontUltrasonic = new AnalogInput(RobotMap.FRONT_ULTRASONIC_PORT);
 	backUltrasonic = new AnalogInput(RobotMap.BACK_ULTRASONIC_PORT);
 	leftDrive = new Talon(RobotMap.LEFT_DRIVE_PORT);
 	rightDrive = new Talon(RobotMap.RIGHT_DRIVE_PORT);
@@ -66,7 +66,7 @@ public class Drive extends Subsystem {
     }
     
     public int getBackUltrasonic() {
-    	return backUltrasonic.getValue();
+    	return backUltrasonic.getAverageValue();
     }
     
     /**
