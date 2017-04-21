@@ -36,12 +36,12 @@ public class Drive extends Subsystem {
     	leftMotorSpeed = 0;
     	rightMotorSpeed = 0;
     	
-    frontUltrasonic = new AnalogInput(RobotMap.FRONT_ULTRASONIC_PORT);
-	backUltrasonic = new AnalogInput(RobotMap.BACK_ULTRASONIC_PORT);
-	leftDrive = new Talon(RobotMap.LEFT_DRIVE_PORT);
-	rightDrive = new Talon(RobotMap.RIGHT_DRIVE_PORT);
-	
-	imu = new ADIS16448_IMU(Axis.kX);
+	    frontUltrasonic = new AnalogInput(RobotMap.FRONT_ULTRASONIC_PORT);
+		backUltrasonic = new AnalogInput(RobotMap.BACK_ULTRASONIC_PORT);
+		leftDrive = new Talon(RobotMap.LEFT_DRIVE_PORT);
+		rightDrive = new Talon(RobotMap.RIGHT_DRIVE_PORT);
+		
+		imu = new ADIS16448_IMU(Axis.kX);
     }
     
     /**

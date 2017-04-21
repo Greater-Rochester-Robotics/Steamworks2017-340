@@ -69,7 +69,7 @@ public class DriveRails extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-//    	System.out.println(Robot.drive.getYaw());
+    	System.out.println(Robot.drive.getYaw());
     	if(goStraight) {
         	Robot.drive.setBothDrive(leftSpeed-((Robot.drive.getYaw()-startAngle)/(arcDivisor/Math.abs(leftSpeed))), 
         			rightSpeed+(((Robot.drive.getYaw()-startAngle)/(arcDivisor/Math.abs(leftSpeed)))));

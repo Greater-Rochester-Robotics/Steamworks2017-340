@@ -1,5 +1,7 @@
 package org.usfirst.frc.team340.robot;
 
+import org.usfirst.frc.team340.robot.commands.AngledSideAutoBlue;
+import org.usfirst.frc.team340.robot.commands.AngledSideAutoRed;
 import org.usfirst.frc.team340.robot.commands.DoNothing;
 import org.usfirst.frc.team340.robot.commands.gears.LeftSideGearAuto;
 import org.usfirst.frc.team340.robot.commands.groups.AutoMobility;
@@ -14,6 +16,8 @@ import org.usfirst.frc.team340.robot.subsystems.NoSub;
 import org.usfirst.frc.team340.robot.subsystems.PneumaticDrop;
 
 import edu.wpi.cscore.UsbCamera;
+import edu.wpi.cscore.VideoMode;
+import edu.wpi.cscore.VideoMode.PixelFormat;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -47,7 +51,7 @@ public class Robot extends IterativeRobot {
 	
 	public static PiLED led;
 	
-	private UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+	private UsbCamera camera;
 	
 	private SendableChooser<Command> chooser;
 
@@ -57,7 +61,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-	    //Construct all the Subsystems
+		//Construct all the Subsystems
 		drive = new Drive();
 	    claw = new Claw();
 	    climber = new Climber();
@@ -79,15 +83,18 @@ public class Robot extends IterativeRobot {
 	    ledTable = NetworkTable.getTable("led");
 		led = new PiLED(ledTable);
 		
+		camera = CameraServer.getInstance().startAutomaticCapture();
 		camera.setResolution(640, 360);
 		camera.setFPS(10);
-		
+			
 		chooser = new SendableChooser<Command>();
 		
 		chooser.addDefault("Do nothing", new DoNothing());
 		chooser.addObject("LEFT One gear", new LeftSideGearAuto());
 		chooser.addObject("STRAIGHT ON one gear", new StraightOnGearAuto());
 		chooser.addObject("RIGHT One gear ", new RightSideGearAuto());
+		chooser.addObject("Forward Blue Side", new AngledSideAutoBlue());
+		chooser.addObject("Forward Red Side", new AngledSideAutoRed());
 //		chooser.addObject("Two Gear Right", new LoadingStationTwoGearAuto());
 //		chooser.addObject("Center Right side Generic Two Gear Auto", new GenericTwoGearAuto());
 //		chooser.addObject("Left side Generic Two Gear Auto", new GenericTwoGearLeft());
@@ -135,7 +142,6 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void disabledInit() {
 		SmartDashboard.putString("Camera Selection", "USB Camera 0");
-//		SmartDashboard.putString("Auto Selected", SmartDashboard.getString("Auto Modes/selected",""));
 	}
 
 	@Override
@@ -145,6 +151,8 @@ public class Robot extends IterativeRobot {
 				SmartDashboard.getString("Auto Modes-selected",
 						SmartDashboard.getString("Auto Modes/selected", "")));
 		SmartDashboard.putString("Auto Selected", SmartDashboard.getString("Auto Modes/selected",""));
+        autonomousCommand = (Command) chooser.getSelected();
+		SmartDashboard.putString("Auto To Be Run", autonomousCommand.getName());
 	}
 
 	/**
@@ -152,14 +160,13 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = new AutoStraightNoVision();
-//        autonomousCommand = (Command) chooser.getSelected();
-    	
+    	if(autonomousCommand == null){
+    		autonomousCommand = (Command) chooser.getSelected();
+    	}
     	// schedule the autonomous command (example)
-        if (autonomousCommand != null) autonomousCommand.start();
-//		if(autonomousCommand != null) {
-//			autonomousCommand.start();
-//		}
+		if(autonomousCommand != null) {
+			autonomousCommand.start();
+		}
 		
 //		try {
 //			char[] chars = new char[8]; //char array to hold the chars in the file
