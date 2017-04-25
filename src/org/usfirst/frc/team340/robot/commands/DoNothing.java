@@ -9,15 +9,6 @@ import edu.wpi.first.wpilibj.command.Command;
  * entirely <em>nothing</em>
  */
 public class DoNothing extends Command {
-    public DoNothing() {
-    	requires(Robot.noSub);
-    }
-
-    protected boolean isFinished() {
-        return false;
-    }
-    
-    protected void end() {
-//    	System.out.println("-FINISHED DOING NOTHING-");
-    }
+    public DoNothing() { requires(Robot.noSub); }
+    protected boolean isFinished() { return false; }
 }

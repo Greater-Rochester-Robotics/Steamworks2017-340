@@ -1,9 +1,3 @@
 #Design vs Implementation for Sensor Training
-**(a) represents design, (b) represents implementation**
 
-1. LEDs  
-	a. Different colors for stages of training process  
-	b. Stages represented by printouts
-2. aStuckOn/aStuckOff/bStuckOn/bStuckOff/sensorAFunctional/sensorBFunctional/gearSensingFunctional  
-	a. Booleans for sensor status  
-	b. Variables entirely unused. Status is implemented in voting numbers
+Gear sensor training was never fully implemented in the robot. All of the code is, in theory, provided in at least a near-working state. However, for various reasons, there was no way to complete the implementation. Instead, two alternates were created. The first involves a strip of LEDs, of which each half is tied to that side's respective gear sensor. If the sensor is triggered, that half changes from red to green. The second of the backup solutions allows for the automated pickup of a gear (in which the gear is picked up as soon as one gear sensor is triggered) to completely ignore either or both sensors. If a sensor is stuck on the "triggered" state, then it can be ignored to prevent the claw from remaining in a closed and raised state.
