@@ -20,7 +20,7 @@ public class CompressorOff extends Command {
 	@Override
 	protected void execute() {
 		Robot.compressor.setCompressor(false);
-		SmartDashboard.putNumber("Pressure", Math.round(Robot.compressor.getPressure()/5) * 5);
+		SmartDashboard.putNumber("Pressure", Math.round(Robot.compressor.getPressure()));
 	}
 	
 	@Override

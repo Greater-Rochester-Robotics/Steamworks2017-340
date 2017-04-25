@@ -1,21 +1,23 @@
-package org.usfirst.frc.team340.robot.commands.groups;
+package org.usfirst.frc.team340.robot.commands.auto.old;
 
 import org.usfirst.frc.team340.robot.commands.DoNothing;
 import org.usfirst.frc.team340.robot.commands.DriveRails;
 import org.usfirst.frc.team340.robot.commands.MoveToPeg;
-import org.usfirst.frc.team340.robot.commands.ResetGyro;
+import org.usfirst.frc.team340.robot.commands.DriveResetGyro;
 import org.usfirst.frc.team340.robot.commands.gears.AbortHarvest;
+import org.usfirst.frc.team340.robot.commands.groups.HarvestGear;
+import org.usfirst.frc.team340.robot.commands.groups.ScoreGear;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class GenericTwoGearLeft extends CommandGroup {
+public class AutoGenericTwoGearLeft extends CommandGroup {
 	
-    public GenericTwoGearLeft() {
+    public AutoGenericTwoGearLeft() {
     	
-    	addSequential(new ResetGyro());
+    	addSequential(new DriveResetGyro());
     	addSequential(new DriveRails(-0.75), 1.15);
     	addSequential(new DriveRails(-.4, .4, -65, 7), 1);
     	addSequential(new DoNothing(), .25);

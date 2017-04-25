@@ -171,10 +171,12 @@ public class Claw extends Subsystem {
     }
     	
     public boolean leftSensorState() {
+    	SmartDashboard.putBoolean("leftGearSensor",gearSensorLeft.get());
     	return gearSensorLeft.get();
     }
     	
     public boolean rightSensorState() {
+    	SmartDashboard.putBoolean("rightGearSensor",gearSensorRight.get());
     	return gearSensorRight.get();
     }
     	
@@ -200,7 +202,7 @@ public class Claw extends Subsystem {
      */
     public void printSensors() {
     	System.out.println("Left (9): " + gearSensorLeft.get() + "; right (8): " + gearSensorRight.get());
-    	SmartDashboard.putString("Gear Sensors", "Left (9): " + gearSensorLeft.get() + "; right (8): " + gearSensorRight.get());
+//    	SmartDashboard.putString("Gear Sensors", "Left (9): " + gearSensorLeft.get() + "; right (8): " + gearSensorRight.get());
     }
     	
     /**

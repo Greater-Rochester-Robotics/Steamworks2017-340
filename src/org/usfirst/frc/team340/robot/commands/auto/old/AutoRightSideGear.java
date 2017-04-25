@@ -1,24 +1,25 @@
-package org.usfirst.frc.team340.robot.commands.groups;
+package org.usfirst.frc.team340.robot.commands.auto.old;
 
 import org.usfirst.frc.team340.robot.commands.CalibrateVision;
 import org.usfirst.frc.team340.robot.commands.DoNothing;
 import org.usfirst.frc.team340.robot.commands.DriveRails;
 import org.usfirst.frc.team340.robot.commands.MoveToPeg;
-import org.usfirst.frc.team340.robot.commands.PIDTurn;
-import org.usfirst.frc.team340.robot.commands.ResetGyro;
+import org.usfirst.frc.team340.robot.commands.groups.ScoreGear;
+import org.usfirst.frc.team340.robot.commands.DrivePIDTurn;
+import org.usfirst.frc.team340.robot.commands.DriveResetGyro;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class RightSideGearAuto extends CommandGroup {
+public class AutoRightSideGear extends CommandGroup {
 
-    public RightSideGearAuto() {
-    	addSequential(new ResetGyro());
+    public AutoRightSideGear() {
+    	addSequential(new DriveResetGyro());
 //    	addSequential(new DriveRails(-0.5, true), 1.67);
     	addSequential(new DriveRails(-0.3, 720, true));
-    	addSequential(new PIDTurn(60, false), 4);
+    	addSequential(new DrivePIDTurn(60, false), 4);
 //    	addSequential(new DriveRails(-.3, .3, -67, 4), 1);
     	addSequential(new DoNothing(), 0.5);
     	addSequential(new DriveRails(-0.3), 1);

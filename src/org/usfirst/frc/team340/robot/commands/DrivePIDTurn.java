@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.PIDCommand;
 /**
  *
  */
-public class PIDTurn extends PIDCommand {
+public class DrivePIDTurn extends PIDCommand {
 
 	private static final double P = 0.04;
 	private static final double I = 0.005;
@@ -15,7 +15,7 @@ public class PIDTurn extends PIDCommand {
 	
 	private double angle;
 	private boolean reset;
-    public PIDTurn(double angle, boolean reset) {
+    public DrivePIDTurn(double angle, boolean reset) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	super(P, I, D);

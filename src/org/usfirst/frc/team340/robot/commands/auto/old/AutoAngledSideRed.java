@@ -1,5 +1,9 @@
-package org.usfirst.frc.team340.robot.commands;
+package org.usfirst.frc.team340.robot.commands.auto.old;
 
+import org.usfirst.frc.team340.robot.commands.DoNothing;
+import org.usfirst.frc.team340.robot.commands.DrivePIDTurn;
+import org.usfirst.frc.team340.robot.commands.DriveRails;
+import org.usfirst.frc.team340.robot.commands.DriveResetGyro;
 import org.usfirst.frc.team340.robot.commands.groups.ScoreGear;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -7,16 +11,16 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class AngledSideAutoBlue extends CommandGroup {
+public class AutoAngledSideRed extends CommandGroup {
 
-    public AngledSideAutoBlue() {
+    public AutoAngledSideRed() {
     	
     	/*
     	 * Stage 1: drive forward and turn
     	 */
-    	addSequential(new ResetGyro());
-    	addSequential(new DriveRails(-1), 2); // first number is speed (-1 to 1) second is time (seconds)
-    	addSequential(new PIDTurn(20, false)); // first number is angle (positive to the left, negative to the right)
+    	addSequential(new DriveResetGyro());
+    	addSequential(new DriveRails(-1), 6); // first number is speed (-1 to 1) second is time (seconds)
+    	addSequential(new DrivePIDTurn(-20, false)); // first number is angle (positive to the left, negative to the right)
     	
     	addSequential(new DoNothing(), 0.5); // delay for pilot
     	

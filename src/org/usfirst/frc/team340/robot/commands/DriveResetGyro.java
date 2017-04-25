@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ResetGyro extends Command {
+public class DriveResetGyro extends Command {
 
-    public ResetGyro() {
+    public DriveResetGyro() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.drive);
