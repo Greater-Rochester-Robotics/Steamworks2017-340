@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  * Gear Sensor Test
  */
+@Deprecated
 public class GST extends Command {
     public GST() {
         requires(Robot.claw);

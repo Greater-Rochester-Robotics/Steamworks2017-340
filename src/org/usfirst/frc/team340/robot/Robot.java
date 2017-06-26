@@ -1,10 +1,15 @@
 package org.usfirst.frc.team340.robot;
 
-//import java.io.FileReader;
-//import java.io.IOException;
-//import java.util.ArrayList;
-
-import org.usfirst.frc.team340.robot.commands.groups.LoadingStationTwoGearAuto;
+import org.usfirst.frc.team340.robot.commands.DoNothing;
+import org.usfirst.frc.team340.robot.commands.auto.AutoBlueSidePegThenNothing;
+import org.usfirst.frc.team340.robot.commands.auto.AutoSwitchBasedSelector;
+import org.usfirst.frc.team340.robot.commands.auto.old.AutoAngledSideBlue;
+import org.usfirst.frc.team340.robot.commands.auto.old.AutoAngledSideRed;
+import org.usfirst.frc.team340.robot.commands.auto.old.AutoLeftSideGear;
+import org.usfirst.frc.team340.robot.commands.auto.old.AutoMobility;
+import org.usfirst.frc.team340.robot.commands.auto.old.AutoRightSideGear;
+import org.usfirst.frc.team340.robot.commands.auto.old.AutoStraightNoVision;
+import org.usfirst.frc.team340.robot.commands.auto.old.AutoStraightOnGear;
 import org.usfirst.frc.team340.robot.subsystems.Claw;
 import org.usfirst.frc.team340.robot.subsystems.Climber;
 import org.usfirst.frc.team340.robot.subsystems.CompressorSub;
@@ -12,11 +17,16 @@ import org.usfirst.frc.team340.robot.subsystems.Drive;
 import org.usfirst.frc.team340.robot.subsystems.NoSub;
 import org.usfirst.frc.team340.robot.subsystems.PneumaticDrop;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.DigitalInput;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -33,42 +43,82 @@ public class Robot extends IterativeRobot {
     public static NoSub noSub;
     public static PneumaticDrop drop;
     public static OI oi;
-
-    Command autonomousCommand;
+    
+    private Command autonomousCommand;
+    
+    private static AutoSwitchBasedSelector autoMode;
     
     public static NetworkTable visionTable;
 	public static NetworkTable ledTable;
+	public static NetworkTable cameraTable;
 	
 	public static PiLED led;
-
+	
+	private UsbCamera camera;
+	
+	private SendableChooser<Command> chooser;
+	
+	
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
 	@Override
 	public void robotInit() {
-	    drive = new Drive();
+		//Construct all the Subsystems
+		drive = new Drive();
 	    claw = new Claw();
 	    climber = new Climber();
 	    compressor = new CompressorSub();
 	    drop = new PneumaticDrop();
-	    noSub = new NoSub();
+	    noSub = new NoSub();	
+	    //AFTER subsystem construction, construct the OI with buttons
 	    oi = new OI();
 	    
+	    //pass subsystems to Dashboard for debug
+	    SmartDashboard.putData(drive);
+	    SmartDashboard.putData(claw);
+	    SmartDashboard.putData(climber);
+	    SmartDashboard.putData(compressor);
+	    SmartDashboard.putData(drop);
+	    SmartDashboard.putData(noSub);
+	    
+	    //Construct the autonomous selector that runs off switches.
+	    autoMode = new AutoSwitchBasedSelector();
+	    
 	    visionTable = NetworkTable.getTable("vision");
-		ledTable = NetworkTable.getTable("led");
+	    ledTable = NetworkTable.getTable("led");
 		led = new PiLED(ledTable);
-	    // chooser.addObject("My Auto", new MyAutoCommand());
-//	    SmartDashboard.putData("Auto modes", chooser);
+		
+		//create a camera server object
+		camera = CameraServer.getInstance().startAutomaticCapture();
+		//set the resolution to 640x360, I want wide screen resolution
+		camera.setResolution(640, 360);
+		//set frame rate to 7, keep it at 7 or lower, there is a limit
+		camera.setFPS(7);
+			
+		chooser = new SendableChooser<Command>();
+		
+		chooser.addDefault("Do nothing", new DoNothing());
+		chooser.addObject("LEFT One gear", new AutoLeftSideGear());
+		chooser.addObject("STRAIGHT ON one gear", new AutoStraightOnGear());
+		chooser.addObject("RIGHT One gear ", new AutoRightSideGear());
+		chooser.addObject("Forward Blue Side", new AutoAngledSideBlue());
+		chooser.addObject("Forward Red Side", new AutoAngledSideRed());
+//		chooser.addObject("Two Gear Right", new LoadingStationTwoGearAuto());
+//		chooser.addObject("Center Right side Generic Two Gear Auto", new GenericTwoGearAuto());
+//		chooser.addObject("Left side Generic Two Gear Auto", new GenericTwoGearLeft());
+		chooser.addObject("Straight on No Vision", new AutoStraightNoVision());
+		chooser.addObject("Mobility No gear", new AutoMobility());
+	    SmartDashboard.putData("Auto Modes", chooser);
+		
 	}
 	
-	public static double avgValue() {
-//		return 0;
+	public static double avgValue() {	
 		return visionTable.getNumber("avg", 0);
 	}
 	
 	public static double distValue() {
-//		return 0;
 		return visionTable.getNumber("dist", 1);
 	}
 	
@@ -94,37 +144,42 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void disabledInit() {
-
+		//force the Dashboard to display the camera 
+		SmartDashboard.putString("Camera Selection", "USB Camera 0");
 	}
 
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		//send sensor values to dashboard to test them for PreMatch
+		drive.getRightIRSensor();
+		drive.getLeftIRSensor();
+		drive.pushEncoderToDashboard();
+		claw.leftSensorState();
+		claw.rightSensorState();
+		
+		//left over from the SendableChoser method, left if we want to go back
+		SmartDashboard.putString("Auto Modes/selected",
+				SmartDashboard.getString("Auto Modes-selected",
+						SmartDashboard.getString("Auto Modes/selected", "")));
+		SmartDashboard.putString("Auto Selected", SmartDashboard.getString("Auto Modes/selected",""));
+		
+		//autoMode switches read and put command in autonomousCommand
+        autonomousCommand = autoMode.getSelected();//(Command) chooser.getSelected();
+        //Push the name of the auto command to run back to the dashboard
+		SmartDashboard.putString("Auto To Be Run", autonomousCommand.getName());
 	}
 
 	/**
-	 * This autonomous (along with the chooser code above) shows how to select
-	 * between different autonomous modes using the dashboard. The sendable
-	 * chooser code works with the Java SmartDashboard. If you prefer the
-	 * LabVIEW Dashboard, remove all of the chooser code and uncomment the
-	 * getString code to get the auto name from the text box below the Gyro
-	 *
-	 * You can add additional auto modes by adding additional commands to the
-	 * chooser code above (like the commented example) or additional comparisons
-	 * to the switch structure below with additional strings & commands.
+	 * This is autonomous 
 	 */
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = new LoadingStationTwoGearAuto();
-
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
-
-		// schedule the autonomous command (example)
+		//if the auto command is null, like if the robot code restarts in auto, command is pulled again
+    	if(autonomousCommand == null){
+    		autonomousCommand = autoMode.getSelected();//(Command) chooser.getSelected();
+    	}
+    	// sart the autonomous command, don't start if it is null
 		if(autonomousCommand != null) {
 			autonomousCommand.start();
 		}
@@ -183,9 +238,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopInit() {
 		// This makes sure that the autonomous stops running when
-		// teleop starts running. If you want the autonomous to
-		// continue until interrupted by another command, remove
-		// this line or comment it out.
+		// teleop starts running. 
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 	}

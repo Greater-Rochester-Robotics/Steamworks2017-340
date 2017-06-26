@@ -1,13 +1,25 @@
-package org.usfirst.frc.team340.robot.commands.groups;
+package org.usfirst.frc.team340.robot.commands.auto.old;
+
+import org.usfirst.frc.team340.robot.commands.DoNothing;
+import org.usfirst.frc.team340.robot.commands.DriveRails;
+import org.usfirst.frc.team340.robot.commands.groups.ScoreGear;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- * Uses vision to get to peg then places the gear on the peg
+ *
  */
-public class AutoScoreGear extends CommandGroup {
+public class AutoStraightNoVision extends CommandGroup {
 
-    public AutoScoreGear() {
+    public AutoStraightNoVision() {
+    	addSequential(new DriveRails(-0.3), 2.7);
+    	addSequential(new DoNothing(), 0.69);
+    	addSequential(new DriveRails(-0.3), 0.7);
+    	addSequential(new DoNothing(), 0.5);
+    	addSequential(new ScoreGear(), 0.3);
+    	addSequential(new DoNothing(), 0.3);
+    	addSequential(new DriveRails(0.3), 1);
+//    	addSequential(new DriveRails(0.5, -0.5), 0.7);
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -24,6 +36,5 @@ public class AutoScoreGear extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	
     }
 }

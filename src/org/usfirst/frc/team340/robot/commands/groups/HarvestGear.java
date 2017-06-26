@@ -5,6 +5,7 @@ import org.usfirst.frc.team340.robot.commands.gears.HarvestMode;
 import org.usfirst.frc.team340.robot.commands.DoNothing;
 import org.usfirst.frc.team340.robot.commands.gears.GearClamp;
 import org.usfirst.frc.team340.robot.commands.gears.RaisingClaw;
+import org.usfirst.frc.team340.robot.commands.gears.manual.ManualClawClose;
 
 /**
  * Robot moves claw down, opens arm, and spins rollers
@@ -13,13 +14,11 @@ import org.usfirst.frc.team340.robot.commands.gears.RaisingClaw;
  * to secure the gear. 
  */
 public class HarvestGear extends CommandGroup {
-
     public HarvestGear() {
-    	
     	addSequential(new HarvestMode());
     	addSequential(new GearClamp());
-    	addSequential(new DoNothing(), 0.2);
+    	addSequential(new ManualClawClose(), 0.2);
+    	addSequential(new DoNothing(), 0.5);
     	addSequential(new RaisingClaw());
-
     }
 }

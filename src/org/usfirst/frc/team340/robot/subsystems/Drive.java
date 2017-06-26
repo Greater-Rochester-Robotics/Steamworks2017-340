@@ -7,24 +7,33 @@ import com.analog.adis16448.frc.ADIS16448_IMU;
 import com.analog.adis16448.frc.ADIS16448_IMU.Axis;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Subsystem that controls the drive train
  */
 public class Drive extends Subsystem {
 	
-	//Makes maths easier when deciding what speed to set the motors to
-	private double leftMotorSpeed;
+    //Makes maths easier when deciding what speed to set the motors to
+    private double leftMotorSpeed;
     private double rightMotorSpeed;
+    
+    private double[] logVals = new double[3];
     
     private AnalogInput frontUltrasonic;
     private AnalogInput backUltrasonic;
     private Talon leftDrive;
     private Talon rightDrive;
+    private Encoder encoder;
+    private DigitalInput rightIRSensor;
+    private DigitalInput leftIRSensor;
     
-    private ADIS16448_IMU imu;   
+    private ADIS16448_IMU imu;
+    
     /**
      * Sets the variables for each of the
      * drive base's objects to the necessary
@@ -34,10 +43,16 @@ public class Drive extends Subsystem {
     	leftMotorSpeed = 0;
     	rightMotorSpeed = 0;
     	
-    	frontUltrasonic = new AnalogInput(RobotMap.FRONT_ULTRASONIC_PORT);
+	    frontUltrasonic = new AnalogInput(RobotMap.FRONT_ULTRASONIC_PORT);
 		backUltrasonic = new AnalogInput(RobotMap.BACK_ULTRASONIC_PORT);
 		leftDrive = new Talon(RobotMap.LEFT_DRIVE_PORT);
 		rightDrive = new Talon(RobotMap.RIGHT_DRIVE_PORT);
+		
+		encoder = new Encoder(RobotMap.ENCODER_FWD_CHANNEL,RobotMap.ENCODER_REV_CHANNEL);
+		encoder.setDistancePerPulse(.049);
+		
+		rightIRSensor = new DigitalInput(RobotMap.IR_RIGHT_SENSOR);
+		leftIRSensor = new DigitalInput(RobotMap.IR_LEFT_SENSOR);
 		
 		imu = new ADIS16448_IMU(Axis.kX);
     }
@@ -51,11 +66,43 @@ public class Drive extends Subsystem {
         setDefaultCommand(new DriveXbox());
     }
     
-    private double[] vals = new double[] {0, 0, 0};
+    /**
+     * return the distance
+     * @return
+     */
+    public double getDistance(){
+    	return encoder.getDistance();
+    }
+    /**
+     * reset the encoder.
+     */
+    public void resetEncoder(){
+    	encoder.reset();
+    }
+    /**
+     * For testing purposes, push the encoder value to the dashboard.
+     */
+    public void pushEncoderToDashboard(){
+    	SmartDashboard.putNumber("encoder", this.getDistance());
+    }
     
+    public boolean getRightIRSensor(){
+    	SmartDashboard.putBoolean("rightIRSensor", !rightIRSensor.get());
+    	return !rightIRSensor.get();
+    }
+    
+    public boolean getLeftIRSensor(){
+    	SmartDashboard.putBoolean("leftIRSensor", !leftIRSensor.get());
+    	return !leftIRSensor.get();
+    }
+    
+    /**
+     * retrieve the angle of the robot from the gyro
+     * @return angle
+     */
     public double getYaw() {
-    	vals[(int) Math.random() * 3] = imu.getAngleX();
-    	return (vals[0] + vals[1] + vals[2]); // ghetto averaging
+    	logVals[(int) Math.random() * 3] = imu.getAngleX();
+    	return (logVals[0] + logVals[1] + logVals[2]); // ghetto averaging
     }
     public void resetGyro() {
     	imu.reset();
@@ -66,7 +113,7 @@ public class Drive extends Subsystem {
     }
     
     public int getBackUltrasonic() {
-    	return backUltrasonic.getValue();
+    	return backUltrasonic.getAverageValue();
     }
     
     /**
@@ -80,7 +127,6 @@ public class Drive extends Subsystem {
     	} else if(speed > 1) {
     		speed = 1;
     	}
-	
     	leftDrive.set(-speed);
     }
     
@@ -96,7 +142,6 @@ public class Drive extends Subsystem {
     	} else if(speed > 1) {
     		speed = 1;
     	}
-	
     	rightDrive.set(speed);
     }
     
@@ -122,35 +167,34 @@ public class Drive extends Subsystem {
     }
     
     /**
-	 * One joystick drive mode.
-u	 * 
-	 * @param moveValue
-	 * @param rotateValue
-	 */
-	public void arcadeDrive(double moveValue, double rotateValue) {
-		if (moveValue > 0.0) {
-			if (rotateValue > 0.0) {
-				leftMotorSpeed = moveValue - rotateValue;
-				rightMotorSpeed = Math.max(moveValue, rotateValue);
-			} else {
-				leftMotorSpeed = Math.max(moveValue, -rotateValue);
-				rightMotorSpeed = moveValue + rotateValue;
-			}
-		} else {
-			if (rotateValue > 0.0) {
-				leftMotorSpeed = -Math.max(-moveValue, rotateValue);
-				rightMotorSpeed = moveValue + rotateValue;
-			} else {
-				leftMotorSpeed = moveValue - rotateValue;
-				rightMotorSpeed = -Math.max(-moveValue, -rotateValue);
-			}
-		}
-		
-		setBothDrive(leftMotorSpeed, rightMotorSpeed);
+     * One joystick drive mode.
+     * 
+     * @param moveValue
+     * @param rotateValue
+     */
+    public void arcadeDrive(double moveValue, double rotateValue) {
+	if (moveValue > 0.0) {
+	    if (rotateValue > 0.0) {
+		leftMotorSpeed = moveValue - rotateValue;
+		rightMotorSpeed = Math.max(moveValue, rotateValue);
+	    } else {
+		leftMotorSpeed = Math.max(moveValue, -rotateValue);
+		rightMotorSpeed = moveValue + rotateValue;
+	    }
+	} else {
+	    if (rotateValue > 0.0) {
+		leftMotorSpeed = -Math.max(-moveValue, rotateValue);
+		rightMotorSpeed = moveValue + rotateValue;
+	    } else {
+		leftMotorSpeed = moveValue - rotateValue;
+		rightMotorSpeed = -Math.max(-moveValue, -rotateValue);
+	    }
 	}
 
-	public void goStop() {
-		// TODO Auto-generated method stub
-		
-	}
+		setBothDrive(leftMotorSpeed, rightMotorSpeed);
+    }
+
+    public void goStop() {
+    	setBothDrive(0);
+    }
 }

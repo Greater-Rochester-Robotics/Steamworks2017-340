@@ -15,7 +15,7 @@ public class ScoreGear extends CommandGroup {
     public ScoreGear() {
     	
     	addSequential(new PlaceGear());
-    	addSequential(new DoNothing(), 0.2);
+    	addSequential(new DoNothing(), 1);
     	addSequential(new ReturnToStart());
     	
     }

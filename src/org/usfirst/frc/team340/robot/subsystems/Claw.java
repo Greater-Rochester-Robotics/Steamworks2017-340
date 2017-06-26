@@ -17,37 +17,37 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * the pusher piston, arm, and claw itself.
  */
 public class Claw extends Subsystem {
-	private static final double ROLLER_IN_SPEED = 1.0; //TODO: perfect this
-	private static final double ROLLER_OUT_SPEED = -1.0; //TODO: perfect this too
-	
-	private static final Value ARM_UP = Value.kForward;
-	private static final Value ARM_DOWN = Value.kReverse;
-	private static final Value CLAW_OPEN = Value.kForward;
-	private static final Value CLAW_CLOSED = Value.kReverse;
-	private static final boolean PUSHER_OUT = true;
-	private static final boolean PUSHER_IN = false;
-	
-	private DoubleSolenoid claw;
-	private DoubleSolenoid hinge;
-	private Solenoid pusher;
-	private Talon rollers;
-	private VotableInput gearSensorLeft;
-	private VotableInput gearSensorRight;
-	
-	/**
-	 * Constructs a {@link Claw} and sets all
-	 * the instance variables = they being a
-	 * speed controller and three double
-	 * solenoids
-	 */
-	public Claw() {
-		claw = new DoubleSolenoid(RobotMap.CLAW_SOLENOID_FORWARD_CHANNEL, RobotMap.CLAW_SOLENOID_REVERSE_CHANNEL);
-		hinge = new DoubleSolenoid(RobotMap.ARM_SOLENOID_FORWARD_CHANNEL, RobotMap.ARM_SOLENOID_REVERSE_CHANNEL);
-		pusher = new Solenoid(RobotMap.PUSHER_SOLENOID_CHANNEL);
-		rollers = new Talon(RobotMap.CLAW_ROLLERS_PORT);
-		gearSensorLeft = new VotableInput(RobotMap.GEAR_SENSOR_LEFT_CHANNEL);
-		gearSensorRight = new VotableInput(RobotMap.GEAR_SENSOR_RIGHT_CHANNEL);
-	}
+    private static final double ROLLER_IN_SPEED = 1.0; //TODO: perfect this
+    private static final double ROLLER_OUT_SPEED = -1.0; //TODO: perfect this too
+    	
+    private static final Value ARM_UP = Value.kForward;
+    private static final Value ARM_DOWN = Value.kReverse;
+    private static final Value CLAW_OPEN = Value.kForward;
+    private static final Value CLAW_CLOSED = Value.kReverse;
+    private static final boolean PUSHER_OUT = true;
+    private static final boolean PUSHER_IN = false;
+    	
+    private DoubleSolenoid claw;
+    private DoubleSolenoid hinge;
+    private Solenoid pusher;
+    private Talon rollers;
+    private VotableInput gearSensorLeft;
+    private VotableInput gearSensorRight;
+    	
+    /**
+     * Constructs a {@link Claw} and sets all
+     * the instance variables = they being a
+     * speed controller and three double
+     * solenoids
+     */
+    public Claw() {
+    	claw = new DoubleSolenoid(RobotMap.CLAW_SOLENOID_FORWARD_CHANNEL, RobotMap.CLAW_SOLENOID_REVERSE_CHANNEL);
+    	hinge = new DoubleSolenoid(RobotMap.ARM_SOLENOID_FORWARD_CHANNEL, RobotMap.ARM_SOLENOID_REVERSE_CHANNEL);
+    	pusher = new Solenoid(RobotMap.PUSHER_SOLENOID_CHANNEL);
+    	rollers = new Talon(RobotMap.CLAW_ROLLERS_PORT);
+    	gearSensorLeft = new VotableInput(RobotMap.GEAR_SENSOR_LEFT_CHANNEL);
+    	gearSensorRight = new VotableInput(RobotMap.GEAR_SENSOR_RIGHT_CHANNEL);
+    }
     
 	/**
 	 * Raise the "arm" (the entire claw)
@@ -191,15 +191,6 @@ public class Claw extends Subsystem {
 	}
 	
 	/**
-	 * Prints the sensor values, their DIO port
-	 * numbers, and their side
-	 */
-	public void printSensors() {
-		System.out.println("Left (9): " + gearSensorLeft.get() + "; right (8): " + gearSensorRight.get());
-		SmartDashboard.putString("Gear Sensors", "Left (9): " + gearSensorLeft.get() + "; right (8): " + gearSensorRight.get());
-	}
-	
-	/**
 	 * @return the left sensor object
 	 */
 	public VotableInput getLeftSensor() {
@@ -212,8 +203,27 @@ public class Claw extends Subsystem {
 	public VotableInput getRightSensor() {
 		return gearSensorRight;
 	}
-	
-	/**
+    	
+    public boolean leftSensorState() {
+    	SmartDashboard.putBoolean("leftGearSensor",gearSensorLeft.get());
+    	return gearSensorLeft.get();
+    }
+    	
+    public boolean rightSensorState() {
+    	SmartDashboard.putBoolean("rightGearSensor",gearSensorRight.get());
+    	return gearSensorRight.get();
+    }
+    	
+    /**
+     * Prints the sensor values, their DIO port
+     * numbers, and their side
+     */
+    public void printSensors() {
+    	System.out.println("Left (9): " + gearSensorLeft.get() + "; right (8): " + gearSensorRight.get());
+//    	SmartDashboard.putString("Gear Sensors", "Left (9): " + gearSensorLeft.get() + "; right (8): " + gearSensorRight.get());
+    }
+    
+    /**
 	 * Sets the default command by
 	 * not setting a default command
 	 */

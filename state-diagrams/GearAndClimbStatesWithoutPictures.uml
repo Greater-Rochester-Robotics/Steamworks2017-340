@@ -1,0 +1,155 @@
+@startuml
+
+'''''states
+
+idle: Natural idle state when\n no commands are running
+
+	PneumaticDrop: dropOmni
+	
+	AbortPneumaticDrop: raiseOmni
+	
+	Drive: driveMotors=humanControl
+
+state Climbing {
+
+	readyToClimb: "driveMotors=humanControl"
+	readyToClimb: ClimbMotors=goStop
+	readyToClimb: <b>armPos=GoClose
+	readyToClimb: <b>clawPos=GoUp
+
+	ClimbMotorsOn: driveMotors=humanControl
+	ClimbMotorsOn: ClimbMotors= <b>goAtEngageSpeed
+ 
+	DriveIntoRope: driveMotors=humanControl
+	DriveIntoRope: ClimbMotors=goAtEngageSpeed 
+
+	state ClimbToTop {
+	
+		Climb: driveMotors= <b>goStop
+		Climb: ClimbMotors= <b>goAtClimbSpeed
+	
+		stayAtTop: driveMotors= goStop
+		stayAtTop: ClimbMotors= <b>goStayingSpeed
+	
+	}
+}
+
+	AbortClimb: driveMotors=humanControl
+	AbortClimb: climbMotors=goStop
+
+state HarvestGear {
+
+	HarvestMode : <b>armPos=GoDown
+	HarvestMode : <b>armPos=GoOpen
+	HarvestMode : pusherPos=GoRetract
+	HarvestMode : <b>rollers=SpinIn
+	
+	GearClamp : armPos=GoDown
+	GearClamp : <b>clawPos=GoClose
+	GearClamp : pusherPos=GoRetract
+	GearClamp : <b>rollers=SpinStop
+	
+	WaitingForClawToClose : wait for 0.2 seconds
+	
+	RaisingClaw : <b>armPos=GoUp
+	RaisingClaw : clawPos=GoClose
+	RaisingClaw : pusherPos=GoRetract
+	RaisingClaw : rollers=SpinStop
+	
+}
+
+	AbortHarvest: armPos=GoUp
+	AbortHarvest: clawPos=GoClose
+	AbortHarvest: pusherPos=GoRetract
+	AbortHarvest: rollers=SpinStop
+
+state ScoreGear {
+
+	MoveToPeg : visionTracking/squaringUp
+	
+	PlaceGear : armPos=GoUp
+	PlaceGear : <b>clawPos=GoOpen
+	PlaceGear : <b>pusherPos=GoExtend
+	PlaceGear : rollers=SpinStop
+	
+	WaitingForPusherToExtend : wait for 0.2 seconds
+	
+	ReturnToStart : armPos=GoUp
+	ReturnToStart : clawPos=GoOpen
+	ReturnToStart : <b>pusherPos=GoRetract
+	ReturnToStart : rollers=SpinStop
+
+}
+
+	AbortScore: armPos=GoUp
+	AbortScore: clawPos=GoClose
+	AbortScore: pusherPos=GoRetract
+	AbortScore: rollers=SpinStop
+
+state ReleaseGear {
+
+	ReadyToReleaseGear : <b>armPos=GoDown
+	ReadyToReleaseGear : clawPos=GoClose
+	ReadyToReleaseGear : pusherPos=GoRetract
+	ReadyToReleaseGear : rollers=SpinStop
+
+	WaitingForArmToLower : wait for 0.5 seconds
+
+	RegurgitateGear : armPos=GoDown
+	RegurgitateGear : <b>clawPos=GoOpen
+	RegurgitateGear : pusherPos=GoRetract
+	RegurgitateGear : <b>rollers=SpinOut
+
+}
+
+	AbortRelease: armPos=GoUp
+	AbortRelease: clawPos=GoClose
+	AbortRelease: pusherPos=GoRetract
+	AbortRelease: rollers=SpinStop
+
+'''''transitions
+
+idle -left-> ScoreGear: Score Button Pressed
+idle -down-> HarvestGear: Harvest Button Pressed 
+idle -up-> ReleaseGear: Release Button Pressed
+idle -right-> Climbing: Hold Climb Button
+idle -right-> PneumaticDrop: Hold PneumaticDrop Button
+idle -left-> Drive: Drive
+
+PneumaticDrop -down-> AbortPneumaticDrop: Release PneumaticDrop
+
+HarvestGear -down-> AbortHarvest: Harvest Button Released
+
+ReleaseGear -right-> AbortRelease: Release Button Released
+
+Climbing -down-> AbortClimb: Climb Button Released
+
+ScoreGear -down-> AbortScore: Score Button Released
+
+readyToClimb -down-> ClimbMotorsOn: doClimbSequence
+
+ClimbMotorsOn -down-> DriveIntoRope: timeDelay= 0.5
+
+DriveIntoRope -down-> ClimbToTop: ClimbMotors=isEngagedWithRope
+
+Climb -down-> stayAtTop: ClimbMotors=isEngagedWithTouchPad
+
+HarvestMode -right-> GearClamp: whenGearIsAcquired
+
+GearClamp -left-> HarvestMode: whenGearIsNotAcquired
+
+GearClamp -right-> WaitingForClawToClose
+
+WaitingForClawToClose -right-> RaisingClaw: timeDelay &\n whenGearIsAcquired
+
+MoveToPeg -down-> PlaceGear: doScoreGearSequence
+
+PlaceGear -down-> WaitingForPusherToExtend
+
+WaitingForPusherToExtend -down-> ReturnToStart: timeDelay &\n whenGearIsNotAcquired
+
+ReadyToReleaseGear -right-> WaitingForArmToLower: doReleaseGearSequence
+
+WaitingForArmToLower -right-> RegurgitateGear: timeDelay
+
+@enduml

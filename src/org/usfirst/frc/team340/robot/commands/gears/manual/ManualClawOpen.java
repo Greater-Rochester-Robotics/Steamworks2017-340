@@ -17,7 +17,7 @@ public class ManualClawOpen extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	System.out.println("initialize ManualClawOpen");
+//    	System.out.println("initialize ManualClawOpen");
     	Robot.claw.goOpen();
     }
 
@@ -32,7 +32,7 @@ public class ManualClawOpen extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println("end ManualClawOpen");
+//    	System.out.println("end ManualClawOpen");
     }
 
     // Called when another command which requires one or more of the same

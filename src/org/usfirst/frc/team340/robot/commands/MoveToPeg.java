@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class MoveToPeg extends Command {
 
-	double speed = -0.7;
+	double speed = -0.65;
 	double tolerance = 30;
 	double forwardMod = 6;
 	double fastMod = 8;
@@ -55,11 +55,11 @@ public class MoveToPeg extends Command {
 		} else {
 			Robot.oi.rumbleDriver(0.0f);
 		}
-		if(dist < endDist) {
-			Robot.drive.setLeftDrive(0);
-			Robot.drive.setRightDrive(0);
-			return;
-		}
+//		if(dist < endDist) {
+//			Robot.drive.setLeftDrive(0);
+//			Robot.drive.setRightDrive(0);
+//			return;
+//		}
 		if(center - avg > tolerance*fastMod) {
 			Robot.drive.setRightDrive(speed/3);
 			Robot.drive.setLeftDrive(-speed/3);

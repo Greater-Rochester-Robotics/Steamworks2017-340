@@ -17,7 +17,7 @@ public class ManualRollersSpinOut extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	System.out.println("initialize ManualRollersSpinOut");
+//    	System.out.println("initialize ManualRollersSpinOut");
     	Robot.claw.spinOut();
     }
 
@@ -32,7 +32,7 @@ public class ManualRollersSpinOut extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println("end ManualRollersSpinOut");
+//    	System.out.println("end ManualRollersSpinOut");
     }
 
     // Called when another command which requires one or more of the same

@@ -18,7 +18,7 @@ public class StayAtTop extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	System.out.println("initialize StayAtTop");
+//    	System.out.println("initialize StayAtTop");
     	Robot.climber.goStayingSpeed();
     	Robot.drive.goStop();
     }
