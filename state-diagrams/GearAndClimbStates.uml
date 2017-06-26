@@ -65,6 +65,7 @@ state HarvestGear {
 	AbortHarvest: clawPos=GoClose
 	AbortHarvest: pusherPos=GoRetract
 	AbortHarvest: rollers=SpinStop
+	AbortHarvest: gearSensors=Check
 
 state ScoreGear {
 
@@ -88,6 +89,7 @@ state ScoreGear {
 	AbortScore: clawPos=GoClose
 	AbortScore: pusherPos=GoRetract
 	AbortScore: rollers=SpinStop
+	AbortScore: gearSensors=Check
 
 state ReleaseGear {
 
@@ -109,6 +111,7 @@ state ReleaseGear {
 	AbortRelease: clawPos=GoClose
 	AbortRelease: pusherPos=GoRetract
 	AbortRelease: rollers=SpinStop
+	AbortRelease: gearSensors=Check
 
 '''''transitions
 

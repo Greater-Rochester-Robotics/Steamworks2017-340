@@ -166,6 +166,10 @@ public class Claw extends Subsystem {
 	 * successfully been acquired
 	 */
 	public boolean whenGearIsAcquired() {
+		/*If GearSensor1 is T, then make UseGearSensor1 F;
+		*If GearSensor2 is T, then make UseGearSensor2 F;
+		*Else set either one to T
+		*/
 		return gearSensorLeft.get() || gearSensorRight.get();
 //		return VotableInput.vote(new VotableInput[] {gearSensorLeft, gearSensorRight});
 	}
