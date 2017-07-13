@@ -138,24 +138,24 @@ public class OI {
 		coDriverB.whenPressed(new AutoScoreGear());
 		coDriverB.whenPressed(new AutoScoreGear()); */
 		
-		coDriverX.whenPressed(new ManualArmDown());
-		coDriverX.whenReleased(new ManualArmUp());
-		coDriverY.whenPressed(new ManualClawOpen());
-		coDriverY.whenReleased(new ManualClawClose());
-		coDriverLB.whenPressed(new ManualRollersSpinIn());
-		coDriverLB.whenReleased(new ManualSpinStop());
-		coDriverRB.whenPressed(new ManualRollersSpinOut());
-		coDriverRB.whenReleased(new ManualSpinStop());
-		coDriverA.whenPressed(new ManualPusherExtend());
-		coDriverA.whenReleased(new ManualPusherRetract());
-//		coDriverB.whenPressed(new DropToggleWheels());
-		coDriverB.whenPressed(new DriveTurnBothSensors(0.35, true));
-		coDriverB.whenReleased(new DriveXbox());
-		coDriverBack.whenPressed(new ManualClimberGoAtEngagementSpeed());
-		coDriverBack.whenReleased(new ManualClimberGoStopped());
-		coDriverStart.whenPressed(new ManualGoAtClimbSpeed());
-		coDriverStart.whenPressed(new CompressorOff());
-		coDriverStart.whenReleased(new ManualClimberGoStopped()); 
+//		coDriverX.whenPressed(new ManualArmDown());
+//		coDriverX.whenReleased(new ManualArmUp());
+//		coDriverY.whenPressed(new ManualClawOpen());
+//		coDriverY.whenReleased(new ManualClawClose());
+//		coDriverLB.whenPressed(new ManualRollersSpinIn());
+//		coDriverLB.whenReleased(new ManualSpinStop());
+//		coDriverRB.whenPressed(new ManualRollersSpinOut());
+//		coDriverRB.whenReleased(new ManualSpinStop());
+//		coDriverA.whenPressed(new ManualPusherExtend());
+//		coDriverA.whenReleased(new ManualPusherRetract());
+//
+//		coDriverB.whenPressed(new DriveTurnBothSensors(0.35, true));
+//		coDriverB.whenReleased(new DriveXbox());
+//		coDriverBack.whenPressed(new ManualClimberGoAtEngagementSpeed());
+//		coDriverBack.whenReleased(new ManualClimberGoStopped());
+//		coDriverStart.whenPressed(new ManualGoAtClimbSpeed());
+//		coDriverStart.whenPressed(new CompressorOff());
+//		coDriverStart.whenReleased(new ManualClimberGoStopped()); 
 //		coDriverStart.whenReleased(new CompressorBackToReg());
 	}
 	

@@ -55,7 +55,7 @@ public class DriveTurnToAngle extends Command {
     			Robot.drive.arcadeDrive(0,(-.27 * batteryV) / ControllerPower.getInputVoltage());
     			
     		}else{
-    			Robot.drive.arcadeDrive(0,(-.25 * batteryV) / ControllerPower.getInputVoltage());
+    			Robot.drive.arcadeDrive(0,(-.27 * batteryV) / ControllerPower.getInputVoltage());
     			
     		}
     	}else if(currAngle > (targetAngle)){
@@ -70,13 +70,13 @@ public class DriveTurnToAngle extends Command {
     			Robot.drive.arcadeDrive(0,(.35 * batteryV) / ControllerPower.getInputVoltage());
     			
     		}else if( currAngle > (targetAngle + 8)){
-    			Robot.drive.arcadeDrive(0,(.5 * batteryV) / ControllerPower.getInputVoltage());
+    			Robot.drive.arcadeDrive(0,(.3 * batteryV) / ControllerPower.getInputVoltage());
     			
     		}else if( currAngle > (targetAngle + 4)){
     			Robot.drive.arcadeDrive(0,(.27 * batteryV) / ControllerPower.getInputVoltage());
     			
     		}else{
-    			Robot.drive.arcadeDrive(0,(.25 * batteryV) / ControllerPower.getInputVoltage());
+    			Robot.drive.arcadeDrive(0,(.27 * batteryV) / ControllerPower.getInputVoltage());
     			
     		}
     	}

@@ -1,11 +1,9 @@
 package org.usfirst.frc.team340.robot.commands.auto;
 
 import org.usfirst.frc.team340.robot.RobotMap;
-import org.usfirst.frc.team340.robot.commands.DoNothing;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.WaitCommand;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class AutoSwitchBasedSelector {
@@ -59,7 +57,7 @@ public class AutoSwitchBasedSelector {
 				if(!autoSwitch2.get() && autoSwitch3.get()){
 					return new AutoRedSidePegThenCrossField();
 				}else if(autoSwitch2.get() && !autoSwitch3.get()){
-					return new AutoRedCenterPegThenBoilerGear();
+					return new AutoRedSidePegThenNothing();//AutoRedCenterPegThenBoilerGear();
 				}else{
 					return new AutoCenterPegThenNothing();
 				}

@@ -7,6 +7,10 @@ package org.usfirst.frc.team340.robot;
  * floating around.
  */
 public class RobotMap {
+	
+	//Speed scaler
+	public static final double SPEED_SCALE = .92;
+	
 	//PWM Channels
     public static final int LEFT_DRIVE_PORT = 0;
     public static final int RIGHT_DRIVE_PORT = 1;

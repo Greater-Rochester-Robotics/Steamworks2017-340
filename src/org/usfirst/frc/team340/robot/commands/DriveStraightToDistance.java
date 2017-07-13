@@ -1,6 +1,7 @@
 package org.usfirst.frc.team340.robot.commands;
 
 import org.usfirst.frc.team340.robot.Robot;
+import org.usfirst.frc.team340.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.ControllerPower;
 import edu.wpi.first.wpilibj.command.Command;
@@ -25,6 +26,9 @@ public class DriveStraightToDistance extends Command {
 	double startAngle;
 	boolean isReverse;
 	
+	//distance left to travel
+	double distanceRemaining;
+	
 	/**
 	 * Do not drive faster than .7 and distance is in inches.
 	 * @param distanceInInches
@@ -33,12 +37,12 @@ public class DriveStraightToDistance extends Command {
     public DriveStraightToDistance(double distanceInInches, double speed) {
     	this.distance = distanceInInches;
     	//I am serious about not having a speed faster than .7
-    	if(speed > .7){
-    		this.speed = .7;
-    	}else if(speed < -.7){
-    		this.speed = -.7;
+    	if(speed > .7*RobotMap.SPEED_SCALE){
+    		this.speed = .7*RobotMap.SPEED_SCALE;
+    	}else if(speed < -.7*RobotMap.SPEED_SCALE){
+    		this.speed = -.7*RobotMap.SPEED_SCALE;
     	}else{
-    		this.speed = speed;
+    		this.speed = speed*RobotMap.SPEED_SCALE;
     	}
         // Use requires() here to declare subsystem dependencies
         requires(Robot.drive);
@@ -72,38 +76,63 @@ public class DriveStraightToDistance extends Command {
        	 }else{
        		 turnValue = 0;
        	 }
-       	 
+       	 double voltageFactor = 12.8/ControllerPower.getInputVoltage();
+       	 distanceRemaining = distance - Robot.drive.getDistance();
+       	 if(isReverse)
+       	 	distanceRemaining=-1*distanceRemaining;
        	 //drive at a speed, that is more static, based on current battery voltage
        	 double moveValue;	
-       	 if(Math.abs(distance-Robot.drive.getDistance()) <= 0){
-       		 //but if we are at the target point stop
-       		 moveValue=0;
-       	 }else if(Math.abs(distance-Robot.drive.getDistance()) < 35*Math.abs(speed)){
-       		 //and if we are close slow down
-       		moveValue = -.4*speed*12.8/ControllerPower.getInputVoltage();
-       		if (Math.abs(moveValue) < .15*12.8/ControllerPower.getInputVoltage()){
-       			moveValue = -1*speed*12.8/ControllerPower.getInputVoltage();
-            }
-       	 }else{
-       		 moveValue = -1*speed*12.8/ControllerPower.getInputVoltage();
+//       	 if(distanceRemaining < -3){
+//       		moveValue = .2*voltageFactor*speed/Math.abs(speed);
+//       	 }else if((distanceRemaining <= 3) && (distanceRemaining >= -3)){
+//       		 //but if we are at the target point stop
+//       		 moveValue=0;
+//       	 }else if(Math.abs(distanceRemaining) < 35){
+//       		 //and if we are close slow down
+//       		moveValue = -.35*speed*voltageFactor;
+//       		if (Math.abs(moveValue) < .2*voltageFactor){
+//       			moveValue = -.2*voltageFactor*speed/Math.abs(speed);
+//            }
+//       	 }else{
+//       		 moveValue = -1*speed*voltageFactor;
+//       	 }
+       	 
+       	 if(distanceRemaining >= 35) {
+       		 moveValue = -speed * voltageFactor;
+       	 } else if(distanceRemaining < 35 && distanceRemaining > 1.5) {
+       		 moveValue = -.35 * speed * voltageFactor;
+       	 } else if(distanceRemaining <= 1.5 && distanceRemaining >= -1.5) {
+       		 moveValue = 0;
+       	 } else if(distanceRemaining < -1.5 && distanceRemaining >= -10) {
+       		 moveValue = .35 * speed * voltageFactor;
+       	 } else {
+       		 moveValue = speed * voltageFactor;
        	 }
        	 
+       	 System.out.println("distance: "+Robot.drive.getDistance());
        	 //now use the turn speed and the forward speed
        	 Robot.drive.arcadeDrive(moveValue, turnValue);
      }
 
      // Make this return true when this Command no longer needs to run execute()
      protected boolean isFinished() {
-    	 if (isReverse){
-    		 if(Robot.drive.getDistance() < distance){
-    			 return true;
-    		 }
-    	 }else{
-    		 if(Robot.drive.getDistance() > distance){
-    			 return true;
-    		 }
-         }
-    	 return false;
+//    	 if (isReverse){
+//    		 if(Robot.drive.getDistance() < distance){
+//    			 return true;
+//    		 }
+//    		 
+//    		 if(distanceRemaining <= 3) {
+//    			 return true
+//    		 }
+//    	 }else{
+//    		 if(Robot.drive.getDistance() > distance){
+//    			 return true;
+//    		 }
+//         }
+    	 
+    	 return Math.abs(distanceRemaining) <= 1.5;
+    	 
+//    	 return false;
      }
 
      // Called once after isFinished returns true
