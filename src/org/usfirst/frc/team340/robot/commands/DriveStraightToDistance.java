@@ -54,6 +54,10 @@ public class DriveStraightToDistance extends Command {
 
      // Called just before this Command runs the first time
      protected void initialize() {
+    	 if(speed < 0 && distance > 0) {
+    		 distance = -distance;
+    	 }
+    	 
     	 //reset the encoder, we will read distance from the starting point
     	 Robot.drive.resetEncoder();
     	 //to stop from drifting off course, we get the initial angle
@@ -100,11 +104,11 @@ public class DriveStraightToDistance extends Command {
        	 if(distanceRemaining >= 35) {
        		 moveValue = -speed * voltageFactor;
        	 } else if(distanceRemaining < 35 && distanceRemaining > 1.5) {
-       		 moveValue = -.35 * speed * voltageFactor;
+       		 moveValue = -.55 * speed * voltageFactor;
        	 } else if(distanceRemaining <= 1.5 && distanceRemaining >= -1.5) {
        		 moveValue = 0;
        	 } else if(distanceRemaining < -1.5 && distanceRemaining >= -10) {
-       		 moveValue = .35 * speed * voltageFactor;
+       		 moveValue = .55 * speed * voltageFactor;
        	 } else {
        		 moveValue = speed * voltageFactor;
        	 }

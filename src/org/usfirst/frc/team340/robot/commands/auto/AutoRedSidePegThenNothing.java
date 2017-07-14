@@ -1,6 +1,7 @@
 package org.usfirst.frc.team340.robot.commands.auto;
 
 import org.usfirst.frc.team340.robot.RobotMap;
+import org.usfirst.frc.team340.robot.commands.DriveRails;
 import org.usfirst.frc.team340.robot.commands.DriveStraightToDistance;
 import org.usfirst.frc.team340.robot.commands.DriveTurnTillSensor;
 import org.usfirst.frc.team340.robot.commands.DriveTurnToAngle;
@@ -20,28 +21,31 @@ public class AutoRedSidePegThenNothing extends CommandGroup {
     	//close gear
     	addParallel(new ManualClawClose());
     	//drive forward
-    	addSequential(new DriveStraightToDistance(77,.4*RobotMap.SPEED_SCALE),8);
+    	addSequential(new DriveStraightToDistance(90,.5*RobotMap.SPEED_SCALE),5);
     	//wait a moment
-    	addSequential(new WaitCommand(.25));
+    	addSequential(new WaitCommand(.5));
     	//turn toward the peg
     	addSequential(new DriveTurnToAngle(-59),5);
     	//wait again
     	addSequential(new WaitCommand(.25));
     	//drive close to peg
-    	addSequential(new DriveStraightToDistance(65,.4*RobotMap.SPEED_SCALE),6);
+    	addSequential(new DriveStraightToDistance(25,.65*RobotMap.SPEED_SCALE),4);
     	//ir sensor turn
-    	addSequential(new DriveTurnTillSensor(.3*RobotMap.SPEED_SCALE,false),2);
+    	addSequential(new DriveTurnBothSensors(-.35, false));
+//    	addSequential(new DriveTurnTillSensor(-.3*RobotMap.SPEED_SCALE,false),2);
     	//TODO:add camera targeting peg position.
     	//wait for pilot to move peg
     	addSequential(new WaitCommand(.5));
     	//move gear on to peg
-    	addSequential(new DriveStraightToDistance(9,.4*RobotMap.SPEED_SCALE),6);
+    	addSequential(new DriveStraightToDistance(25,.4*RobotMap.SPEED_SCALE),2.5);
     	//score the gear
     	addSequential(new ScoreGear(), 0.5);
     	addSequential(new ReturnToStart(), 0.1);
     	//move away 
-    	addSequential(new DriveStraightToDistance(-50,-.4*RobotMap.SPEED_SCALE), 5);
+    	addSequential(new DriveStraightToDistance(-30,-.4*RobotMap.SPEED_SCALE), 5);
     	//retract pusher
     	addParallel(new ReturnToStart()); 
+//    	addSequential(new DriveTurnToAngle(0), 3);
+//    	addSequential(new DriveRails(-0.5), 3);
     }
 }
