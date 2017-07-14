@@ -19,19 +19,19 @@ public class AutoCenterPegThenNothing extends CommandGroup {
     	//close claw
     	addParallel(new ManualClawClose());
     	//drive forward
-    	addSequential(new DriveStraightToDistance(69,.4*RobotMap.SPEED_SCALE),6);
+    	addSequential(new DriveStraightToDistance(75,.55*RobotMap.SPEED_SCALE),6);
     	//wait a moment
     	addSequential(new WaitCommand(.75));
     	//turn to peg
     	addSequential(new DriveTurnTillSensor(-.25*RobotMap.SPEED_SCALE,true),2);
     	//move gear on to peg
-    	addSequential(new DriveStraightToDistance(9,.4*RobotMap.SPEED_SCALE),2);
+    	addSequential(new DriveStraightToDistance(9,.65*RobotMap.SPEED_SCALE),2);
     	//score the gear
     	addSequential(new ScoreGear(), 0.5);
     	//pull the pusher back in
     	addParallel(new ReturnToStart());
     	//drive back off the peg
-    	addSequential(new DriveStraightToDistance(-20,-.4*RobotMap.SPEED_SCALE),6);
+    	addSequential(new DriveStraightToDistance(-25,-.7*RobotMap.SPEED_SCALE),6);
     	
     }
 }

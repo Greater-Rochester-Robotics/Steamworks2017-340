@@ -14,8 +14,8 @@ public class DriveTurnBothSensors extends Command {
 	boolean stop = false;
 	
 	int sweepStage = 0;
-	double stage1Time = 2.0;
-	double stage2Time = 3.0;
+	double stage1Time = 0.5;
+	double stage2Time = 1.5;
 	
     public DriveTurnBothSensors(double speed, boolean rightSensor) {
     	this.speed = speed;

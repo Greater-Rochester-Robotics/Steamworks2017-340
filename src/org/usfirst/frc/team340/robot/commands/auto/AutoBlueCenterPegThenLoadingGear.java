@@ -21,7 +21,7 @@ public class AutoBlueCenterPegThenLoadingGear extends CommandGroup {
     	//close claw
     	addParallel(new ManualClawClose());
     	//drive forward
-    	addSequential(new DriveStraightToDistance(69,.6*RobotMap.SPEED_SCALE),6);
+    	addSequential(new DriveStraightToDistance(80,.6*RobotMap.SPEED_SCALE),6);
     	//wait a moment
     	addSequential(new WaitCommand(.75));
     	//turn to peg using the IR sensor, time out at 2 seconds

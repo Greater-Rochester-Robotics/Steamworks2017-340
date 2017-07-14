@@ -3,6 +3,7 @@ package org.usfirst.frc.team340.robot;
 import org.usfirst.frc.team340.robot.DPad.Direction;
 import org.usfirst.frc.team340.robot.commands.BlindHarvest;
 import org.usfirst.frc.team340.robot.commands.BlindScore;
+import org.usfirst.frc.team340.robot.commands.CompressorBackToReg;
 //import org.usfirst.frc.team340.robot.commands.CompressorBackToReg;
 import org.usfirst.frc.team340.robot.commands.CompressorOff;
 import org.usfirst.frc.team340.robot.commands.DelayedRaise;
@@ -11,8 +12,9 @@ import org.usfirst.frc.team340.robot.commands.DropLowerWheels;
 import org.usfirst.frc.team340.robot.commands.DropRaiseWheels;
 import org.usfirst.frc.team340.robot.commands.DropToggleWheels;
 import org.usfirst.frc.team340.robot.commands.MoveToGear;
+import org.usfirst.frc.team340.robot.commands.MoveToPeg;
 import org.usfirst.frc.team340.robot.commands.auto.DriveTurnBothSensors;
-import org.usfirst.frc.team340.robot.commands.DrivePIDTurn;
+import org.usfirst.frc.team340.robot.commands.climb.StayAtTop;
 import org.usfirst.frc.team340.robot.commands.climb.manual.ManualClimberGoAtEngagementSpeed;
 import org.usfirst.frc.team340.robot.commands.climb.manual.ManualClimberGoStopped;
 import org.usfirst.frc.team340.robot.commands.climb.manual.ManualGoAtClimbSpeed;
@@ -28,7 +30,6 @@ import org.usfirst.frc.team340.robot.commands.gears.manual.ManualPusherRetract;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualRollersSpinIn;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualRollersSpinOut;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualSpinStop;
-import org.usfirst.frc.team340.robot.commands.groups.GearSensorTraining;
 import org.usfirst.frc.team340.robot.commands.groups.HarvestGear;
 import org.usfirst.frc.team340.robot.commands.groups.ReleaseGear;
 import org.usfirst.frc.team340.robot.commands.groups.ScoreGear;
@@ -95,8 +96,8 @@ public class OI {
 		driverA.whenPressed(new HarvestGear());
 		driverA.whenReleased(new AbortHarvest());
 		driverB.whenPressed(new DropToggleWheels());
-		driverBack.whenPressed(new MoveToGear());
-		driverBack.whenReleased(new DriveXbox());
+//		driverBack.whenPressed(new MoveToGear());
+//		driverBack.whenReleased(new DriveXbox());
 //		driverStart.whenPressed(new PIDTurn(-90, false));
 //		driverStart.whenReleased(new DriveXbox());
 		driverRT.whenPressed(new DropLowerWheels());
@@ -107,6 +108,10 @@ public class OI {
 		//Manual testing for rollers
 		driverLB.whenPressed(new BlindScore());
 		driverLB.whenReleased(new AbortScore());
+//		driverLB.whenPressed(new ManualClimberGoAtEngagementSpeed());
+//		driverLB.whenReleased(new ManualClimberGoStopped());
+		driverStart.whenPressed(new ManualGoAtClimbSpeed());
+		driverStart.whenReleased(new ManualClimberGoStopped());
 //		driverLB.whenPressed(new GearSensorTraining());
 //		driverLB.whenReleased(new ManualSpinStop());
 		
@@ -127,7 +132,7 @@ public class OI {
 		
 //		driverDPadRight.whileHeld(new GST());
 		
-/*		coDriverA.whenPressed(new ManualClimberGoAtEngagementSpeed());
+		coDriverA.whenPressed(new ManualClimberGoAtEngagementSpeed());
 		coDriverA.whenReleased(new ManualClimberGoStopped());
 		coDriverB.whenPressed(new ManualGoAtClimbSpeed());
 		coDriverB.whenReleased(new ManualClimberGoStopped());
@@ -135,28 +140,28 @@ public class OI {
 		coDriverY.whenReleased(new ManualClimberGoStopped());
 		coDriverA.whenPressed(new MoveToPeg());
 		coDriverA.whenReleased(new DriveXbox());
-		coDriverB.whenPressed(new AutoScoreGear());
-		coDriverB.whenPressed(new AutoScoreGear()); */
+//		coDriverB.whenPressed(new AutoScoreGear());
+//		coDriverB.whenPressed(new AutoScoreGear());
 		
-//		coDriverX.whenPressed(new ManualArmDown());
-//		coDriverX.whenReleased(new ManualArmUp());
-//		coDriverY.whenPressed(new ManualClawOpen());
-//		coDriverY.whenReleased(new ManualClawClose());
-//		coDriverLB.whenPressed(new ManualRollersSpinIn());
-//		coDriverLB.whenReleased(new ManualSpinStop());
-//		coDriverRB.whenPressed(new ManualRollersSpinOut());
-//		coDriverRB.whenReleased(new ManualSpinStop());
-//		coDriverA.whenPressed(new ManualPusherExtend());
-//		coDriverA.whenReleased(new ManualPusherRetract());
-//
-//		coDriverB.whenPressed(new DriveTurnBothSensors(0.35, true));
-//		coDriverB.whenReleased(new DriveXbox());
-//		coDriverBack.whenPressed(new ManualClimberGoAtEngagementSpeed());
-//		coDriverBack.whenReleased(new ManualClimberGoStopped());
-//		coDriverStart.whenPressed(new ManualGoAtClimbSpeed());
-//		coDriverStart.whenPressed(new CompressorOff());
-//		coDriverStart.whenReleased(new ManualClimberGoStopped()); 
-//		coDriverStart.whenReleased(new CompressorBackToReg());
+		coDriverX.whenPressed(new ManualArmDown());
+		coDriverX.whenReleased(new ManualArmUp());
+		coDriverY.whenPressed(new ManualClawOpen());
+		coDriverY.whenReleased(new ManualClawClose());
+		coDriverLB.whenPressed(new ManualRollersSpinIn());
+		coDriverLB.whenReleased(new ManualSpinStop());
+		coDriverRB.whenPressed(new ManualRollersSpinOut());
+		coDriverRB.whenReleased(new ManualSpinStop());
+		coDriverA.whenPressed(new ManualPusherExtend());
+		coDriverA.whenReleased(new ManualPusherRetract());
+
+		coDriverB.whenPressed(new DriveTurnBothSensors(0.35, true));
+		coDriverB.whenReleased(new DriveXbox());
+		coDriverBack.whenPressed(new ManualClimberGoAtEngagementSpeed());
+		coDriverBack.whenReleased(new ManualClimberGoStopped());
+		coDriverStart.whenPressed(new ManualGoAtClimbSpeed());
+		coDriverStart.whenPressed(new CompressorOff());
+		coDriverStart.whenReleased(new ManualClimberGoStopped()); 
+		coDriverStart.whenReleased(new CompressorBackToReg());
 	}
 	
 	/**
