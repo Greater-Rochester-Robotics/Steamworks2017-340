@@ -1,6 +1,7 @@
 package org.usfirst.frc.team340.robot.commands.auto;
 
 import org.usfirst.frc.team340.robot.RobotMap;
+import org.usfirst.frc.team340.robot.commands.DriveRails;
 import org.usfirst.frc.team340.robot.commands.DriveStraightToDistance;
 import org.usfirst.frc.team340.robot.commands.DriveTurnTillSensor;
 import org.usfirst.frc.team340.robot.commands.DriveTurnToAngle;
@@ -20,36 +21,31 @@ public class AutoBlueSidePegThenCrossField extends CommandGroup {
     	//close gear
     	addParallel(new ManualClawClose());
     	//drive forward
-    	addSequential(new DriveStraightToDistance(77,.4*RobotMap.SPEED_SCALE),8);
+    	addSequential(new DriveStraightToDistance(85,.5*RobotMap.SPEED_SCALE),5);
     	//wait a moment
-    	addSequential(new WaitCommand(.25));
+    	addSequential(new WaitCommand(.5));
     	//turn toward the peg
     	addSequential(new DriveTurnToAngle(59),5);
     	//wait again
     	addSequential(new WaitCommand(.25));
     	//drive close to peg
-    	addSequential(new DriveStraightToDistance(65,.4*RobotMap.SPEED_SCALE),6);
+    	addSequential(new DriveStraightToDistance(25,.65*RobotMap.SPEED_SCALE),4);
     	//ir sensor turn
-    	addSequential(new DriveTurnTillSensor(-.3*RobotMap.SPEED_SCALE,true),2);
+    	addSequential(new DriveTurnBothSensors(.35, true),2);
     	//TODO:add camera targeting peg position.
     	//wait for pilot to move peg
-    	addSequential(new WaitCommand(.5));
+    	addSequential(new WaitCommand(.25));
     	//move gear on to peg
-    	addSequential(new DriveStraightToDistance(9,.4*RobotMap.SPEED_SCALE),2);
+    	addSequential(new DriveStraightToDistance(25,.4*RobotMap.SPEED_SCALE),1);
     	//score the gear
     	addSequential(new ScoreGear(), 0.5);
     	addSequential(new ReturnToStart(), 0.1);
     	//move away 
-    	addSequential(new DriveStraightToDistance(-50,-.4*RobotMap.SPEED_SCALE), 5);
+    	addSequential(new DriveStraightToDistance(-30,-.4*RobotMap.SPEED_SCALE), 5);
     	//retract pusher
     	addParallel(new ReturnToStart());
-    	//turn rear toward other alliance
-    	addSequential(new DriveTurnToAngle(117),5);
-    	//wait again
-    	addSequential(new WaitCommand(.25));
-    	//drive toward other alliance
-    	//TODO:Make this distance much longer, short for in shop test
-    	addSequential(new DriveStraightToDistance(-10,-8*RobotMap.SPEED_SCALE),5);    
+    	addSequential(new DriveTurnToAngle(120), 3);
+    	addSequential(new DriveRails(0.9), 2.5);
     	
     }
 }

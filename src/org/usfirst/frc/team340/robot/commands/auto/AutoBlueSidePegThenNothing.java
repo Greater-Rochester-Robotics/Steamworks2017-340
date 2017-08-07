@@ -33,9 +33,9 @@ public class AutoBlueSidePegThenNothing extends CommandGroup {
     	addSequential(new DriveTurnBothSensors(.35, true),2);
     	//TODO:add camera targeting peg position.
     	//wait for pilot to move peg
-    	addSequential(new WaitCommand(.5));
+    	addSequential(new WaitCommand(.25));
     	//move gear on to peg
-    	addSequential(new DriveStraightToDistance(25,.4*RobotMap.SPEED_SCALE),2);
+    	addSequential(new DriveStraightToDistance(25,.4*RobotMap.SPEED_SCALE),1);
     	//score the gear
     	addSequential(new ScoreGear(), 0.5);
     	addSequential(new ReturnToStart(), 0.1);

@@ -21,7 +21,7 @@ public class AutoRedSidePegThenCrossField extends CommandGroup {
     	//close gear
     	addParallel(new ManualClawClose());
     	//drive forward
-    	addSequential(new DriveStraightToDistance(90,.5*RobotMap.SPEED_SCALE),5);
+    	addSequential(new DriveStraightToDistance(99,.6*RobotMap.SPEED_SCALE),5);
     	//wait a moment
     	addSequential(new WaitCommand(.5));
     	//turn toward the peg
@@ -35,9 +35,9 @@ public class AutoRedSidePegThenCrossField extends CommandGroup {
 //    	addSequential(new DriveTurnTillSensor(-.3*RobotMap.SPEED_SCALE,false),2);
     	//TODO:add camera targeting peg position.
     	//wait for pilot to move peg
-    	addSequential(new WaitCommand(.5));
+    	addSequential(new WaitCommand(.25));
     	//move gear on to peg
-    	addSequential(new DriveStraightToDistance(25,.4*RobotMap.SPEED_SCALE),2.5);
+    	addSequential(new DriveStraightToDistance(25,.4*RobotMap.SPEED_SCALE),1);
     	//score the gear
     	addSequential(new ScoreGear(), 0.5);
     	addSequential(new ReturnToStart(), 0.1);
@@ -45,7 +45,7 @@ public class AutoRedSidePegThenCrossField extends CommandGroup {
     	addSequential(new DriveStraightToDistance(-30,-.4*RobotMap.SPEED_SCALE), 5);
     	//retract pusher
     	addParallel(new ReturnToStart()); 
-    	addSequential(new DriveTurnToAngle(-120), 3);
-    	addSequential(new DriveRails(1), 2.5);
+    	addSequential(new DriveTurnToAngle(-85), 3);
+    	addSequential(new DriveRails(0.75), 2);
     }
 }
