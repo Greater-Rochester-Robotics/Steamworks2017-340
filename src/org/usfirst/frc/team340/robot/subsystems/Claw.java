@@ -5,6 +5,7 @@ import org.usfirst.frc.team340.robot.VotableInput;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -33,6 +34,7 @@ public class Claw extends Subsystem {
     private Talon rollers;
     private VotableInput gearSensorLeft;
     private VotableInput gearSensorRight;
+    private Relay leds;
     	
     /**
      * Constructs a {@link Claw} and sets all
@@ -47,6 +49,15 @@ public class Claw extends Subsystem {
     	rollers = new Talon(RobotMap.CLAW_ROLLERS_PORT);
     	gearSensorLeft = new VotableInput(RobotMap.GEAR_SENSOR_LEFT_CHANNEL);
     	gearSensorRight = new VotableInput(RobotMap.GEAR_SENSOR_RIGHT_CHANNEL);
+    	leds = new Relay(0);
+    }
+    
+    public void ledsOn() {
+    	leds.set(edu.wpi.first.wpilibj.Relay.Value.kForward);
+    }
+    
+    public void ledsOff() {
+    	leds.set(edu.wpi.first.wpilibj.Relay.Value.kOff);
     }
     
 	/**

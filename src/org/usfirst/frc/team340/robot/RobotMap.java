@@ -41,7 +41,7 @@ public class RobotMap {
     public static final int GEAR_SENSOR_RIGHT_CHANNEL = 8;
     
     //Spike Relay Channels
-    public static final int COMPRESSOR_SPIKE_CHANNEL = 0; //TODO: get the channel for this, not used if compressor uses PCM
+    public static final int COMPRESSOR_SPIKE_CHANNEL = 1; //TODO: get the channel for this, not used if compressor uses PCM
     
     //Analog Input ports
     public static final int TRANSDUCER_CHANNEL = 3;

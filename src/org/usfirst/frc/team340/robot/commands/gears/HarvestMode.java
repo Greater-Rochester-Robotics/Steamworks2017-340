@@ -47,6 +47,7 @@ public class HarvestMode extends Command {
     	} else {
     		Robot.led.setRightColor(255, 0, 0);
     	}
+    	Robot.claw.ledsOn();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -59,6 +60,7 @@ public class HarvestMode extends Command {
 //    	Robot.led.unhookLEDs();
     	Robot.claw.spinStop();
     	Robot.oi.rumbleDriver(0f);
+    	Robot.claw.ledsOff();
 //    	System.out.println("end HarvestMode");
     }
 
