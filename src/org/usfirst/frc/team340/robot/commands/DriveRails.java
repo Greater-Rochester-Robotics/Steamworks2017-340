@@ -43,7 +43,8 @@ public class DriveRails extends Command {
     	this.rightSpeed = speed;
     	this.goStraight = true;
     }
-    public DriveRails(double speed, double distance, boolean stop) {
+    
+    public DriveRails(double speed, double distance, @SuppressWarnings("unused") boolean stop) {
     	requires(Robot.drive);
     	this.leftSpeed = speed;
     	this.rightSpeed = speed;
@@ -71,7 +72,8 @@ public class DriveRails extends Command {
     protected void execute() {
     	System.out.println(Robot.drive.getYaw());
     	if(goStraight) {
-        	Robot.drive.setBothDrive(leftSpeed-((Robot.drive.getYaw()-startAngle)/(arcDivisor/Math.abs(leftSpeed))), 
+        	Robot.drive.setBothDrive(
+        			leftSpeed-((Robot.drive.getYaw()-startAngle)/(arcDivisor/Math.abs(leftSpeed))), 
         			rightSpeed+(((Robot.drive.getYaw()-startAngle)/(arcDivisor/Math.abs(leftSpeed)))));
     	} else {
         	Robot.drive.setBothDrive(leftSpeed, rightSpeed);

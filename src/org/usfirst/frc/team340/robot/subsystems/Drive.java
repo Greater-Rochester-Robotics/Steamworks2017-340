@@ -71,7 +71,7 @@ public class Drive extends Subsystem {
      * @return
      */
     public double getDistance(){
-    	return encoder.getDistance();
+    	return -encoder.getDistance();
     }
     /**
      * reset the encoder.
@@ -114,6 +114,19 @@ public class Drive extends Subsystem {
     
     public int getBackUltrasonic() {
     	return backUltrasonic.getAverageValue();
+    }
+    
+    public double getAccel() {
+    	double accel = imu.getAccelY();
+    	if(Math.abs(accel) < 0.05) {
+    		return 0;
+    	}
+    	System.out.println(accel);
+    	return -accel;
+    }
+    
+    public double integrate(double x, double xo, double interval) {
+    	return (x+xo)/2 * interval;
     }
     
     /**

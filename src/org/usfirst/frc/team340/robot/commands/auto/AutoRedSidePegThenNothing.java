@@ -1,9 +1,7 @@
 package org.usfirst.frc.team340.robot.commands.auto;
 
 import org.usfirst.frc.team340.robot.RobotMap;
-import org.usfirst.frc.team340.robot.commands.DriveRails;
 import org.usfirst.frc.team340.robot.commands.DriveStraightToDistance;
-import org.usfirst.frc.team340.robot.commands.DriveTurnTillSensor;
 import org.usfirst.frc.team340.robot.commands.DriveTurnToAngle;
 import org.usfirst.frc.team340.robot.commands.gears.ReturnToStart;
 import org.usfirst.frc.team340.robot.commands.gears.manual.ManualClawClose;

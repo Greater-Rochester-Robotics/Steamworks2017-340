@@ -1,7 +1,6 @@
 package org.usfirst.frc.team340.robot;
 
 import org.usfirst.frc.team340.robot.commands.DoNothing;
-import org.usfirst.frc.team340.robot.commands.auto.AutoBlueSidePegThenNothing;
 import org.usfirst.frc.team340.robot.commands.auto.AutoSwitchBasedSelector;
 import org.usfirst.frc.team340.robot.commands.auto.old.AutoAngledSideBlue;
 import org.usfirst.frc.team340.robot.commands.auto.old.AutoAngledSideRed;
@@ -26,7 +25,6 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.DigitalInput;
 
 /**
  * The VM is configured to automatically run this class, and to call the
