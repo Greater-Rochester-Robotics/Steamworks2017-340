@@ -36,6 +36,9 @@ import org.usfirst.frc.team340.robot.commands.groups.HarvestGear;
 import org.usfirst.frc.team340.robot.commands.groups.ReleaseGear;
 import org.usfirst.frc.team340.robot.commands.groups.ScoreGear;
 import org.usfirst.frc.team340.robot.commands.pathing.CenterSwitchLeftPath;
+import org.usfirst.frc.team340.robot.commands.pathing.LeftSwitchAndReturn;
+import org.usfirst.frc.team340.robot.commands.pathing.ObstacleCourse;
+import org.usfirst.frc.team340.robot.commands.pathing.SwitchLeftReturn;
 
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
@@ -100,7 +103,7 @@ public class OI {
 		driverA.whenReleased(new AbortHarvest());
 		driverB.whenPressed(new DropToggleWheels());
 //		driverBack.whenPressed(new FollowPath(0.3));
-		driverBack.whenPressed(new CenterSwitchLeftPath(0.3));
+		driverBack.whenPressed(new ObstacleCourse());
 //		driverBack.whenPressed(new DriveRails(0.3));
 		driverBack.whenReleased(new DriveXbox());
 //		driverStart.whenPressed(new PIDTurn(-90, false));

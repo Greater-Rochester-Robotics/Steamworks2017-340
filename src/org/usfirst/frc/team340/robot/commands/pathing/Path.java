@@ -57,7 +57,7 @@ public abstract class Path extends Command {
     	double error = -deltaAngle(Robot.drive.getYaw());
     	
     	System.out.println("error: " + error);
-    	if(Robot.drive.getDistance() > 3) {
+    	if(Math.abs(Robot.drive.getDistance()) > 3) {
     		double speed = leftSpeed;
         	Robot.drive.setBothDrive(
         			leftSpeed-((error)/(arcDivisor/Math.abs(speed))), 
@@ -69,7 +69,7 @@ public abstract class Path extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.drive.getDistance() > length;
+        return Math.abs(Robot.drive.getDistance()) > (length);
     }
 
     // Called once after isFinished returns true

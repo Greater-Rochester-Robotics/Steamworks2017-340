@@ -116,7 +116,7 @@ public class FollowPath extends Command {
 //    	}
 //    	System.out.println(error);
     	System.out.println("error: " + error);
-    	if(goStraight && Robot.drive.getDistance() > 3) {
+    	if(goStraight && Math.abs(Robot.drive.getDistance()) > 3) {
     		double speed = leftSpeed;
         	Robot.drive.setBothDrive(
         			leftSpeed-((error)/(arcDivisor/Math.abs(speed))), 
