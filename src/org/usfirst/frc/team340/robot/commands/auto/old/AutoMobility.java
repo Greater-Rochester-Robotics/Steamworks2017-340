@@ -1,6 +1,5 @@
 package org.usfirst.frc.team340.robot.commands.auto.old;
 
-import org.usfirst.frc.team340.robot.commands.DriveRails;
 import org.usfirst.frc.team340.robot.commands.DriveStraightToDistance;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;

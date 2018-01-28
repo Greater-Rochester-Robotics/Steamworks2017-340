@@ -1,6 +1,7 @@
 package org.usfirst.frc.team340.robot.commands.auto;
 
 import org.usfirst.frc.team340.robot.RobotMap;
+import org.usfirst.frc.team340.robot.commands.DoNothing;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Command;
@@ -21,48 +22,53 @@ public class AutoSwitchBasedSelector {
 	}
 	public Command getSelected(){
 		this.pushToSmartDashboard();
+		return new DoNothing();
 		
-		if(autoSwitchAllianceColor.get()){
-			//alliance color blue
-			if(autoSwitchAirshipPos.get()){
-				//airship position side
-				if(!autoSwitch2.get() && autoSwitch3.get()){
-					return new AutoBlueSidePegThenCrossField();
-				}else{
-					return new AutoBlueSidePegThenNothing();
-				}
-			}else{
-				//airship position center
-				if(autoSwitch2.get() && autoSwitch3.get()){
-					return new AutoBlueCenterPegThenBoilerGear();
-				}else if(!autoSwitch2.get() && autoSwitch3.get()){
-					return new AutoBlueCenterPegThenLoadingGear();
-				}else if(autoSwitch2.get() && !autoSwitch3.get()){
-					return new AutoBlueCenterPegThenCrossField();
-				}else{
-					return new AutoCenterPegThenNothing();
-				}
-			}
-		}else{
-			//alliance color red
-			if(autoSwitchAirshipPos.get()){
-				//airship position side
-				if(!autoSwitch2.get() && autoSwitch3.get()){
-					return new AutoRedSidePegThenCrossField();
-				}else{
-					return new AutoRedSidePegThenNothing();
-				}
-			}else{
-				//airship position center
-				if(!autoSwitch2.get() && autoSwitch3.get()){
-					return new AutoRedSidePegThenCrossField();
-				}else if(autoSwitch2.get() && !autoSwitch3.get()){
-					return new AutoRedSidePegThenNothing();//AutoRedCenterPegThenBoilerGear();
-				}else{
-					return new AutoCenterPegThenNothing();
-				}
-			}
-		}
+		//////////////////
+		//ONLY FOR DEMOS//
+		//////////////////
+		
+//		if(autoSwitchAllianceColor.get()){
+//			//alliance color blue
+//			if(autoSwitchAirshipPos.get()){
+//				//airship position side
+//				if(!autoSwitch2.get() && autoSwitch3.get()){
+//					return new AutoBlueSidePegThenCrossField();
+//				}else{
+//					return new AutoBlueSidePegThenNothing();
+//				}
+//			}else{
+//				//airship position center
+//				if(autoSwitch2.get() && autoSwitch3.get()){
+//					return new AutoBlueCenterPegThenBoilerGear();
+//				}else if(!autoSwitch2.get() && autoSwitch3.get()){
+//					return new AutoBlueCenterPegThenLoadingGear();
+//				}else if(autoSwitch2.get() && !autoSwitch3.get()){
+//					return new AutoBlueCenterPegThenCrossField();
+//				}else{
+//					return new AutoCenterPegThenNothing();
+//				}
+//			}
+//		}else{
+//			//alliance color red
+//			if(autoSwitchAirshipPos.get()){
+//				//airship position side
+//				if(!autoSwitch2.get() && autoSwitch3.get()){
+//					return new AutoRedSidePegThenCrossField();
+//				}else{
+//					return new AutoRedSidePegThenNothing();
+//				}
+//			}else{
+//				//airship position center
+//				if(!autoSwitch2.get() && autoSwitch3.get()){
+//					return new AutoRedSidePegThenCrossField();
+//				}else if(autoSwitch2.get() && !autoSwitch3.get()){
+//					return new AutoRedSidePegThenNothing();//AutoRedCenterPegThenBoilerGear();
+//				}else{
+//					return new AutoCenterPegThenNothing();
+//				}
+//			}
+//		}
 	}
 	
 	/**

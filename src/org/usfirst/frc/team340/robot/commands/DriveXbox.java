@@ -29,10 +29,12 @@ public class DriveXbox extends Command {
 
     @Override
     protected void execute() {
+//    	Robot.drive.getAccel();
 //    	System.out.println(Robot.drive.getYaw());\][
 //    	Robot.drive.getRightIRSensor();//this was used to see the sensor via dashboard for testing purposes
 //    	Robot.drive.getLeftIRSensor();//this was used to see the sensor via dashboard for testing purposes
 //    	System.out.println(Robot.drive.getBackUltrasonic() + " , " + Robot.drive.getFrontUltrasonic());
+//    	System.out.println(Robot.drive.getDistance());
     	if(Math.abs(Robot.oi.getDriverAxis(Axis.LEFT_X)) > 0.1 || //At least 10% away from center of left X
     			Math.abs(Robot.oi.getDriverAxis(Axis.LEFT_Y)) > 0.1) { //At least 10% away from center of left Y
     			Robot.drive.arcadeDrive(Robot.oi.getDriverAxis(Axis.LEFT_Y), //Movement speed
