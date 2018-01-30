@@ -51,10 +51,17 @@ public abstract class Path extends Command {
     	System.out.println("Encoder: " + Robot.drive.getDistance() + " dydx: " + dydx(Robot.drive.getDistance()));
     	return angle;
     }
+    
+    public double speed() {
+    	return leftSpeed;
+    }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	double error = -deltaAngle(Robot.drive.getYaw());
+    	
+    	leftSpeed = speed();
+    	rightSpeed = speed();
     	
     	System.out.println("error: " + error);
     	if(Math.abs(Robot.drive.getDistance()) > 3) {
