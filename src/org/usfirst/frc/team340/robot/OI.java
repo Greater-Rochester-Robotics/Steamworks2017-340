@@ -103,7 +103,7 @@ public class OI {
 		driverA.whenReleased(new AbortHarvest());
 		driverB.whenPressed(new DropToggleWheels());
 //		driverBack.whenPressed(new FollowPath(0.3));
-		driverBack.whenPressed(new CenterSwitchLeftPath(1));
+		driverBack.whenPressed(new ObstacleCourse());
 //		driverBack.whenPressed(new DriveRails(0.3));
 		driverBack.whenReleased(new DriveXbox());
 //		driverStart.whenPressed(new PIDTurn(-90, false));
