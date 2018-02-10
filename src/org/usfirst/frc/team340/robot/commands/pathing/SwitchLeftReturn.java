@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class SwitchLeftReturn extends Path {
+public class SwitchLeftReturn extends PathOld {
 
     public SwitchLeftReturn(double speed) {
         // Use requires() here to declare subsystem dependencies

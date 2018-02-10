@@ -1,5 +1,7 @@
 package org.usfirst.frc.team340.robot.commands.pathing;
 
+import java.util.function.Function;
+
 import org.usfirst.frc.team340.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -7,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public abstract class PathOld extends Command {
+public abstract class RunPath extends Command {
 	
 
 	private final double arcDivisor = 45;
@@ -17,22 +19,33 @@ public abstract class PathOld extends Command {
 	
 	private double length = -1;
 	
-	public abstract double dydx(double s);
+	private Path path;
 	
-    private PathOld(double speed) {
+	private Function<Double, Double> speed;
+	
+    private RunPath(Path path, double speed) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.drive);
-
+    	this.path = path;
     	this.leftSpeed = speed;
     	this.rightSpeed = speed;
+    	this.speed = x -> speed;
     }
-    public PathOld(double speed, double length) {
+    
+    private RunPath(Path path, Function<Double, Double> speed) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	this(speed);
-    	this.length = length;
+    	requires(Robot.drive);
+    	this.path = path;
+    	this.speed = speed;
+    	this.leftSpeed = speed.apply(0.0);
+    	this.rightSpeed = speed.apply(0.0);
     }
+    
+	public double dydx(double s) {
+		return path.getPathAtDistance(s).getDerivative().apply(s);
+	}
 
     // Called just before this Command runs the first time
     protected void initialize() {
@@ -53,7 +66,7 @@ public abstract class PathOld extends Command {
     }
     
     public double speed() {
-    	return leftSpeed;
+    	return speed.apply(Robot.drive.getDistance());
     }
 
     // Called repeatedly when this Command is scheduled to run

@@ -1,6 +1,6 @@
 package org.usfirst.frc.team340.robot.commands.pathing;
 
-public class Part3 extends Path {
+public class Part3 extends PathOld {
 
 	public Part3(double speed) {
 		super(speed, 161.8);
